@@ -5,10 +5,10 @@ import Image from 'next/image'
 import { useState } from "react";
 import Button from '@mui/material/Button';
 import styles from '../styles/Home.module.css'
-import Account from "../lib/components/Account";
-import useEagerConnect from "../lib/hooks/useEagerConnect";
-import ETHBalance from "../lib/components/ETHBalance";
-import CreateWallet from "../lib/components/CreateWallet";
+import Account from "./components/Account";
+import useEagerConnect from "./hooks/useEagerConnect";
+import ETHBalance from "./components/ETHBalance";
+import CreateWallet from "./components/CreateWallet";
 
 const WALLET_FACTORY_DIAMOND_ADDRESS = "0xB51049AffFA9C2DF44654BACC65A9aF45013a027";
 
