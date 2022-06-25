@@ -9,12 +9,12 @@ function createWallet(contract: WalletFactoryFacet) {
     console.log(transaction);
     const receipt = await transaction.wait();
     console.log(receipt.events);
-    let newWalletAddress;
-    if (receipt.events > 0) {
-      const events = receipt.events;
+    let newWalletAddress = "";
+    // if (receipt.events > 0) {
+    //   const events = receipt.events;
 
-      newWalletAddress = events[0].address;
-    }
+    //   newWalletAddress = events[0].address;
+    // }
     return newWalletAddress;
   };
 }
