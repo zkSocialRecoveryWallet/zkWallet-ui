@@ -21,7 +21,7 @@ export function formatEtherscanLink(
       } else if (chainId === 1666600000) {
         return `https://explorer.harmony.one/address/${address}`;
       } else {
-        return null;
+        return `https://etherscan.io/address/${address}`;
       }
     }
     case "Transaction": {
@@ -30,11 +30,11 @@ export function formatEtherscanLink(
       if (chainId === 1666900000) {
         return `https://explorer.ps.hmny.io/tx/${hash}`;
       } else if (chainId === 1666700000) {
-        return `https://explorer.pops.one//tx/${hash}`;
+        return `https://explorer.pops.one///${hash}`;
       } else if (chainId === 1666600000) {
-        return `https://explorer.harmony.one/addtxress/${hash}`;
+        return `https://explorer.harmony.one/tx/${hash}`;
       } else {
-        return null;
+        return `https://etherscan.io/tx/${hash}`;
       }
     }
   }
