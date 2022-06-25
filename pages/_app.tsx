@@ -1,6 +1,6 @@
 import { Web3ReactProvider } from "@web3-react/core";
 import type { AppProps } from 'next/app'
-import getLibrary from "./utils/getLibrary";
+import getLibrary from "../lib/utils/getLibrary";
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps) {

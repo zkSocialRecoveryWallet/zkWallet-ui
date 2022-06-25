@@ -6,7 +6,7 @@ import { useState } from "react";
 import Button from '@mui/material/Button';
 import styles from '../styles/Home.module.css'
 import Account from "./components/Account";
-import useEagerConnect from "./hooks/useEagerConnect";
+import useEagerConnect from "../lib/hooks/useEagerConnect";
 import ETHBalance from "./components/ETHBalance";
 import CreateWallet from "./components/CreateWallet";
 

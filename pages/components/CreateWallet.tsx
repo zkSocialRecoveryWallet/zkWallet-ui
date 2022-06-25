@@ -3,7 +3,7 @@ import { useWeb3React } from "@web3-react/core";
 import { useState } from "react";
 import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
-import useCreateWallet from "../hooks/useCreateWallet";
+import useCreateWallet from "../../lib/hooks/useCreateWallet";
 
 type CreateWalletProps = {
   hashId: string;

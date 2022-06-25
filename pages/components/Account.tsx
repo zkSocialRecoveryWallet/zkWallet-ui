@@ -2,10 +2,10 @@ import { useWeb3React } from "@web3-react/core";
 import { UserRejectedRequestError } from "@web3-react/injected-connector";
 import { useEffect, useState } from "react";
 import Button from '@mui/material/Button';
-import { injected } from "../utils/connectors";
-import useENSName from "../hooks/useENSName";
-import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
-import { formatEtherscanLink } from "../utils/util";
+import { injected } from "../../lib/utils/connectors";
+import useENSName from "../../lib/hooks/useENSName";
+import useMetaMaskOnboarding from "../../lib/hooks/useMetaMaskOnboarding";
+import { formatEtherscanLink } from "../../lib/utils/util";
 
 type AccountProps = {
   triedToEagerConnect: boolean;
