@@ -5,7 +5,7 @@ import Button from '@mui/material/Button';
 import { injected } from "../utils/connectors";
 import useENSName from "../hooks/useENSName";
 import useMetaMaskOnboarding from "../hooks/useMetaMaskOnboarding";
-import { formatEtherscanLink, shortenHex } from "../utils/util";
+import { formatEtherscanLink } from "../utils/util";
 
 type AccountProps = {
   triedToEagerConnect: boolean;
