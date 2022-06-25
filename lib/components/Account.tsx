@@ -31,21 +31,7 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
     }
   }, [active, error, stopOnboarding]);
 
-  let newAccount: string | undefined;
-  if (account) {
-    newAccount = account;
-  } else {
-    newAccount = "";
-  }
-
-  let newChainId: number | undefined;
-  if (chainId) {
-    newChainId = chainId;
-  } else {
-    newChainId = 1;
-  }
-
-  const ENSName = useENSName(newAccount);
+  const ENSName = useENSName(account);
 
   if (error) {
     return null;
@@ -87,7 +73,7 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
   return (
     <a
       {...{
-        href: formatEtherscanLink("Account", [newChainId, account]),
+        href: formatEtherscanLink("Account", [chainId, account]),
         target: "_blank",
         rel: "noopener noreferrer",
       }}

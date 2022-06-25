@@ -17,7 +17,7 @@ const ETHERSCAN_PREFIXES = {
 
 export function formatEtherscanLink(
   type: "Account" | "Transaction",
-  data: [number, string]
+  data: [number | undefined, string]
 ) {
   switch (type) {
     case "Account": {
