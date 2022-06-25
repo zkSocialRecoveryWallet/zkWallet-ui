@@ -31,7 +31,14 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
     }
   }, [active, error, stopOnboarding]);
 
-  const ENSName = useENSName(account);
+  let newAccount: string | undefined;
+  if (account) {
+    newAccount = account;
+  } else {
+    newAccount = "";
+  }
+
+  const ENSName = useENSName(newAccount);
 
   if (error) {
     return null;
