@@ -3,7 +3,7 @@ import { WalletFactoryFacet } from "../../typechain-types";
 import useKeepSWRDataLiveAsBlocksArrive from "./useKeepSWRDataLiveAsBlocksArrive";
 import useWalletFactoryFacet from "./useWalletFactoryFacet";
 
-function createWallet(contract: WalletFactoryFacet) {
+function createWallet(contract: WalletFactoryFacet | any) {
   return async (hashID: string, address: string) => {
     const transaction = await contract.createWallet(hashID, address);
     console.log(transaction);
