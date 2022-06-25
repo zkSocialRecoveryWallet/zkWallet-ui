@@ -7,14 +7,6 @@ export function shortenHex(hex: string, length = 4) {
   )}`;
 }
 
-const ETHERSCAN_PREFIXES = {
-  1: "",
-  3: "ropsten.",
-  4: "rinkeby.",
-  5: "goerli.",
-  42: "kovan.",
-};
-
 export function formatEtherscanLink(
   type: "Account" | "Transaction",
   data: [number, string]
@@ -22,11 +14,28 @@ export function formatEtherscanLink(
   switch (type) {
     case "Account": {
       const [chainId, address] = data;
-      return `https://${ETHERSCAN_PREFIXES[chainId]}etherscan.io/address/${address}`;
+      if (chainId === 1666900000) {
+        return `https://explorer.ps.hmny.io/address/${address}`;
+      } else if (chainId === 1666700000) {
+        return `https://explorer.pops.one//address/${address}`;
+      } else if (chainId === 1666600000) {
+        return `https://explorer.harmony.one/address/${address}`;
+      } else {
+        return null;
+      }
     }
     case "Transaction": {
       const [chainId, hash] = data;
-      return `https://${ETHERSCAN_PREFIXES[chainId]}etherscan.io/tx/${hash}`;
+
+      if (chainId === 1666900000) {
+        return `https://explorer.ps.hmny.io/tx/${hash}`;
+      } else if (chainId === 1666700000) {
+        return `https://explorer.pops.one//tx/${hash}`;
+      } else if (chainId === 1666600000) {
+        return `https://explorer.harmony.one/addtxress/${hash}`;
+      } else {
+        return null;
+      }
     }
   }
 }
