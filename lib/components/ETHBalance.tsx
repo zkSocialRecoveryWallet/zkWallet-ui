@@ -9,7 +9,15 @@ type ETHBalanceProps = {
 
 const ETHBalance = ({symbol}: ETHBalanceProps) => {
   const { account } = useWeb3React<Web3Provider>();
-  const { data } = useETHBalance(account);
+
+  let newAccount: string | undefined;
+  if (account) {
+    newAccount = account;
+  } else {
+    newAccount = "";
+  }
+
+  const { data } = useETHBalance(newAccount);
 
   return <p>{`${symbol} Balance`}: {parseBalance(data ?? 0)}</p>;
 };
