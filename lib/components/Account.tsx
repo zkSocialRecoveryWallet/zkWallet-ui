@@ -41,6 +41,10 @@ const Account = ({ triedToEagerConnect }: AccountProps) => {
     return null;
   }
 
+  if (!chainId) {
+    return null;
+  }
+
   if (typeof account !== "string") {
     return (
       <div>
