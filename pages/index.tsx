@@ -3,7 +3,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from "react";
-import Button from '@mui/material/Button';
+import Link from '@mui/material/Link';
 import styles from '../styles/Home.module.css'
 import Account from "./components/Account";
 import useEagerConnect from "../lib/hooks/useEagerConnect";
@@ -68,6 +68,7 @@ const Home: NextPage = () => {
             <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
           </span>
         </a>
+        <Link href="https://github.com/zkSocialRecoveryWallet/zkSocialRecoveryWallet/">Github documentation</Link>
       </footer>
     </div>
   )
