@@ -22,18 +22,6 @@ const _abi = [
         name: "identityCommitments",
         type: "uint256[]",
       },
-      {
-        components: [
-          {
-            internalType: "uint256",
-            name: "hashId",
-            type: "uint256",
-          },
-        ],
-        internalType: "struct IGuardianInternal.GuardianDTO[]",
-        name: "guardians",
-        type: "tuple[]",
-      },
     ],
     name: "addGuardians",
     outputs: [],

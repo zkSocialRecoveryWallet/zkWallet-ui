@@ -24,13 +24,14 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export declare namespace WalletFactoryStorage {
   export type FacetStruct = {
-    name: string;
-    facetAddress: string;
-    version: string;
+    name: PromiseOrValue<string>;
+    facetAddress: PromiseOrValue<string>;
+    version: PromiseOrValue<string>;
   };
 
   export type FacetStructOutput = [string, string, string] & {
@@ -100,35 +101,43 @@ export interface WalletFactoryFacetInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "addFacet",
-    values: [string, string, string]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "addFacet(string,address,string)",
-    values: [string, string, string]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "addGuardian",
-    values: [BytesLike, BytesLike]
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "addGuardian(bytes32,bytes32)",
-    values: [BytesLike, BytesLike]
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "createWallet",
-    values: [BytesLike, string]
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "createWallet(bytes32,address)",
-    values: [BytesLike, string]
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "createWalletDeterministic",
-    values: [BytesLike, BytesLike]
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "createWalletDeterministic(bytes32,bytes32)",
-    values: [BytesLike, BytesLike]
+    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "getDiamond",
@@ -140,19 +149,19 @@ export interface WalletFactoryFacetInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getFacet",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getFacet(uint256)",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getFacetIndex",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "getFacetIndex(address)",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "getFacets", values?: undefined): string;
   encodeFunctionData(
@@ -161,32 +170,35 @@ export interface WalletFactoryFacetInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getWallet",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "getWallet(bytes32)",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "predictDeterministicAddress",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "predictDeterministicAddress(bytes32)",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "removeGuardian",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "removeGuardian(bytes32)",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
-  encodeFunctionData(functionFragment: "setDiamond", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "setDiamond",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "setDiamond(address)",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "walletFactoryFacetVersion",
@@ -293,15 +305,22 @@ export interface WalletFactoryFacetInterface extends utils.Interface {
   ): Result;
 
   events: {
+    "Decremented(uint256,uint256)": EventFragment;
     "DiamondIsSet(address)": EventFragment;
     "FacetIsAdded(string,address,string)": EventFragment;
     "FacetIsRemoved(address)": EventFragment;
     "GuardianAdded(bytes32,bytes32)": EventFragment;
     "GuardianRemoved(bytes32,bytes32)": EventFragment;
+    "Incremented(uint256,uint256)": EventFragment;
     "NewDiamondWallet(address)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
+    "Reset(uint256,uint256)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "Decremented"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "Decremented(uint256,uint256)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "DiamondIsSet"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "DiamondIsSet(address)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "FacetIsAdded"): EventFragment;
@@ -318,13 +337,30 @@ export interface WalletFactoryFacetInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "GuardianRemoved(bytes32,bytes32)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Incremented"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "Incremented(uint256,uint256)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "NewDiamondWallet"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "NewDiamondWallet(address)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "OwnershipTransferred(address,address)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Reset"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Reset(uint256,uint256)"): EventFragment;
 }
+
+export interface DecrementedEventObject {
+  index: BigNumber;
+  newValue: BigNumber;
+}
+export type DecrementedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  DecrementedEventObject
+>;
+
+export type DecrementedEventFilter = TypedEventFilter<DecrementedEvent>;
 
 export interface DiamondIsSetEventObject {
   wallet: string;
@@ -377,6 +413,17 @@ export type GuardianRemovedEvent = TypedEvent<
 
 export type GuardianRemovedEventFilter = TypedEventFilter<GuardianRemovedEvent>;
 
+export interface IncrementedEventObject {
+  index: BigNumber;
+  newValue: BigNumber;
+}
+export type IncrementedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  IncrementedEventObject
+>;
+
+export type IncrementedEventFilter = TypedEventFilter<IncrementedEvent>;
+
 export interface NewDiamondWalletEventObject {
   instance: string;
 }
@@ -399,6 +446,14 @@ export type OwnershipTransferredEvent = TypedEvent<
 
 export type OwnershipTransferredEventFilter =
   TypedEventFilter<OwnershipTransferredEvent>;
+
+export interface ResetEventObject {
+  index: BigNumber;
+  newValue: BigNumber;
+}
+export type ResetEvent = TypedEvent<[BigNumber, BigNumber], ResetEventObject>;
+
+export type ResetEventFilter = TypedEventFilter<ResetEvent>;
 
 export interface WalletFactoryFacet extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -432,53 +487,53 @@ export interface WalletFactoryFacet extends BaseContract {
     "WALLET_CREATION()"(overrides?: CallOverrides): Promise<[string]>;
 
     addFacet(
-      name: string,
-      facetAddress: string,
-      version: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      name: PromiseOrValue<string>,
+      facetAddress: PromiseOrValue<string>,
+      version: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "addFacet(string,address,string)"(
-      name: string,
-      facetAddress: string,
-      version: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      name: PromiseOrValue<string>,
+      facetAddress: PromiseOrValue<string>,
+      version: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     addGuardian(
-      hashId: BytesLike,
-      guardian: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      guardian: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "addGuardian(bytes32,bytes32)"(
-      hashId: BytesLike,
-      guardian: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      guardian: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     createWallet(
-      hashId: BytesLike,
-      owner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      owner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "createWallet(bytes32,address)"(
-      hashId: BytesLike,
-      owner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      owner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     createWalletDeterministic(
-      hashId: BytesLike,
-      salt: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      salt: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "createWalletDeterministic(bytes32,bytes32)"(
-      hashId: BytesLike,
-      salt: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      salt: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getDiamond(overrides?: CallOverrides): Promise<[string]>;
@@ -486,22 +541,22 @@ export interface WalletFactoryFacet extends BaseContract {
     "getDiamond()"(overrides?: CallOverrides): Promise<[string]>;
 
     getFacet(
-      arrayIndex: BigNumberish,
+      arrayIndex: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[WalletFactoryStorage.FacetStructOutput]>;
 
     "getFacet(uint256)"(
-      arrayIndex: BigNumberish,
+      arrayIndex: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[WalletFactoryStorage.FacetStructOutput]>;
 
     getFacetIndex(
-      facetAddress: string,
+      facetAddress: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     "getFacetIndex(address)"(
-      facetAddress: string,
+      facetAddress: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
@@ -513,41 +568,44 @@ export interface WalletFactoryFacet extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[WalletFactoryStorage.FacetStructOutput[]]>;
 
-    getWallet(hashId: BytesLike, overrides?: CallOverrides): Promise<[string]>;
+    getWallet(
+      hashId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     "getWallet(bytes32)"(
-      hashId: BytesLike,
+      hashId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     predictDeterministicAddress(
-      salt: BytesLike,
+      salt: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string] & { predicted: string }>;
 
     "predictDeterministicAddress(bytes32)"(
-      salt: BytesLike,
+      salt: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string] & { predicted: string }>;
 
     removeGuardian(
-      hashId: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "removeGuardian(bytes32)"(
-      hashId: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setDiamond(
-      diamond: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      diamond: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "setDiamond(address)"(
-      diamond: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      diamond: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     walletFactoryFacetVersion(overrides?: CallOverrides): Promise<[string]>;
@@ -560,53 +618,53 @@ export interface WalletFactoryFacet extends BaseContract {
   "WALLET_CREATION()"(overrides?: CallOverrides): Promise<string>;
 
   addFacet(
-    name: string,
-    facetAddress: string,
-    version: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    name: PromiseOrValue<string>,
+    facetAddress: PromiseOrValue<string>,
+    version: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "addFacet(string,address,string)"(
-    name: string,
-    facetAddress: string,
-    version: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    name: PromiseOrValue<string>,
+    facetAddress: PromiseOrValue<string>,
+    version: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   addGuardian(
-    hashId: BytesLike,
-    guardian: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    hashId: PromiseOrValue<BytesLike>,
+    guardian: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "addGuardian(bytes32,bytes32)"(
-    hashId: BytesLike,
-    guardian: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    hashId: PromiseOrValue<BytesLike>,
+    guardian: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   createWallet(
-    hashId: BytesLike,
-    owner: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    hashId: PromiseOrValue<BytesLike>,
+    owner: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "createWallet(bytes32,address)"(
-    hashId: BytesLike,
-    owner: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    hashId: PromiseOrValue<BytesLike>,
+    owner: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   createWalletDeterministic(
-    hashId: BytesLike,
-    salt: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    hashId: PromiseOrValue<BytesLike>,
+    salt: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "createWalletDeterministic(bytes32,bytes32)"(
-    hashId: BytesLike,
-    salt: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    hashId: PromiseOrValue<BytesLike>,
+    salt: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getDiamond(overrides?: CallOverrides): Promise<string>;
@@ -614,22 +672,22 @@ export interface WalletFactoryFacet extends BaseContract {
   "getDiamond()"(overrides?: CallOverrides): Promise<string>;
 
   getFacet(
-    arrayIndex: BigNumberish,
+    arrayIndex: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<WalletFactoryStorage.FacetStructOutput>;
 
   "getFacet(uint256)"(
-    arrayIndex: BigNumberish,
+    arrayIndex: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<WalletFactoryStorage.FacetStructOutput>;
 
   getFacetIndex(
-    facetAddress: string,
+    facetAddress: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   "getFacetIndex(address)"(
-    facetAddress: string,
+    facetAddress: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
@@ -641,41 +699,44 @@ export interface WalletFactoryFacet extends BaseContract {
     overrides?: CallOverrides
   ): Promise<WalletFactoryStorage.FacetStructOutput[]>;
 
-  getWallet(hashId: BytesLike, overrides?: CallOverrides): Promise<string>;
+  getWallet(
+    hashId: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   "getWallet(bytes32)"(
-    hashId: BytesLike,
+    hashId: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   predictDeterministicAddress(
-    salt: BytesLike,
+    salt: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   "predictDeterministicAddress(bytes32)"(
-    salt: BytesLike,
+    salt: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   removeGuardian(
-    hashId: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    hashId: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "removeGuardian(bytes32)"(
-    hashId: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    hashId: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setDiamond(
-    diamond: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    diamond: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "setDiamond(address)"(
-    diamond: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    diamond: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   walletFactoryFacetVersion(overrides?: CallOverrides): Promise<string>;
@@ -688,52 +749,52 @@ export interface WalletFactoryFacet extends BaseContract {
     "WALLET_CREATION()"(overrides?: CallOverrides): Promise<string>;
 
     addFacet(
-      name: string,
-      facetAddress: string,
-      version: string,
+      name: PromiseOrValue<string>,
+      facetAddress: PromiseOrValue<string>,
+      version: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "addFacet(string,address,string)"(
-      name: string,
-      facetAddress: string,
-      version: string,
+      name: PromiseOrValue<string>,
+      facetAddress: PromiseOrValue<string>,
+      version: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     addGuardian(
-      hashId: BytesLike,
-      guardian: BytesLike,
+      hashId: PromiseOrValue<BytesLike>,
+      guardian: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "addGuardian(bytes32,bytes32)"(
-      hashId: BytesLike,
-      guardian: BytesLike,
+      hashId: PromiseOrValue<BytesLike>,
+      guardian: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     createWallet(
-      hashId: BytesLike,
-      owner: string,
+      hashId: PromiseOrValue<BytesLike>,
+      owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     "createWallet(bytes32,address)"(
-      hashId: BytesLike,
-      owner: string,
+      hashId: PromiseOrValue<BytesLike>,
+      owner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     createWalletDeterministic(
-      hashId: BytesLike,
-      salt: BytesLike,
+      hashId: PromiseOrValue<BytesLike>,
+      salt: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "createWalletDeterministic(bytes32,bytes32)"(
-      hashId: BytesLike,
-      salt: BytesLike,
+      hashId: PromiseOrValue<BytesLike>,
+      salt: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -742,22 +803,22 @@ export interface WalletFactoryFacet extends BaseContract {
     "getDiamond()"(overrides?: CallOverrides): Promise<string>;
 
     getFacet(
-      arrayIndex: BigNumberish,
+      arrayIndex: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<WalletFactoryStorage.FacetStructOutput>;
 
     "getFacet(uint256)"(
-      arrayIndex: BigNumberish,
+      arrayIndex: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<WalletFactoryStorage.FacetStructOutput>;
 
     getFacetIndex(
-      facetAddress: string,
+      facetAddress: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getFacetIndex(address)"(
-      facetAddress: string,
+      facetAddress: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -769,34 +830,43 @@ export interface WalletFactoryFacet extends BaseContract {
       overrides?: CallOverrides
     ): Promise<WalletFactoryStorage.FacetStructOutput[]>;
 
-    getWallet(hashId: BytesLike, overrides?: CallOverrides): Promise<string>;
+    getWallet(
+      hashId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<string>;
 
     "getWallet(bytes32)"(
-      hashId: BytesLike,
+      hashId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     predictDeterministicAddress(
-      salt: BytesLike,
+      salt: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     "predictDeterministicAddress(bytes32)"(
-      salt: BytesLike,
+      salt: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
 
-    removeGuardian(hashId: BytesLike, overrides?: CallOverrides): Promise<void>;
-
-    "removeGuardian(bytes32)"(
-      hashId: BytesLike,
+    removeGuardian(
+      hashId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    setDiamond(diamond: string, overrides?: CallOverrides): Promise<void>;
+    "removeGuardian(bytes32)"(
+      hashId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setDiamond(
+      diamond: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     "setDiamond(address)"(
-      diamond: string,
+      diamond: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -806,6 +876,15 @@ export interface WalletFactoryFacet extends BaseContract {
   };
 
   filters: {
+    "Decremented(uint256,uint256)"(
+      index?: PromiseOrValue<BigNumberish> | null,
+      newValue?: null
+    ): DecrementedEventFilter;
+    Decremented(
+      index?: PromiseOrValue<BigNumberish> | null,
+      newValue?: null
+    ): DecrementedEventFilter;
+
     "DiamondIsSet(address)"(wallet?: null): DiamondIsSetEventFilter;
     DiamondIsSet(wallet?: null): DiamondIsSetEventFilter;
 
@@ -824,34 +903,52 @@ export interface WalletFactoryFacet extends BaseContract {
     FacetIsRemoved(facetAddress?: null): FacetIsRemovedEventFilter;
 
     "GuardianAdded(bytes32,bytes32)"(
-      hashId?: BytesLike | null,
+      hashId?: PromiseOrValue<BytesLike> | null,
       guardian?: null
     ): GuardianAddedEventFilter;
     GuardianAdded(
-      hashId?: BytesLike | null,
+      hashId?: PromiseOrValue<BytesLike> | null,
       guardian?: null
     ): GuardianAddedEventFilter;
 
     "GuardianRemoved(bytes32,bytes32)"(
-      hashId?: BytesLike | null,
+      hashId?: PromiseOrValue<BytesLike> | null,
       guardian?: null
     ): GuardianRemovedEventFilter;
     GuardianRemoved(
-      hashId?: BytesLike | null,
+      hashId?: PromiseOrValue<BytesLike> | null,
       guardian?: null
     ): GuardianRemovedEventFilter;
+
+    "Incremented(uint256,uint256)"(
+      index?: PromiseOrValue<BigNumberish> | null,
+      newValue?: null
+    ): IncrementedEventFilter;
+    Incremented(
+      index?: PromiseOrValue<BigNumberish> | null,
+      newValue?: null
+    ): IncrementedEventFilter;
 
     "NewDiamondWallet(address)"(instance?: null): NewDiamondWalletEventFilter;
     NewDiamondWallet(instance?: null): NewDiamondWalletEventFilter;
 
     "OwnershipTransferred(address,address)"(
-      previousOwner?: string | null,
-      newOwner?: string | null
+      previousOwner?: PromiseOrValue<string> | null,
+      newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
     OwnershipTransferred(
-      previousOwner?: string | null,
-      newOwner?: string | null
+      previousOwner?: PromiseOrValue<string> | null,
+      newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
+
+    "Reset(uint256,uint256)"(
+      index?: PromiseOrValue<BigNumberish> | null,
+      newValue?: null
+    ): ResetEventFilter;
+    Reset(
+      index?: PromiseOrValue<BigNumberish> | null,
+      newValue?: null
+    ): ResetEventFilter;
   };
 
   estimateGas: {
@@ -860,53 +957,53 @@ export interface WalletFactoryFacet extends BaseContract {
     "WALLET_CREATION()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     addFacet(
-      name: string,
-      facetAddress: string,
-      version: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      name: PromiseOrValue<string>,
+      facetAddress: PromiseOrValue<string>,
+      version: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "addFacet(string,address,string)"(
-      name: string,
-      facetAddress: string,
-      version: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      name: PromiseOrValue<string>,
+      facetAddress: PromiseOrValue<string>,
+      version: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     addGuardian(
-      hashId: BytesLike,
-      guardian: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      guardian: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "addGuardian(bytes32,bytes32)"(
-      hashId: BytesLike,
-      guardian: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      guardian: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     createWallet(
-      hashId: BytesLike,
-      owner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      owner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "createWallet(bytes32,address)"(
-      hashId: BytesLike,
-      owner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      owner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     createWalletDeterministic(
-      hashId: BytesLike,
-      salt: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      salt: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "createWalletDeterministic(bytes32,bytes32)"(
-      hashId: BytesLike,
-      salt: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      salt: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getDiamond(overrides?: CallOverrides): Promise<BigNumber>;
@@ -914,22 +1011,22 @@ export interface WalletFactoryFacet extends BaseContract {
     "getDiamond()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     getFacet(
-      arrayIndex: BigNumberish,
+      arrayIndex: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getFacet(uint256)"(
-      arrayIndex: BigNumberish,
+      arrayIndex: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getFacetIndex(
-      facetAddress: string,
+      facetAddress: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getFacetIndex(address)"(
-      facetAddress: string,
+      facetAddress: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -937,41 +1034,44 @@ export interface WalletFactoryFacet extends BaseContract {
 
     "getFacets()"(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getWallet(hashId: BytesLike, overrides?: CallOverrides): Promise<BigNumber>;
+    getWallet(
+      hashId: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     "getWallet(bytes32)"(
-      hashId: BytesLike,
+      hashId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     predictDeterministicAddress(
-      salt: BytesLike,
+      salt: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "predictDeterministicAddress(bytes32)"(
-      salt: BytesLike,
+      salt: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     removeGuardian(
-      hashId: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "removeGuardian(bytes32)"(
-      hashId: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setDiamond(
-      diamond: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      diamond: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "setDiamond(address)"(
-      diamond: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      diamond: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     walletFactoryFacetVersion(overrides?: CallOverrides): Promise<BigNumber>;
@@ -989,53 +1089,53 @@ export interface WalletFactoryFacet extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     addFacet(
-      name: string,
-      facetAddress: string,
-      version: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      name: PromiseOrValue<string>,
+      facetAddress: PromiseOrValue<string>,
+      version: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "addFacet(string,address,string)"(
-      name: string,
-      facetAddress: string,
-      version: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      name: PromiseOrValue<string>,
+      facetAddress: PromiseOrValue<string>,
+      version: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     addGuardian(
-      hashId: BytesLike,
-      guardian: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      guardian: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "addGuardian(bytes32,bytes32)"(
-      hashId: BytesLike,
-      guardian: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      guardian: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     createWallet(
-      hashId: BytesLike,
-      owner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      owner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "createWallet(bytes32,address)"(
-      hashId: BytesLike,
-      owner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      owner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     createWalletDeterministic(
-      hashId: BytesLike,
-      salt: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      salt: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "createWalletDeterministic(bytes32,bytes32)"(
-      hashId: BytesLike,
-      salt: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      salt: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getDiamond(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -1043,22 +1143,22 @@ export interface WalletFactoryFacet extends BaseContract {
     "getDiamond()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getFacet(
-      arrayIndex: BigNumberish,
+      arrayIndex: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "getFacet(uint256)"(
-      arrayIndex: BigNumberish,
+      arrayIndex: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getFacetIndex(
-      facetAddress: string,
+      facetAddress: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "getFacetIndex(address)"(
-      facetAddress: string,
+      facetAddress: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1067,43 +1167,43 @@ export interface WalletFactoryFacet extends BaseContract {
     "getFacets()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     getWallet(
-      hashId: BytesLike,
+      hashId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "getWallet(bytes32)"(
-      hashId: BytesLike,
+      hashId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     predictDeterministicAddress(
-      salt: BytesLike,
+      salt: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "predictDeterministicAddress(bytes32)"(
-      salt: BytesLike,
+      salt: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     removeGuardian(
-      hashId: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "removeGuardian(bytes32)"(
-      hashId: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setDiamond(
-      diamond: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      diamond: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "setDiamond(address)"(
-      diamond: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      diamond: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     walletFactoryFacetVersion(

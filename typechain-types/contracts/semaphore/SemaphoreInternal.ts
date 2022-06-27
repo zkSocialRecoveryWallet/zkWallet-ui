@@ -15,6 +15,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export interface SemaphoreInternalInterface extends utils.Interface {
@@ -94,11 +95,11 @@ export interface SemaphoreInternal extends BaseContract {
     NullifierHashAdded(nullifierHash?: null): NullifierHashAddedEventFilter;
 
     "ProofVerified(uint256,bytes32)"(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       signal?: null
     ): ProofVerifiedEventFilter;
     ProofVerified(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       signal?: null
     ): ProofVerifiedEventFilter;
   };

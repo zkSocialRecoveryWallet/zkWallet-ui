@@ -22,6 +22,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export interface SemaphoreCoreBaseMockInterface extends utils.Interface {
@@ -38,23 +39,23 @@ export interface SemaphoreCoreBaseMockInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "___verifyProof",
     values: [
-      BytesLike,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish[],
-      string
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<string>
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "___verifyProof(bytes32,uint256,uint256,uint256,uint256[8],address)",
     values: [
-      BytesLike,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish[],
-      string
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<string>
     ]
   ): string;
 
@@ -116,64 +117,64 @@ export interface SemaphoreCoreBaseMock extends BaseContract {
 
   functions: {
     ___verifyProof(
-      signal: BytesLike,
-      root: BigNumberish,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      verifier: string,
+      signal: PromiseOrValue<BytesLike>,
+      root: PromiseOrValue<BigNumberish>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      verifier: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[void]>;
 
     "___verifyProof(bytes32,uint256,uint256,uint256,uint256[8],address)"(
-      signal: BytesLike,
-      root: BigNumberish,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      verifier: string,
+      signal: PromiseOrValue<BytesLike>,
+      root: PromiseOrValue<BigNumberish>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      verifier: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[void]>;
   };
 
   ___verifyProof(
-    signal: BytesLike,
-    root: BigNumberish,
-    nullifierHash: BigNumberish,
-    externalNullifier: BigNumberish,
-    proof: BigNumberish[],
-    verifier: string,
+    signal: PromiseOrValue<BytesLike>,
+    root: PromiseOrValue<BigNumberish>,
+    nullifierHash: PromiseOrValue<BigNumberish>,
+    externalNullifier: PromiseOrValue<BigNumberish>,
+    proof: PromiseOrValue<BigNumberish>[],
+    verifier: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<void>;
 
   "___verifyProof(bytes32,uint256,uint256,uint256,uint256[8],address)"(
-    signal: BytesLike,
-    root: BigNumberish,
-    nullifierHash: BigNumberish,
-    externalNullifier: BigNumberish,
-    proof: BigNumberish[],
-    verifier: string,
+    signal: PromiseOrValue<BytesLike>,
+    root: PromiseOrValue<BigNumberish>,
+    nullifierHash: PromiseOrValue<BigNumberish>,
+    externalNullifier: PromiseOrValue<BigNumberish>,
+    proof: PromiseOrValue<BigNumberish>[],
+    verifier: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<void>;
 
   callStatic: {
     ___verifyProof(
-      signal: BytesLike,
-      root: BigNumberish,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      verifier: string,
+      signal: PromiseOrValue<BytesLike>,
+      root: PromiseOrValue<BigNumberish>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      verifier: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "___verifyProof(bytes32,uint256,uint256,uint256,uint256[8],address)"(
-      signal: BytesLike,
-      root: BigNumberish,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      verifier: string,
+      signal: PromiseOrValue<BytesLike>,
+      root: PromiseOrValue<BigNumberish>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      verifier: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -187,44 +188,44 @@ export interface SemaphoreCoreBaseMock extends BaseContract {
 
   estimateGas: {
     ___verifyProof(
-      signal: BytesLike,
-      root: BigNumberish,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      verifier: string,
+      signal: PromiseOrValue<BytesLike>,
+      root: PromiseOrValue<BigNumberish>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      verifier: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "___verifyProof(bytes32,uint256,uint256,uint256,uint256[8],address)"(
-      signal: BytesLike,
-      root: BigNumberish,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      verifier: string,
+      signal: PromiseOrValue<BytesLike>,
+      root: PromiseOrValue<BigNumberish>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      verifier: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     ___verifyProof(
-      signal: BytesLike,
-      root: BigNumberish,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      verifier: string,
+      signal: PromiseOrValue<BytesLike>,
+      root: PromiseOrValue<BigNumberish>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      verifier: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "___verifyProof(bytes32,uint256,uint256,uint256,uint256[8],address)"(
-      signal: BytesLike,
-      root: BigNumberish,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      verifier: string,
+      signal: PromiseOrValue<BytesLike>,
+      root: PromiseOrValue<BigNumberish>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      verifier: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

@@ -18,6 +18,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface Verifier28Interface extends utils.Interface {
@@ -34,19 +35,35 @@ export interface Verifier28Interface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "verifyProof",
     values: [
-      [BigNumberish, BigNumberish],
-      [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      [BigNumberish, BigNumberish],
-      [BigNumberish, BigNumberish, BigNumberish, BigNumberish]
+      [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      [
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+      ],
+      [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+      ]
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[4])",
     values: [
-      [BigNumberish, BigNumberish],
-      [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      [BigNumberish, BigNumberish],
-      [BigNumberish, BigNumberish, BigNumberish, BigNumberish]
+      [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      [
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+      ],
+      [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+      ]
     ]
   ): string;
 
@@ -90,52 +107,100 @@ export interface Verifier28 extends BaseContract {
 
   functions: {
     verifyProof(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
+      a: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      b: [
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+      ],
+      c: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      input: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+      ],
       overrides?: CallOverrides
     ): Promise<[void]>;
 
     "verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[4])"(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
+      a: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      b: [
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+      ],
+      c: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      input: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+      ],
       overrides?: CallOverrides
     ): Promise<[void]>;
   };
 
   verifyProof(
-    a: [BigNumberish, BigNumberish],
-    b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-    c: [BigNumberish, BigNumberish],
-    input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
+    a: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+    b: [
+      [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+    ],
+    c: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+    input: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ],
     overrides?: CallOverrides
   ): Promise<void>;
 
   "verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[4])"(
-    a: [BigNumberish, BigNumberish],
-    b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-    c: [BigNumberish, BigNumberish],
-    input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
+    a: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+    b: [
+      [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+    ],
+    c: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+    input: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ],
     overrides?: CallOverrides
   ): Promise<void>;
 
   callStatic: {
     verifyProof(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
+      a: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      b: [
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+      ],
+      c: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      input: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+      ],
       overrides?: CallOverrides
     ): Promise<void>;
 
     "verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[4])"(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
+      a: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      b: [
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+      ],
+      c: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      input: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+      ],
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -144,36 +209,68 @@ export interface Verifier28 extends BaseContract {
 
   estimateGas: {
     verifyProof(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
+      a: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      b: [
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+      ],
+      c: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      input: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+      ],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[4])"(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
+      a: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      b: [
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+      ],
+      c: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      input: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+      ],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     verifyProof(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
+      a: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      b: [
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+      ],
+      c: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      input: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+      ],
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[4])"(
-      a: [BigNumberish, BigNumberish],
-      b: [[BigNumberish, BigNumberish], [BigNumberish, BigNumberish]],
-      c: [BigNumberish, BigNumberish],
-      input: [BigNumberish, BigNumberish, BigNumberish, BigNumberish],
+      a: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      b: [
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+        [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
+      ],
+      c: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>],
+      input: [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+      ],
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

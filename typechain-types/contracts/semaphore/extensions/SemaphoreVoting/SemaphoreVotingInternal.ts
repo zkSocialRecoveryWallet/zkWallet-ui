@@ -15,6 +15,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export interface SemaphoreVotingInternalInterface extends utils.Interface {
@@ -159,49 +160,52 @@ export interface SemaphoreVotingInternal extends BaseContract {
 
     "PollCreated(uint256,address)"(
       pollId?: null,
-      coordinator?: string | null
+      coordinator?: PromiseOrValue<string> | null
     ): PollCreatedEventFilter;
     PollCreated(
       pollId?: null,
-      coordinator?: string | null
+      coordinator?: PromiseOrValue<string> | null
     ): PollCreatedEventFilter;
 
     "PollEnded(uint256,address,uint256)"(
       pollId?: null,
-      coordinator?: string | null,
+      coordinator?: PromiseOrValue<string> | null,
       decryptionKey?: null
     ): PollEndedEventFilter;
     PollEnded(
       pollId?: null,
-      coordinator?: string | null,
+      coordinator?: PromiseOrValue<string> | null,
       decryptionKey?: null
     ): PollEndedEventFilter;
 
     "PollStarted(uint256,address,uint256)"(
       pollId?: null,
-      coordinator?: string | null,
+      coordinator?: PromiseOrValue<string> | null,
       encryptionKey?: null
     ): PollStartedEventFilter;
     PollStarted(
       pollId?: null,
-      coordinator?: string | null,
+      coordinator?: PromiseOrValue<string> | null,
       encryptionKey?: null
     ): PollStartedEventFilter;
 
     "ProofVerified(uint256,bytes32)"(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       signal?: null
     ): ProofVerifiedEventFilter;
     ProofVerified(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       signal?: null
     ): ProofVerifiedEventFilter;
 
     "VoteAdded(uint256,bytes32)"(
-      pollId?: BigNumberish | null,
+      pollId?: PromiseOrValue<BigNumberish> | null,
       vote?: null
     ): VoteAddedEventFilter;
-    VoteAdded(pollId?: BigNumberish | null, vote?: null): VoteAddedEventFilter;
+    VoteAdded(
+      pollId?: PromiseOrValue<BigNumberish> | null,
+      vote?: null
+    ): VoteAddedEventFilter;
   };
 
   estimateGas: {};

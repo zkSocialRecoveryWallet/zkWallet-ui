@@ -9,6 +9,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface IWalletFactoryInternalInterface extends utils.Interface {
@@ -154,20 +155,20 @@ export interface IWalletFactoryInternal extends BaseContract {
     FacetIsRemoved(facetAddress?: null): FacetIsRemovedEventFilter;
 
     "GuardianAdded(bytes32,bytes32)"(
-      hashId?: BytesLike | null,
+      hashId?: PromiseOrValue<BytesLike> | null,
       guardian?: null
     ): GuardianAddedEventFilter;
     GuardianAdded(
-      hashId?: BytesLike | null,
+      hashId?: PromiseOrValue<BytesLike> | null,
       guardian?: null
     ): GuardianAddedEventFilter;
 
     "GuardianRemoved(bytes32,bytes32)"(
-      hashId?: BytesLike | null,
+      hashId?: PromiseOrValue<BytesLike> | null,
       guardian?: null
     ): GuardianRemovedEventFilter;
     GuardianRemoved(
-      hashId?: BytesLike | null,
+      hashId?: PromiseOrValue<BytesLike> | null,
       guardian?: null
     ): GuardianRemovedEventFilter;
 

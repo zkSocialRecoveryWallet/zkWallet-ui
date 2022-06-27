@@ -17,10 +17,14 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../../common";
 
 export declare namespace IDiamondReadable {
-  export type FacetStruct = { target: string; selectors: BytesLike[] };
+  export type FacetStruct = {
+    target: PromiseOrValue<string>;
+    selectors: PromiseOrValue<BytesLike>[];
+  };
 
   export type FacetStructOutput = [string, string[]] & {
     target: string;
@@ -50,11 +54,11 @@ export interface IDiamondReadableInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "facetAddress",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "facetAddress(bytes4)",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "facetAddresses",
@@ -66,11 +70,11 @@ export interface IDiamondReadableInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "facetFunctionSelectors",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "facetFunctionSelectors(address)",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "facets", values?: undefined): string;
   encodeFunctionData(functionFragment: "facets()", values?: undefined): string;
@@ -133,12 +137,12 @@ export interface IDiamondReadable extends BaseContract {
 
   functions: {
     facetAddress(
-      selector: BytesLike,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string] & { facet: string }>;
 
     "facetAddress(bytes4)"(
-      selector: BytesLike,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string] & { facet: string }>;
 
@@ -151,12 +155,12 @@ export interface IDiamondReadable extends BaseContract {
     ): Promise<[string[]] & { addresses: string[] }>;
 
     facetFunctionSelectors(
-      facet: string,
+      facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[string[]] & { selectors: string[] }>;
 
     "facetFunctionSelectors(address)"(
-      facet: string,
+      facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[string[]] & { selectors: string[] }>;
 
@@ -177,10 +181,13 @@ export interface IDiamondReadable extends BaseContract {
     >;
   };
 
-  facetAddress(selector: BytesLike, overrides?: CallOverrides): Promise<string>;
+  facetAddress(
+    selector: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   "facetAddress(bytes4)"(
-    selector: BytesLike,
+    selector: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -189,12 +196,12 @@ export interface IDiamondReadable extends BaseContract {
   "facetAddresses()"(overrides?: CallOverrides): Promise<string[]>;
 
   facetFunctionSelectors(
-    facet: string,
+    facet: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<string[]>;
 
   "facetFunctionSelectors(address)"(
-    facet: string,
+    facet: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<string[]>;
 
@@ -208,12 +215,12 @@ export interface IDiamondReadable extends BaseContract {
 
   callStatic: {
     facetAddress(
-      selector: BytesLike,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     "facetAddress(bytes4)"(
-      selector: BytesLike,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -222,12 +229,12 @@ export interface IDiamondReadable extends BaseContract {
     "facetAddresses()"(overrides?: CallOverrides): Promise<string[]>;
 
     facetFunctionSelectors(
-      facet: string,
+      facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string[]>;
 
     "facetFunctionSelectors(address)"(
-      facet: string,
+      facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string[]>;
 
@@ -244,12 +251,12 @@ export interface IDiamondReadable extends BaseContract {
 
   estimateGas: {
     facetAddress(
-      selector: BytesLike,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "facetAddress(bytes4)"(
-      selector: BytesLike,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -258,12 +265,12 @@ export interface IDiamondReadable extends BaseContract {
     "facetAddresses()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     facetFunctionSelectors(
-      facet: string,
+      facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "facetFunctionSelectors(address)"(
-      facet: string,
+      facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -274,12 +281,12 @@ export interface IDiamondReadable extends BaseContract {
 
   populateTransaction: {
     facetAddress(
-      selector: BytesLike,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "facetAddress(bytes4)"(
-      selector: BytesLike,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -290,12 +297,12 @@ export interface IDiamondReadable extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     facetFunctionSelectors(
-      facet: string,
+      facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "facetFunctionSelectors(address)"(
-      facet: string,
+      facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

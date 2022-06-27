@@ -24,17 +24,12 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
-
-export declare namespace IGuardianInternal {
-  export type GuardianDTOStruct = { hashId: BigNumberish };
-
-  export type GuardianDTOStructOutput = [BigNumber] & { hashId: BigNumber };
-}
 
 export interface IzkWalletInterface extends utils.Interface {
   functions: {
-    "addGuardians(uint256,uint256[],(uint256)[])": FunctionFragment;
+    "addGuardians(uint256,uint256[])": FunctionFragment;
     "addMember(uint256,uint256)": FunctionFragment;
     "addMembers(uint256,uint256[])": FunctionFragment;
     "approveERC20(address,address,uint256)": FunctionFragment;
@@ -72,7 +67,7 @@ export interface IzkWalletInterface extends utils.Interface {
   getFunction(
     nameOrSignatureOrTopic:
       | "addGuardians"
-      | "addGuardians(uint256,uint256[],(uint256)[])"
+      | "addGuardians(uint256,uint256[])"
       | "addMember"
       | "addMember(uint256,uint256)"
       | "addMembers"
@@ -139,75 +134,93 @@ export interface IzkWalletInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "addGuardians",
-    values: [
-      BigNumberish,
-      BigNumberish[],
-      IGuardianInternal.GuardianDTOStruct[]
-    ]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
-    functionFragment: "addGuardians(uint256,uint256[],(uint256)[])",
-    values: [
-      BigNumberish,
-      BigNumberish[],
-      IGuardianInternal.GuardianDTOStruct[]
-    ]
+    functionFragment: "addGuardians(uint256,uint256[])",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
     functionFragment: "addMember",
-    values: [BigNumberish, BigNumberish]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "addMember(uint256,uint256)",
-    values: [BigNumberish, BigNumberish]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "addMembers",
-    values: [BigNumberish, BigNumberish[]]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
     functionFragment: "addMembers(uint256,uint256[])",
-    values: [BigNumberish, BigNumberish[]]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
     functionFragment: "approveERC20",
-    values: [string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "approveERC20(address,address,uint256)",
-    values: [string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "approveERC721",
-    values: [string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "approveERC721(address,address,uint256)",
-    values: [string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "balanceOfERC20",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "balanceOfERC20(address)",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "balanceOfERC721",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "balanceOfERC721(address)",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "createGroup",
-    values: [BigNumberish, BigNumberish, BigNumberish, string]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "createGroup(uint256,uint8,uint256,address)",
-    values: [BigNumberish, BigNumberish, BigNumberish, string]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "getAllTrackedERC20Tokens",
@@ -227,11 +240,11 @@ export interface IzkWalletInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getGroupAdmin",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getGroupAdmin(uint256)",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getMajority",
@@ -275,70 +288,83 @@ export interface IzkWalletInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "ownerOfERC721",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "ownerOfERC721(address,uint256)",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "recover",
     values: [
-      BigNumberish,
-      BytesLike,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish[],
-      string
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<string>
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "recover(uint256,bytes32,uint256,uint256,uint256[8],address)",
     values: [
-      BigNumberish,
-      BytesLike,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish[],
-      string
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<string>
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "registerERC20",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "registerERC20(address)",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "registerERC721",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "registerERC721(address)",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(functionFragment: "removeERC20", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "removeERC20",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "removeERC20(address)",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "removeERC721",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "removeERC721(address)",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "removeMember",
-    values: [BigNumberish, BigNumberish, BigNumberish[], BigNumberish[]]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BigNumberish>[]
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "removeMember(uint256,uint256,uint256[],uint8[])",
-    values: [BigNumberish, BigNumberish, BigNumberish[], BigNumberish[]]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BigNumberish>[]
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "resetRecovery",
@@ -350,70 +376,117 @@ export interface IzkWalletInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "safeTransferERC721From(address,address,address,uint256)",
-    values: [string, string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "safeTransferERC721From(address,address,address,uint256,bytes)",
-    values: [string, string, string, BigNumberish, BytesLike]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "transferERC20",
-    values: [string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "transferERC20(address,address,uint256)",
-    values: [string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "transferERC20From",
-    values: [string, string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "transferERC20From(address,address,address,uint256)",
-    values: [string, string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "transferERC721",
-    values: [string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "transferERC721(address,address,uint256)",
-    values: [string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "transferERC721From",
-    values: [string, string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "transferERC721From(address,address,address,uint256)",
-    values: [string, string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "updateGroupAdmin",
-    values: [BigNumberish, string]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "updateGroupAdmin(uint256,address)",
-    values: [BigNumberish, string]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "verifyProof",
     values: [
-      BigNumberish,
-      BytesLike,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish[]
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[]
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "verifyProof(uint256,bytes32,uint256,uint256,uint256[8])",
     values: [
-      BigNumberish,
-      BytesLike,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish[]
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[]
     ]
   ): string;
   encodeFunctionData(functionFragment: "version", values?: undefined): string;
@@ -424,7 +497,7 @@ export interface IzkWalletInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "addGuardians(uint256,uint256[],(uint256)[])",
+    functionFragment: "addGuardians(uint256,uint256[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "addMember", data: BytesLike): Result;
@@ -883,105 +956,103 @@ export interface IzkWallet extends BaseContract {
 
   functions: {
     addGuardians(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "addGuardians(uint256,uint256[],(uint256)[])"(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+    "addGuardians(uint256,uint256[])"(
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     addMember(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "addMember(uint256,uint256)"(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     addMembers(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "addMembers(uint256,uint256[])"(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     approveERC20(
-      token: string,
-      spender: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "approveERC20(address,address,uint256)"(
-      token: string,
-      spender: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     approveERC721(
-      token: string,
-      spender: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "approveERC721(address,address,uint256)"(
-      token: string,
-      spender: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     balanceOfERC20(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     "balanceOfERC20(address)"(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     balanceOfERC721(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     "balanceOfERC721(address)"(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     createGroup(
-      groupId: BigNumberish,
-      depth: BigNumberish,
-      zeroValue: BigNumberish,
-      admin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      depth: PromiseOrValue<BigNumberish>,
+      zeroValue: PromiseOrValue<BigNumberish>,
+      admin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "createGroup(uint256,uint8,uint256,address)"(
-      groupId: BigNumberish,
-      depth: BigNumberish,
-      zeroValue: BigNumberish,
-      admin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      depth: PromiseOrValue<BigNumberish>,
+      zeroValue: PromiseOrValue<BigNumberish>,
+      admin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getAllTrackedERC20Tokens(overrides?: CallOverrides): Promise<[string[]]>;
@@ -997,12 +1068,12 @@ export interface IzkWallet extends BaseContract {
     ): Promise<[string[]]>;
 
     getGroupAdmin(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     "getGroupAdmin(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
@@ -1027,206 +1098,206 @@ export interface IzkWallet extends BaseContract {
     "guardianFacetVersion()"(overrides?: CallOverrides): Promise<[string]>;
 
     ownerOfERC721(
-      token: string,
-      tokenId: BigNumberish,
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string] & { owner: string }>;
 
     "ownerOfERC721(address,uint256)"(
-      token: string,
-      tokenId: BigNumberish,
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string] & { owner: string }>;
 
     recover(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "recover(uint256,bytes32,uint256,uint256,uint256[8],address)"(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     registerERC20(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "registerERC20(address)"(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     registerERC721(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "registerERC721(address)"(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     removeERC20(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "removeERC20(address)"(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     removeERC721(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "removeERC721(address)"(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     removeMember(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      proofSiblings: BigNumberish[],
-      proofPathIndices: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "removeMember(uint256,uint256,uint256[],uint8[])"(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      proofSiblings: BigNumberish[],
-      proofPathIndices: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     resetRecovery(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "resetRecovery()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "safeTransferERC721From(address,address,address,uint256)"(
-      token: string,
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "safeTransferERC721From(address,address,address,uint256,bytes)"(
-      token: string,
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     transferERC20(
-      token: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "transferERC20(address,address,uint256)"(
-      token: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     transferERC20From(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "transferERC20From(address,address,address,uint256)"(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     transferERC721(
-      token: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "transferERC721(address,address,uint256)"(
-      token: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     transferERC721From(
-      token: string,
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "transferERC721From(address,address,address,uint256)"(
-      token: string,
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     updateGroupAdmin(
-      groupId: BigNumberish,
-      newAdmin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "updateGroupAdmin(uint256,address)"(
-      groupId: BigNumberish,
-      newAdmin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     verifyProof(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "verifyProof(uint256,bytes32,uint256,uint256,uint256[8])"(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     version(overrides?: CallOverrides): Promise<[string]>;
@@ -1235,99 +1306,103 @@ export interface IzkWallet extends BaseContract {
   };
 
   addGuardians(
-    groupId: BigNumberish,
-    identityCommitments: BigNumberish[],
-    guardians: IGuardianInternal.GuardianDTOStruct[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    identityCommitments: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "addGuardians(uint256,uint256[],(uint256)[])"(
-    groupId: BigNumberish,
-    identityCommitments: BigNumberish[],
-    guardians: IGuardianInternal.GuardianDTOStruct[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+  "addGuardians(uint256,uint256[])"(
+    groupId: PromiseOrValue<BigNumberish>,
+    identityCommitments: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   addMember(
-    groupId: BigNumberish,
-    identityCommitment: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    identityCommitment: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "addMember(uint256,uint256)"(
-    groupId: BigNumberish,
-    identityCommitment: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    identityCommitment: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   addMembers(
-    groupId: BigNumberish,
-    identityCommitments: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    identityCommitments: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "addMembers(uint256,uint256[])"(
-    groupId: BigNumberish,
-    identityCommitments: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    identityCommitments: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   approveERC20(
-    token: string,
-    spender: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    spender: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "approveERC20(address,address,uint256)"(
-    token: string,
-    spender: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    spender: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   approveERC721(
-    token: string,
-    spender: string,
-    tokenId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    spender: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "approveERC721(address,address,uint256)"(
-    token: string,
-    spender: string,
-    tokenId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    spender: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  balanceOfERC20(token: string, overrides?: CallOverrides): Promise<BigNumber>;
-
-  "balanceOfERC20(address)"(
-    token: string,
+  balanceOfERC20(
+    token: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  balanceOfERC721(token: string, overrides?: CallOverrides): Promise<BigNumber>;
+  "balanceOfERC20(address)"(
+    token: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  balanceOfERC721(
+    token: PromiseOrValue<string>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   "balanceOfERC721(address)"(
-    token: string,
+    token: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   createGroup(
-    groupId: BigNumberish,
-    depth: BigNumberish,
-    zeroValue: BigNumberish,
-    admin: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    depth: PromiseOrValue<BigNumberish>,
+    zeroValue: PromiseOrValue<BigNumberish>,
+    admin: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "createGroup(uint256,uint8,uint256,address)"(
-    groupId: BigNumberish,
-    depth: BigNumberish,
-    zeroValue: BigNumberish,
-    admin: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    depth: PromiseOrValue<BigNumberish>,
+    zeroValue: PromiseOrValue<BigNumberish>,
+    admin: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getAllTrackedERC20Tokens(overrides?: CallOverrides): Promise<string[]>;
@@ -1339,12 +1414,12 @@ export interface IzkWallet extends BaseContract {
   "getAllTrackedERC721Tokens()"(overrides?: CallOverrides): Promise<string[]>;
 
   getGroupAdmin(
-    groupId: BigNumberish,
+    groupId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   "getGroupAdmin(uint256)"(
-    groupId: BigNumberish,
+    groupId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -1369,206 +1444,206 @@ export interface IzkWallet extends BaseContract {
   "guardianFacetVersion()"(overrides?: CallOverrides): Promise<string>;
 
   ownerOfERC721(
-    token: string,
-    tokenId: BigNumberish,
+    token: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   "ownerOfERC721(address,uint256)"(
-    token: string,
-    tokenId: BigNumberish,
+    token: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   recover(
-    groupId: BigNumberish,
-    signal: BytesLike,
-    nullifierHash: BigNumberish,
-    externalNullifier: BigNumberish,
-    proof: BigNumberish[],
-    newOwner: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    signal: PromiseOrValue<BytesLike>,
+    nullifierHash: PromiseOrValue<BigNumberish>,
+    externalNullifier: PromiseOrValue<BigNumberish>,
+    proof: PromiseOrValue<BigNumberish>[],
+    newOwner: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "recover(uint256,bytes32,uint256,uint256,uint256[8],address)"(
-    groupId: BigNumberish,
-    signal: BytesLike,
-    nullifierHash: BigNumberish,
-    externalNullifier: BigNumberish,
-    proof: BigNumberish[],
-    newOwner: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    signal: PromiseOrValue<BytesLike>,
+    nullifierHash: PromiseOrValue<BigNumberish>,
+    externalNullifier: PromiseOrValue<BigNumberish>,
+    proof: PromiseOrValue<BigNumberish>[],
+    newOwner: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   registerERC20(
-    token: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "registerERC20(address)"(
-    token: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   registerERC721(
-    token: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "registerERC721(address)"(
-    token: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   removeERC20(
-    token: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "removeERC20(address)"(
-    token: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   removeERC721(
-    token: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "removeERC721(address)"(
-    token: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   removeMember(
-    groupId: BigNumberish,
-    identityCommitment: BigNumberish,
-    proofSiblings: BigNumberish[],
-    proofPathIndices: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    identityCommitment: PromiseOrValue<BigNumberish>,
+    proofSiblings: PromiseOrValue<BigNumberish>[],
+    proofPathIndices: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "removeMember(uint256,uint256,uint256[],uint8[])"(
-    groupId: BigNumberish,
-    identityCommitment: BigNumberish,
-    proofSiblings: BigNumberish[],
-    proofPathIndices: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    identityCommitment: PromiseOrValue<BigNumberish>,
+    proofSiblings: PromiseOrValue<BigNumberish>[],
+    proofPathIndices: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   resetRecovery(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "resetRecovery()"(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "safeTransferERC721From(address,address,address,uint256)"(
-    token: string,
-    from: string,
-    to: string,
-    tokenId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "safeTransferERC721From(address,address,address,uint256,bytes)"(
-    token: string,
-    from: string,
-    to: string,
-    tokenId: BigNumberish,
-    data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   transferERC20(
-    token: string,
-    to: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "transferERC20(address,address,uint256)"(
-    token: string,
-    to: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   transferERC20From(
-    token: string,
-    from: string,
-    to: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "transferERC20From(address,address,address,uint256)"(
-    token: string,
-    from: string,
-    to: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   transferERC721(
-    token: string,
-    to: string,
-    tokenId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "transferERC721(address,address,uint256)"(
-    token: string,
-    to: string,
-    tokenId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   transferERC721From(
-    token: string,
-    from: string,
-    to: string,
-    tokenId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "transferERC721From(address,address,address,uint256)"(
-    token: string,
-    from: string,
-    to: string,
-    tokenId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    token: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   updateGroupAdmin(
-    groupId: BigNumberish,
-    newAdmin: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    newAdmin: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "updateGroupAdmin(uint256,address)"(
-    groupId: BigNumberish,
-    newAdmin: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    newAdmin: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   verifyProof(
-    groupId: BigNumberish,
-    signal: BytesLike,
-    nullifierHash: BigNumberish,
-    externalNullifier: BigNumberish,
-    proof: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    signal: PromiseOrValue<BytesLike>,
+    nullifierHash: PromiseOrValue<BigNumberish>,
+    externalNullifier: PromiseOrValue<BigNumberish>,
+    proof: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "verifyProof(uint256,bytes32,uint256,uint256,uint256[8])"(
-    groupId: BigNumberish,
-    signal: BytesLike,
-    nullifierHash: BigNumberish,
-    externalNullifier: BigNumberish,
-    proof: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    signal: PromiseOrValue<BytesLike>,
+    nullifierHash: PromiseOrValue<BigNumberish>,
+    externalNullifier: PromiseOrValue<BigNumberish>,
+    proof: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   version(overrides?: CallOverrides): Promise<string>;
@@ -1577,104 +1652,102 @@ export interface IzkWallet extends BaseContract {
 
   callStatic: {
     addGuardians(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      guardians: IGuardianInternal.GuardianDTOStruct[],
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "addGuardians(uint256,uint256[],(uint256)[])"(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      guardians: IGuardianInternal.GuardianDTOStruct[],
+    "addGuardians(uint256,uint256[])"(
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     addMember(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "addMember(uint256,uint256)"(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     addMembers(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     "addMembers(uint256,uint256[])"(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     approveERC20(
-      token: string,
-      spender: string,
-      amount: BigNumberish,
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     "approveERC20(address,address,uint256)"(
-      token: string,
-      spender: string,
-      amount: BigNumberish,
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     approveERC721(
-      token: string,
-      spender: string,
-      tokenId: BigNumberish,
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "approveERC721(address,address,uint256)"(
-      token: string,
-      spender: string,
-      tokenId: BigNumberish,
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     balanceOfERC20(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "balanceOfERC20(address)"(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     balanceOfERC721(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "balanceOfERC721(address)"(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     createGroup(
-      groupId: BigNumberish,
-      depth: BigNumberish,
-      zeroValue: BigNumberish,
-      admin: string,
+      groupId: PromiseOrValue<BigNumberish>,
+      depth: PromiseOrValue<BigNumberish>,
+      zeroValue: PromiseOrValue<BigNumberish>,
+      admin: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "createGroup(uint256,uint8,uint256,address)"(
-      groupId: BigNumberish,
-      depth: BigNumberish,
-      zeroValue: BigNumberish,
-      admin: string,
+      groupId: PromiseOrValue<BigNumberish>,
+      depth: PromiseOrValue<BigNumberish>,
+      zeroValue: PromiseOrValue<BigNumberish>,
+      admin: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1687,12 +1760,12 @@ export interface IzkWallet extends BaseContract {
     "getAllTrackedERC721Tokens()"(overrides?: CallOverrides): Promise<string[]>;
 
     getGroupAdmin(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     "getGroupAdmin(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -1717,78 +1790,90 @@ export interface IzkWallet extends BaseContract {
     "guardianFacetVersion()"(overrides?: CallOverrides): Promise<string>;
 
     ownerOfERC721(
-      token: string,
-      tokenId: BigNumberish,
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     "ownerOfERC721(address,uint256)"(
-      token: string,
-      tokenId: BigNumberish,
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     recover(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      newOwner: string,
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "recover(uint256,bytes32,uint256,uint256,uint256[8],address)"(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      newOwner: string,
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    registerERC20(token: string, overrides?: CallOverrides): Promise<void>;
+    registerERC20(
+      token: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     "registerERC20(address)"(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    registerERC721(token: string, overrides?: CallOverrides): Promise<void>;
+    registerERC721(
+      token: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     "registerERC721(address)"(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    removeERC20(token: string, overrides?: CallOverrides): Promise<void>;
+    removeERC20(
+      token: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     "removeERC20(address)"(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    removeERC721(token: string, overrides?: CallOverrides): Promise<void>;
+    removeERC721(
+      token: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     "removeERC721(address)"(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     removeMember(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      proofSiblings: BigNumberish[],
-      proofPathIndices: BigNumberish[],
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     "removeMember(uint256,uint256,uint256[],uint8[])"(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      proofSiblings: BigNumberish[],
-      proofPathIndices: BigNumberish[],
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1797,109 +1882,109 @@ export interface IzkWallet extends BaseContract {
     "resetRecovery()"(overrides?: CallOverrides): Promise<void>;
 
     "safeTransferERC721From(address,address,address,uint256)"(
-      token: string,
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "safeTransferERC721From(address,address,address,uint256,bytes)"(
-      token: string,
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      data: BytesLike,
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     transferERC20(
-      token: string,
-      to: string,
-      amount: BigNumberish,
+      token: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     "transferERC20(address,address,uint256)"(
-      token: string,
-      to: string,
-      amount: BigNumberish,
+      token: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     transferERC20From(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     "transferERC20From(address,address,address,uint256)"(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     transferERC721(
-      token: string,
-      to: string,
-      tokenId: BigNumberish,
+      token: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "transferERC721(address,address,uint256)"(
-      token: string,
-      to: string,
-      tokenId: BigNumberish,
+      token: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     transferERC721From(
-      token: string,
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "transferERC721From(address,address,address,uint256)"(
-      token: string,
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     updateGroupAdmin(
-      groupId: BigNumberish,
-      newAdmin: string,
+      groupId: PromiseOrValue<BigNumberish>,
+      newAdmin: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "updateGroupAdmin(uint256,address)"(
-      groupId: BigNumberish,
-      newAdmin: string,
+      groupId: PromiseOrValue<BigNumberish>,
+      newAdmin: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     verifyProof(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     "verifyProof(uint256,bytes32,uint256,uint256,uint256[8])"(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1915,66 +2000,66 @@ export interface IzkWallet extends BaseContract {
     ERC20TokenRemoved(tokenAddress?: null): ERC20TokenRemovedEventFilter;
 
     "ERC20TokenTracked(address)"(
-      tokenAddress?: string | null
+      tokenAddress?: PromiseOrValue<string> | null
     ): ERC20TokenTrackedEventFilter;
     ERC20TokenTracked(
-      tokenAddress?: string | null
+      tokenAddress?: PromiseOrValue<string> | null
     ): ERC20TokenTrackedEventFilter;
 
     "ERC721TokenRemoved(address)"(
-      tokenAddress?: string | null
+      tokenAddress?: PromiseOrValue<string> | null
     ): ERC721TokenRemovedEventFilter;
     ERC721TokenRemoved(
-      tokenAddress?: string | null
+      tokenAddress?: PromiseOrValue<string> | null
     ): ERC721TokenRemovedEventFilter;
 
     "ERC721TokenTracked(address)"(
-      tokenAddress?: string | null
+      tokenAddress?: PromiseOrValue<string> | null
     ): ERC721TokenTrackedEventFilter;
     ERC721TokenTracked(
-      tokenAddress?: string | null
+      tokenAddress?: PromiseOrValue<string> | null
     ): ERC721TokenTrackedEventFilter;
 
     "GroupAdminUpdated(uint256,address,address)"(
-      groupId?: BigNumberish | null,
-      oldAdmin?: string | null,
-      newAdmin?: string | null
+      groupId?: PromiseOrValue<BigNumberish> | null,
+      oldAdmin?: PromiseOrValue<string> | null,
+      newAdmin?: PromiseOrValue<string> | null
     ): GroupAdminUpdatedEventFilter;
     GroupAdminUpdated(
-      groupId?: BigNumberish | null,
-      oldAdmin?: string | null,
-      newAdmin?: string | null
+      groupId?: PromiseOrValue<BigNumberish> | null,
+      oldAdmin?: PromiseOrValue<string> | null,
+      newAdmin?: PromiseOrValue<string> | null
     ): GroupAdminUpdatedEventFilter;
 
     "GroupCreated(uint256,uint8,uint256)"(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       depth?: null,
       zeroValue?: null
     ): GroupCreatedEventFilter;
     GroupCreated(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       depth?: null,
       zeroValue?: null
     ): GroupCreatedEventFilter;
 
     "MemberAdded(uint256,uint256,uint256)"(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       identityCommitment?: null,
       root?: null
     ): MemberAddedEventFilter;
     MemberAdded(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       identityCommitment?: null,
       root?: null
     ): MemberAddedEventFilter;
 
     "MemberRemoved(uint256,uint256,uint256)"(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       identityCommitment?: null,
       root?: null
     ): MemberRemovedEventFilter;
     MemberRemoved(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       identityCommitment?: null,
       root?: null
     ): MemberRemovedEventFilter;
@@ -1985,11 +2070,11 @@ export interface IzkWallet extends BaseContract {
     NullifierHashAdded(nullifierHash?: null): NullifierHashAddedEventFilter;
 
     "ProofVerified(uint256,bytes32)"(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       signal?: null
     ): ProofVerifiedEventFilter;
     ProofVerified(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       signal?: null
     ): ProofVerifiedEventFilter;
 
@@ -2012,105 +2097,103 @@ export interface IzkWallet extends BaseContract {
 
   estimateGas: {
     addGuardians(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "addGuardians(uint256,uint256[],(uint256)[])"(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+    "addGuardians(uint256,uint256[])"(
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     addMember(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "addMember(uint256,uint256)"(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     addMembers(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "addMembers(uint256,uint256[])"(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     approveERC20(
-      token: string,
-      spender: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "approveERC20(address,address,uint256)"(
-      token: string,
-      spender: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     approveERC721(
-      token: string,
-      spender: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "approveERC721(address,address,uint256)"(
-      token: string,
-      spender: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     balanceOfERC20(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "balanceOfERC20(address)"(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     balanceOfERC721(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "balanceOfERC721(address)"(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     createGroup(
-      groupId: BigNumberish,
-      depth: BigNumberish,
-      zeroValue: BigNumberish,
-      admin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      depth: PromiseOrValue<BigNumberish>,
+      zeroValue: PromiseOrValue<BigNumberish>,
+      admin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "createGroup(uint256,uint8,uint256,address)"(
-      groupId: BigNumberish,
-      depth: BigNumberish,
-      zeroValue: BigNumberish,
-      admin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      depth: PromiseOrValue<BigNumberish>,
+      zeroValue: PromiseOrValue<BigNumberish>,
+      admin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getAllTrackedERC20Tokens(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2124,12 +2207,12 @@ export interface IzkWallet extends BaseContract {
     ): Promise<BigNumber>;
 
     getGroupAdmin(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getGroupAdmin(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -2154,206 +2237,206 @@ export interface IzkWallet extends BaseContract {
     "guardianFacetVersion()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     ownerOfERC721(
-      token: string,
-      tokenId: BigNumberish,
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "ownerOfERC721(address,uint256)"(
-      token: string,
-      tokenId: BigNumberish,
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     recover(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "recover(uint256,bytes32,uint256,uint256,uint256[8],address)"(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     registerERC20(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "registerERC20(address)"(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     registerERC721(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "registerERC721(address)"(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     removeERC20(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "removeERC20(address)"(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     removeERC721(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "removeERC721(address)"(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     removeMember(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      proofSiblings: BigNumberish[],
-      proofPathIndices: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "removeMember(uint256,uint256,uint256[],uint8[])"(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      proofSiblings: BigNumberish[],
-      proofPathIndices: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     resetRecovery(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "resetRecovery()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "safeTransferERC721From(address,address,address,uint256)"(
-      token: string,
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "safeTransferERC721From(address,address,address,uint256,bytes)"(
-      token: string,
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferERC20(
-      token: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "transferERC20(address,address,uint256)"(
-      token: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferERC20From(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "transferERC20From(address,address,address,uint256)"(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferERC721(
-      token: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "transferERC721(address,address,uint256)"(
-      token: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferERC721From(
-      token: string,
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "transferERC721From(address,address,address,uint256)"(
-      token: string,
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     updateGroupAdmin(
-      groupId: BigNumberish,
-      newAdmin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "updateGroupAdmin(uint256,address)"(
-      groupId: BigNumberish,
-      newAdmin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     verifyProof(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "verifyProof(uint256,bytes32,uint256,uint256,uint256[8])"(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     version(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2363,105 +2446,103 @@ export interface IzkWallet extends BaseContract {
 
   populateTransaction: {
     addGuardians(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "addGuardians(uint256,uint256[],(uint256)[])"(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+    "addGuardians(uint256,uint256[])"(
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     addMember(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "addMember(uint256,uint256)"(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     addMembers(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "addMembers(uint256,uint256[])"(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     approveERC20(
-      token: string,
-      spender: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "approveERC20(address,address,uint256)"(
-      token: string,
-      spender: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     approveERC721(
-      token: string,
-      spender: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "approveERC721(address,address,uint256)"(
-      token: string,
-      spender: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     balanceOfERC20(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "balanceOfERC20(address)"(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     balanceOfERC721(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "balanceOfERC721(address)"(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     createGroup(
-      groupId: BigNumberish,
-      depth: BigNumberish,
-      zeroValue: BigNumberish,
-      admin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      depth: PromiseOrValue<BigNumberish>,
+      zeroValue: PromiseOrValue<BigNumberish>,
+      admin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "createGroup(uint256,uint8,uint256,address)"(
-      groupId: BigNumberish,
-      depth: BigNumberish,
-      zeroValue: BigNumberish,
-      admin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      depth: PromiseOrValue<BigNumberish>,
+      zeroValue: PromiseOrValue<BigNumberish>,
+      admin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getAllTrackedERC20Tokens(
@@ -2481,12 +2562,12 @@ export interface IzkWallet extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     getGroupAdmin(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "getGroupAdmin(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -2525,206 +2606,206 @@ export interface IzkWallet extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     ownerOfERC721(
-      token: string,
-      tokenId: BigNumberish,
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "ownerOfERC721(address,uint256)"(
-      token: string,
-      tokenId: BigNumberish,
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     recover(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "recover(uint256,bytes32,uint256,uint256,uint256[8],address)"(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     registerERC20(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "registerERC20(address)"(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     registerERC721(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "registerERC721(address)"(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     removeERC20(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "removeERC20(address)"(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     removeERC721(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "removeERC721(address)"(
-      token: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     removeMember(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      proofSiblings: BigNumberish[],
-      proofPathIndices: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "removeMember(uint256,uint256,uint256[],uint8[])"(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      proofSiblings: BigNumberish[],
-      proofPathIndices: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     resetRecovery(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "resetRecovery()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "safeTransferERC721From(address,address,address,uint256)"(
-      token: string,
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "safeTransferERC721From(address,address,address,uint256,bytes)"(
-      token: string,
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferERC20(
-      token: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "transferERC20(address,address,uint256)"(
-      token: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferERC20From(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "transferERC20From(address,address,address,uint256)"(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferERC721(
-      token: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "transferERC721(address,address,uint256)"(
-      token: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferERC721From(
-      token: string,
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "transferERC721From(address,address,address,uint256)"(
-      token: string,
-      from: string,
-      to: string,
-      tokenId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     updateGroupAdmin(
-      groupId: BigNumberish,
-      newAdmin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "updateGroupAdmin(uint256,address)"(
-      groupId: BigNumberish,
-      newAdmin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     verifyProof(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "verifyProof(uint256,bytes32,uint256,uint256,uint256[8])"(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     version(overrides?: CallOverrides): Promise<PopulatedTransaction>;

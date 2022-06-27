@@ -24,13 +24,14 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export declare namespace GuardianStorage {
   export type GuardianStruct = {
-    hashId: BigNumberish;
-    status: BigNumberish;
-    timestamp: BigNumberish;
+    hashId: PromiseOrValue<BigNumberish>;
+    status: PromiseOrValue<BigNumberish>;
+    timestamp: PromiseOrValue<BigNumberish>;
   };
 
   export type GuardianStructOutput = [BigNumber, number, BigNumber] & {
@@ -41,7 +42,7 @@ export declare namespace GuardianStorage {
 }
 
 export declare namespace IGuardianInternal {
-  export type GuardianDTOStruct = { hashId: BigNumberish };
+  export type GuardianDTOStruct = { hashId: PromiseOrValue<BigNumberish> };
 
   export type GuardianDTOStructOutput = [BigNumber] & { hashId: BigNumber };
 }
@@ -54,9 +55,9 @@ export interface GuardianInterface extends utils.Interface {
     "getGuardians(bool)": FunctionFragment;
     "numGuardians(bool)": FunctionFragment;
     "removeGuardian(uint256)": FunctionFragment;
-    "removeGuardians((uint256)[])": FunctionFragment;
+    "removeGuardians(uint256[])": FunctionFragment;
     "requireMajority((uint256)[])": FunctionFragment;
-    "setInitialGuardians((uint256)[])": FunctionFragment;
+    "setInitialGuardians(uint256[])": FunctionFragment;
   };
 
   getFunction(
@@ -74,20 +75,20 @@ export interface GuardianInterface extends utils.Interface {
       | "removeGuardian"
       | "removeGuardian(uint256)"
       | "removeGuardians"
-      | "removeGuardians((uint256)[])"
+      | "removeGuardians(uint256[])"
       | "requireMajority"
       | "requireMajority((uint256)[])"
       | "setInitialGuardians"
-      | "setInitialGuardians((uint256)[])"
+      | "setInitialGuardians(uint256[])"
   ): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "addGuardian",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "addGuardian(uint256)",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "cancelPendingGuardians",
@@ -99,43 +100,43 @@ export interface GuardianInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getGuardian",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getGuardian(uint256)",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getGuardians",
-    values: [boolean]
+    values: [PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "getGuardians(bool)",
-    values: [boolean]
+    values: [PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "numGuardians",
-    values: [boolean]
+    values: [PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "numGuardians(bool)",
-    values: [boolean]
+    values: [PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "removeGuardian",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "removeGuardian(uint256)",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "removeGuardians",
-    values: [IGuardianInternal.GuardianDTOStruct[]]
+    values: [PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
-    functionFragment: "removeGuardians((uint256)[])",
-    values: [IGuardianInternal.GuardianDTOStruct[]]
+    functionFragment: "removeGuardians(uint256[])",
+    values: [PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
     functionFragment: "requireMajority",
@@ -147,11 +148,11 @@ export interface GuardianInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setInitialGuardians",
-    values: [IGuardianInternal.GuardianDTOStruct[]]
+    values: [PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
-    functionFragment: "setInitialGuardians((uint256)[])",
-    values: [IGuardianInternal.GuardianDTOStruct[]]
+    functionFragment: "setInitialGuardians(uint256[])",
+    values: [PromiseOrValue<BigNumberish>[]]
   ): string;
 
   decodeFunctionResult(
@@ -207,7 +208,7 @@ export interface GuardianInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "removeGuardians((uint256)[])",
+    functionFragment: "removeGuardians(uint256[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -223,7 +224,7 @@ export interface GuardianInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setInitialGuardians((uint256)[])",
+    functionFragment: "setInitialGuardians(uint256[])",
     data: BytesLike
   ): Result;
 
@@ -292,71 +293,71 @@ export interface Guardian extends BaseContract {
 
   functions: {
     addGuardian(
-      hashId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "addGuardian(uint256)"(
-      hashId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     cancelPendingGuardians(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "cancelPendingGuardians()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getGuardian(
-      hashId: BigNumberish,
+      hashId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[GuardianStorage.GuardianStructOutput]>;
 
     "getGuardian(uint256)"(
-      hashId: BigNumberish,
+      hashId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[GuardianStorage.GuardianStructOutput]>;
 
     getGuardians(
-      includePendingAddition: boolean,
+      includePendingAddition: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<[GuardianStorage.GuardianStructOutput[]]>;
 
     "getGuardians(bool)"(
-      includePendingAddition: boolean,
+      includePendingAddition: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<[GuardianStorage.GuardianStructOutput[]]>;
 
     numGuardians(
-      includePendingAddition: boolean,
+      includePendingAddition: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     "numGuardians(bool)"(
-      includePendingAddition: boolean,
+      includePendingAddition: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     removeGuardian(
-      hashId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "removeGuardian(uint256)"(
-      hashId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     removeGuardians(
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "removeGuardians((uint256)[])"(
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+    "removeGuardians(uint256[])"(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     requireMajority(
@@ -370,82 +371,82 @@ export interface Guardian extends BaseContract {
     ): Promise<[void]>;
 
     setInitialGuardians(
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "setInitialGuardians((uint256)[])"(
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+    "setInitialGuardians(uint256[])"(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   addGuardian(
-    hashId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    hashId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "addGuardian(uint256)"(
-    hashId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    hashId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   cancelPendingGuardians(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "cancelPendingGuardians()"(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getGuardian(
-    hashId: BigNumberish,
+    hashId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<GuardianStorage.GuardianStructOutput>;
 
   "getGuardian(uint256)"(
-    hashId: BigNumberish,
+    hashId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<GuardianStorage.GuardianStructOutput>;
 
   getGuardians(
-    includePendingAddition: boolean,
+    includePendingAddition: PromiseOrValue<boolean>,
     overrides?: CallOverrides
   ): Promise<GuardianStorage.GuardianStructOutput[]>;
 
   "getGuardians(bool)"(
-    includePendingAddition: boolean,
+    includePendingAddition: PromiseOrValue<boolean>,
     overrides?: CallOverrides
   ): Promise<GuardianStorage.GuardianStructOutput[]>;
 
   numGuardians(
-    includePendingAddition: boolean,
+    includePendingAddition: PromiseOrValue<boolean>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   "numGuardians(bool)"(
-    includePendingAddition: boolean,
+    includePendingAddition: PromiseOrValue<boolean>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   removeGuardian(
-    hashId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    hashId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "removeGuardian(uint256)"(
-    hashId: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    hashId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   removeGuardians(
-    guardians: IGuardianInternal.GuardianDTOStruct[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    guardians: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "removeGuardians((uint256)[])"(
-    guardians: IGuardianInternal.GuardianDTOStruct[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+  "removeGuardians(uint256[])"(
+    guardians: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   requireMajority(
@@ -459,23 +460,23 @@ export interface Guardian extends BaseContract {
   ): Promise<void>;
 
   setInitialGuardians(
-    guardians: IGuardianInternal.GuardianDTOStruct[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    guardians: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "setInitialGuardians((uint256)[])"(
-    guardians: IGuardianInternal.GuardianDTOStruct[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+  "setInitialGuardians(uint256[])"(
+    guardians: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     addGuardian(
-      hashId: BigNumberish,
+      hashId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     "addGuardian(uint256)"(
-      hashId: BigNumberish,
+      hashId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
@@ -484,52 +485,52 @@ export interface Guardian extends BaseContract {
     "cancelPendingGuardians()"(overrides?: CallOverrides): Promise<void>;
 
     getGuardian(
-      hashId: BigNumberish,
+      hashId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<GuardianStorage.GuardianStructOutput>;
 
     "getGuardian(uint256)"(
-      hashId: BigNumberish,
+      hashId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<GuardianStorage.GuardianStructOutput>;
 
     getGuardians(
-      includePendingAddition: boolean,
+      includePendingAddition: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<GuardianStorage.GuardianStructOutput[]>;
 
     "getGuardians(bool)"(
-      includePendingAddition: boolean,
+      includePendingAddition: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<GuardianStorage.GuardianStructOutput[]>;
 
     numGuardians(
-      includePendingAddition: boolean,
+      includePendingAddition: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "numGuardians(bool)"(
-      includePendingAddition: boolean,
+      includePendingAddition: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     removeGuardian(
-      hashId: BigNumberish,
+      hashId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     "removeGuardian(uint256)"(
-      hashId: BigNumberish,
+      hashId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     removeGuardians(
-      guardians: IGuardianInternal.GuardianDTOStruct[],
+      guardians: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "removeGuardians((uint256)[])"(
-      guardians: IGuardianInternal.GuardianDTOStruct[],
+    "removeGuardians(uint256[])"(
+      guardians: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -544,103 +545,103 @@ export interface Guardian extends BaseContract {
     ): Promise<void>;
 
     setInitialGuardians(
-      guardians: IGuardianInternal.GuardianDTOStruct[],
+      guardians: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "setInitialGuardians((uint256)[])"(
-      guardians: IGuardianInternal.GuardianDTOStruct[],
+    "setInitialGuardians(uint256[])"(
+      guardians: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
     "GuardianAdded(uint256,uint256)"(
-      hashId?: BigNumberish | null,
+      hashId?: PromiseOrValue<BigNumberish> | null,
       effectiveTime?: null
     ): GuardianAddedEventFilter;
     GuardianAdded(
-      hashId?: BigNumberish | null,
+      hashId?: PromiseOrValue<BigNumberish> | null,
       effectiveTime?: null
     ): GuardianAddedEventFilter;
 
     "GuardianRemoved(uint256,uint256)"(
-      hashId?: BigNumberish | null,
+      hashId?: PromiseOrValue<BigNumberish> | null,
       effectiveTime?: null
     ): GuardianRemovedEventFilter;
     GuardianRemoved(
-      hashId?: BigNumberish | null,
+      hashId?: PromiseOrValue<BigNumberish> | null,
       effectiveTime?: null
     ): GuardianRemovedEventFilter;
   };
 
   estimateGas: {
     addGuardian(
-      hashId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "addGuardian(uint256)"(
-      hashId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     cancelPendingGuardians(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "cancelPendingGuardians()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getGuardian(
-      hashId: BigNumberish,
+      hashId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getGuardian(uint256)"(
-      hashId: BigNumberish,
+      hashId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getGuardians(
-      includePendingAddition: boolean,
+      includePendingAddition: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getGuardians(bool)"(
-      includePendingAddition: boolean,
+      includePendingAddition: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     numGuardians(
-      includePendingAddition: boolean,
+      includePendingAddition: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "numGuardians(bool)"(
-      includePendingAddition: boolean,
+      includePendingAddition: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     removeGuardian(
-      hashId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "removeGuardian(uint256)"(
-      hashId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     removeGuardians(
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "removeGuardians((uint256)[])"(
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+    "removeGuardians(uint256[])"(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     requireMajority(
@@ -654,83 +655,83 @@ export interface Guardian extends BaseContract {
     ): Promise<BigNumber>;
 
     setInitialGuardians(
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "setInitialGuardians((uint256)[])"(
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+    "setInitialGuardians(uint256[])"(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     addGuardian(
-      hashId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "addGuardian(uint256)"(
-      hashId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     cancelPendingGuardians(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "cancelPendingGuardians()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getGuardian(
-      hashId: BigNumberish,
+      hashId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "getGuardian(uint256)"(
-      hashId: BigNumberish,
+      hashId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getGuardians(
-      includePendingAddition: boolean,
+      includePendingAddition: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "getGuardians(bool)"(
-      includePendingAddition: boolean,
+      includePendingAddition: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     numGuardians(
-      includePendingAddition: boolean,
+      includePendingAddition: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "numGuardians(bool)"(
-      includePendingAddition: boolean,
+      includePendingAddition: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     removeGuardian(
-      hashId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "removeGuardian(uint256)"(
-      hashId: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     removeGuardians(
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "removeGuardians((uint256)[])"(
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+    "removeGuardians(uint256[])"(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     requireMajority(
@@ -744,13 +745,13 @@ export interface Guardian extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     setInitialGuardians(
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "setInitialGuardians((uint256)[])"(
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+    "setInitialGuardians(uint256[])"(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

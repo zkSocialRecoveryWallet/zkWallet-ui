@@ -9,6 +9,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface ERC20ServiceInternalInterface extends utils.Interface {
@@ -84,10 +85,10 @@ export interface ERC20ServiceInternal extends BaseContract {
     ERC20TokenRemoved(tokenAddress?: null): ERC20TokenRemovedEventFilter;
 
     "ERC20TokenTracked(address)"(
-      tokenAddress?: string | null
+      tokenAddress?: PromiseOrValue<string> | null
     ): ERC20TokenTrackedEventFilter;
     ERC20TokenTracked(
-      tokenAddress?: string | null
+      tokenAddress?: PromiseOrValue<string> | null
     ): ERC20TokenTrackedEventFilter;
   };
 

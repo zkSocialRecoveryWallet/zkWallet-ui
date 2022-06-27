@@ -9,6 +9,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface ERC721ServiceInternalInterface extends utils.Interface {
@@ -83,17 +84,17 @@ export interface ERC721ServiceInternal extends BaseContract {
 
   filters: {
     "ERC721TokenRemoved(address)"(
-      tokenAddress?: string | null
+      tokenAddress?: PromiseOrValue<string> | null
     ): ERC721TokenRemovedEventFilter;
     ERC721TokenRemoved(
-      tokenAddress?: string | null
+      tokenAddress?: PromiseOrValue<string> | null
     ): ERC721TokenRemovedEventFilter;
 
     "ERC721TokenTracked(address)"(
-      tokenAddress?: string | null
+      tokenAddress?: PromiseOrValue<string> | null
     ): ERC721TokenTrackedEventFilter;
     ERC721TokenTracked(
-      tokenAddress?: string | null
+      tokenAddress?: PromiseOrValue<string> | null
     ): ERC721TokenTrackedEventFilter;
   };
 

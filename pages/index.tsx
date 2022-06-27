@@ -1,25 +1,36 @@
-import { useWeb3React } from "@web3-react/core";
+import detectEthereumProvider from "@metamask/detect-provider"
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
+import { useForm } from "react-hook-form";
 import { useState } from "react";
 import Link from '@mui/material/Link';
+import Avatar from "@mui/material/Avatar";
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+
+const theme = createTheme();
 import styles from '../styles/Home.module.css'
-import Account from "./components/Account";
-import useEagerConnect from "../lib/hooks/useEagerConnect";
-import ETHBalance from "./components/ETHBalance";
-import CreateWallet from "./components/CreateWallet";
+
 
 const WALLET_FACTORY_DIAMOND_ADDRESS = "0xB51049AffFA9C2DF44654BACC65A9aF45013a027";
 
 const Home: NextPage = () => {
   const [hashId, setHashId] = useState(randomNumberInRange(1, 10000000));
 
-  const { account, library } = useWeb3React();
+  const { handleSubmit, register, reset, formState } = useForm()
+  const { errors } = formState;
 
-  const triedToEagerConnect = useEagerConnect();
+  const onSubmitHandler = (input: any) => {
+  }
 
-  const isConnected = typeof account === "string" && !!library;
 
   function randomNumberInRange(min: number, max:number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -41,20 +52,40 @@ const Home: NextPage = () => {
         <a href="https://simplicy.io">
           <img src="/images/zkWallet.png" alt="zkWalllet" width={600}/>
         </a>
-        <Account triedToEagerConnect={triedToEagerConnect} />
 
-        {isConnected && (
-          <section>
-           <ETHBalance symbol="ONE"  />
+        <ThemeProvider theme={theme}>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Box
+              sx={{
+                marginTop: 8,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+                <AccountBalanceWalletIcon />
+              </Avatar>
+              <form onSubmit={handleSubmit(onSubmitHandler)} >
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Create a new wallet
+                </Button>            
+              </form>
+            </Box>
+          </Container>
+        </ThemeProvider>
 
-           Your generated hashId =  {hashId}
-           
-           <CreateWallet hashId={hashId.toString()} factoryContractAddress={WALLET_FACTORY_DIAMOND_ADDRESS} />
 
-          </section>
-        )}
-
-       
+        <div style={{ marginTop: "5em" }}>
+          <div className={styles.logs}>Your Onchain data:</div>
+                    {/* <TextBox value={greeting} /> */}
+        </div>
       </main>
 
       <footer className={styles.footer}>

@@ -4,6 +4,7 @@
 import type {
   BaseContract,
   BigNumber,
+  BigNumberish,
   BytesLike,
   CallOverrides,
   PopulatedTransaction,
@@ -21,6 +22,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../common";
 
 export interface WalletFactoryInternalInterface extends utils.Interface {
@@ -51,14 +53,21 @@ export interface WalletFactoryInternalInterface extends utils.Interface {
   ): Result;
 
   events: {
+    "Decremented(uint256,uint256)": EventFragment;
     "DiamondIsSet(address)": EventFragment;
     "FacetIsAdded(string,address,string)": EventFragment;
     "FacetIsRemoved(address)": EventFragment;
     "GuardianAdded(bytes32,bytes32)": EventFragment;
     "GuardianRemoved(bytes32,bytes32)": EventFragment;
+    "Incremented(uint256,uint256)": EventFragment;
     "NewDiamondWallet(address)": EventFragment;
+    "Reset(uint256,uint256)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "Decremented"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "Decremented(uint256,uint256)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "DiamondIsSet"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "DiamondIsSet(address)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "FacetIsAdded"): EventFragment;
@@ -75,9 +84,26 @@ export interface WalletFactoryInternalInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "GuardianRemoved(bytes32,bytes32)"
   ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Incremented"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "Incremented(uint256,uint256)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "NewDiamondWallet"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "NewDiamondWallet(address)"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Reset"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Reset(uint256,uint256)"): EventFragment;
 }
+
+export interface DecrementedEventObject {
+  index: BigNumber;
+  newValue: BigNumber;
+}
+export type DecrementedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  DecrementedEventObject
+>;
+
+export type DecrementedEventFilter = TypedEventFilter<DecrementedEvent>;
 
 export interface DiamondIsSetEventObject {
   wallet: string;
@@ -130,6 +156,17 @@ export type GuardianRemovedEvent = TypedEvent<
 
 export type GuardianRemovedEventFilter = TypedEventFilter<GuardianRemovedEvent>;
 
+export interface IncrementedEventObject {
+  index: BigNumber;
+  newValue: BigNumber;
+}
+export type IncrementedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  IncrementedEventObject
+>;
+
+export type IncrementedEventFilter = TypedEventFilter<IncrementedEvent>;
+
 export interface NewDiamondWalletEventObject {
   instance: string;
 }
@@ -140,6 +177,14 @@ export type NewDiamondWalletEvent = TypedEvent<
 
 export type NewDiamondWalletEventFilter =
   TypedEventFilter<NewDiamondWalletEvent>;
+
+export interface ResetEventObject {
+  index: BigNumber;
+  newValue: BigNumber;
+}
+export type ResetEvent = TypedEvent<[BigNumber, BigNumber], ResetEventObject>;
+
+export type ResetEventFilter = TypedEventFilter<ResetEvent>;
 
 export interface WalletFactoryInternal extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -184,6 +229,15 @@ export interface WalletFactoryInternal extends BaseContract {
   };
 
   filters: {
+    "Decremented(uint256,uint256)"(
+      index?: PromiseOrValue<BigNumberish> | null,
+      newValue?: null
+    ): DecrementedEventFilter;
+    Decremented(
+      index?: PromiseOrValue<BigNumberish> | null,
+      newValue?: null
+    ): DecrementedEventFilter;
+
     "DiamondIsSet(address)"(wallet?: null): DiamondIsSetEventFilter;
     DiamondIsSet(wallet?: null): DiamondIsSetEventFilter;
 
@@ -202,25 +256,43 @@ export interface WalletFactoryInternal extends BaseContract {
     FacetIsRemoved(facetAddress?: null): FacetIsRemovedEventFilter;
 
     "GuardianAdded(bytes32,bytes32)"(
-      hashId?: BytesLike | null,
+      hashId?: PromiseOrValue<BytesLike> | null,
       guardian?: null
     ): GuardianAddedEventFilter;
     GuardianAdded(
-      hashId?: BytesLike | null,
+      hashId?: PromiseOrValue<BytesLike> | null,
       guardian?: null
     ): GuardianAddedEventFilter;
 
     "GuardianRemoved(bytes32,bytes32)"(
-      hashId?: BytesLike | null,
+      hashId?: PromiseOrValue<BytesLike> | null,
       guardian?: null
     ): GuardianRemovedEventFilter;
     GuardianRemoved(
-      hashId?: BytesLike | null,
+      hashId?: PromiseOrValue<BytesLike> | null,
       guardian?: null
     ): GuardianRemovedEventFilter;
 
+    "Incremented(uint256,uint256)"(
+      index?: PromiseOrValue<BigNumberish> | null,
+      newValue?: null
+    ): IncrementedEventFilter;
+    Incremented(
+      index?: PromiseOrValue<BigNumberish> | null,
+      newValue?: null
+    ): IncrementedEventFilter;
+
     "NewDiamondWallet(address)"(instance?: null): NewDiamondWalletEventFilter;
     NewDiamondWallet(instance?: null): NewDiamondWalletEventFilter;
+
+    "Reset(uint256,uint256)"(
+      index?: PromiseOrValue<BigNumberish> | null,
+      newValue?: null
+    ): ResetEventFilter;
+    Reset(
+      index?: PromiseOrValue<BigNumberish> | null,
+      newValue?: null
+    ): ResetEventFilter;
   };
 
   estimateGas: {

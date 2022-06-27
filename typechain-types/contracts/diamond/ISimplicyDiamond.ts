@@ -24,13 +24,14 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export declare namespace IDiamondWritable {
   export type FacetCutStruct = {
-    target: string;
-    action: BigNumberish;
-    selectors: BytesLike[];
+    target: PromiseOrValue<string>;
+    action: PromiseOrValue<BigNumberish>;
+    selectors: PromiseOrValue<BytesLike>[];
   };
 
   export type FacetCutStructOutput = [string, number, string[]] & {
@@ -41,7 +42,10 @@ export declare namespace IDiamondWritable {
 }
 
 export declare namespace IDiamondReadable {
-  export type FacetStruct = { target: string; selectors: BytesLike[] };
+  export type FacetStruct = {
+    target: PromiseOrValue<string>;
+    selectors: PromiseOrValue<BytesLike>[];
+  };
 
   export type FacetStructOutput = [string, string[]] & {
     target: string;
@@ -83,19 +87,27 @@ export interface ISimplicyDiamondInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "diamondCut",
-    values: [IDiamondWritable.FacetCutStruct[], string, BytesLike]
+    values: [
+      IDiamondWritable.FacetCutStruct[],
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "diamondCut((address,uint8,bytes4[])[],address,bytes)",
-    values: [IDiamondWritable.FacetCutStruct[], string, BytesLike]
+    values: [
+      IDiamondWritable.FacetCutStruct[],
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "facetAddress",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "facetAddress(bytes4)",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "facetAddresses",
@@ -107,11 +119,11 @@ export interface ISimplicyDiamondInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "facetFunctionSelectors",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "facetFunctionSelectors(address)",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(functionFragment: "facets", values?: undefined): string;
   encodeFunctionData(functionFragment: "facets()", values?: undefined): string;
@@ -125,19 +137,19 @@ export interface ISimplicyDiamondInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "setFallbackAddress",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "setFallbackAddress(address)",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "supportsInterface(bytes4)",
-    values: [BytesLike]
+    values: [PromiseOrValue<BytesLike>]
   ): string;
 
   decodeFunctionResult(functionFragment: "diamondCut", data: BytesLike): Result;
@@ -247,25 +259,25 @@ export interface ISimplicyDiamond extends BaseContract {
   functions: {
     diamondCut(
       facetCuts: IDiamondWritable.FacetCutStruct[],
-      target: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "diamondCut((address,uint8,bytes4[])[],address,bytes)"(
       facetCuts: IDiamondWritable.FacetCutStruct[],
-      target: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     facetAddress(
-      selector: BytesLike,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string] & { facet: string }>;
 
     "facetAddress(bytes4)"(
-      selector: BytesLike,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[string] & { facet: string }>;
 
@@ -278,12 +290,12 @@ export interface ISimplicyDiamond extends BaseContract {
     ): Promise<[string[]] & { addresses: string[] }>;
 
     facetFunctionSelectors(
-      facet: string,
+      facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[string[]] & { selectors: string[] }>;
 
     "facetFunctionSelectors(address)"(
-      facet: string,
+      facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[string[]] & { selectors: string[] }>;
 
@@ -308,44 +320,47 @@ export interface ISimplicyDiamond extends BaseContract {
     "getFallbackAddress()"(overrides?: CallOverrides): Promise<[string]>;
 
     setFallbackAddress(
-      fallbackAddress: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      fallbackAddress: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "setFallbackAddress(address)"(
-      fallbackAddress: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      fallbackAddress: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     supportsInterface(
-      interfaceId: BytesLike,
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
 
     "supportsInterface(bytes4)"(
-      interfaceId: BytesLike,
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<[boolean]>;
   };
 
   diamondCut(
     facetCuts: IDiamondWritable.FacetCutStruct[],
-    target: string,
-    data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    target: PromiseOrValue<string>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "diamondCut((address,uint8,bytes4[])[],address,bytes)"(
     facetCuts: IDiamondWritable.FacetCutStruct[],
-    target: string,
-    data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    target: PromiseOrValue<string>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  facetAddress(selector: BytesLike, overrides?: CallOverrides): Promise<string>;
+  facetAddress(
+    selector: PromiseOrValue<BytesLike>,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   "facetAddress(bytes4)"(
-    selector: BytesLike,
+    selector: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<string>;
 
@@ -354,12 +369,12 @@ export interface ISimplicyDiamond extends BaseContract {
   "facetAddresses()"(overrides?: CallOverrides): Promise<string[]>;
 
   facetFunctionSelectors(
-    facet: string,
+    facet: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<string[]>;
 
   "facetFunctionSelectors(address)"(
-    facet: string,
+    facet: PromiseOrValue<string>,
     overrides?: CallOverrides
   ): Promise<string[]>;
 
@@ -376,47 +391,47 @@ export interface ISimplicyDiamond extends BaseContract {
   "getFallbackAddress()"(overrides?: CallOverrides): Promise<string>;
 
   setFallbackAddress(
-    fallbackAddress: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    fallbackAddress: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "setFallbackAddress(address)"(
-    fallbackAddress: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    fallbackAddress: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   supportsInterface(
-    interfaceId: BytesLike,
+    interfaceId: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   "supportsInterface(bytes4)"(
-    interfaceId: BytesLike,
+    interfaceId: PromiseOrValue<BytesLike>,
     overrides?: CallOverrides
   ): Promise<boolean>;
 
   callStatic: {
     diamondCut(
       facetCuts: IDiamondWritable.FacetCutStruct[],
-      target: string,
-      data: BytesLike,
+      target: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "diamondCut((address,uint8,bytes4[])[],address,bytes)"(
       facetCuts: IDiamondWritable.FacetCutStruct[],
-      target: string,
-      data: BytesLike,
+      target: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     facetAddress(
-      selector: BytesLike,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     "facetAddress(bytes4)"(
-      selector: BytesLike,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<string>;
 
@@ -425,12 +440,12 @@ export interface ISimplicyDiamond extends BaseContract {
     "facetAddresses()"(overrides?: CallOverrides): Promise<string[]>;
 
     facetFunctionSelectors(
-      facet: string,
+      facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string[]>;
 
     "facetFunctionSelectors(address)"(
-      facet: string,
+      facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<string[]>;
 
@@ -447,22 +462,22 @@ export interface ISimplicyDiamond extends BaseContract {
     "getFallbackAddress()"(overrides?: CallOverrides): Promise<string>;
 
     setFallbackAddress(
-      fallbackAddress: string,
+      fallbackAddress: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "setFallbackAddress(address)"(
-      fallbackAddress: string,
+      fallbackAddress: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     supportsInterface(
-      interfaceId: BytesLike,
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
 
     "supportsInterface(bytes4)"(
-      interfaceId: BytesLike,
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<boolean>;
   };
@@ -483,25 +498,25 @@ export interface ISimplicyDiamond extends BaseContract {
   estimateGas: {
     diamondCut(
       facetCuts: IDiamondWritable.FacetCutStruct[],
-      target: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "diamondCut((address,uint8,bytes4[])[],address,bytes)"(
       facetCuts: IDiamondWritable.FacetCutStruct[],
-      target: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     facetAddress(
-      selector: BytesLike,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "facetAddress(bytes4)"(
-      selector: BytesLike,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -510,12 +525,12 @@ export interface ISimplicyDiamond extends BaseContract {
     "facetAddresses()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     facetFunctionSelectors(
-      facet: string,
+      facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "facetFunctionSelectors(address)"(
-      facet: string,
+      facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
@@ -528,22 +543,22 @@ export interface ISimplicyDiamond extends BaseContract {
     "getFallbackAddress()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     setFallbackAddress(
-      fallbackAddress: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      fallbackAddress: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "setFallbackAddress(address)"(
-      fallbackAddress: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      fallbackAddress: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     supportsInterface(
-      interfaceId: BytesLike,
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "supportsInterface(bytes4)"(
-      interfaceId: BytesLike,
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -551,25 +566,25 @@ export interface ISimplicyDiamond extends BaseContract {
   populateTransaction: {
     diamondCut(
       facetCuts: IDiamondWritable.FacetCutStruct[],
-      target: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "diamondCut((address,uint8,bytes4[])[],address,bytes)"(
       facetCuts: IDiamondWritable.FacetCutStruct[],
-      target: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     facetAddress(
-      selector: BytesLike,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "facetAddress(bytes4)"(
-      selector: BytesLike,
+      selector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -580,12 +595,12 @@ export interface ISimplicyDiamond extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     facetFunctionSelectors(
-      facet: string,
+      facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "facetFunctionSelectors(address)"(
-      facet: string,
+      facet: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -602,22 +617,22 @@ export interface ISimplicyDiamond extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     setFallbackAddress(
-      fallbackAddress: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      fallbackAddress: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "setFallbackAddress(address)"(
-      fallbackAddress: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      fallbackAddress: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     supportsInterface(
-      interfaceId: BytesLike,
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "supportsInterface(bytes4)"(
-      interfaceId: BytesLike,
+      interfaceId: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
   };

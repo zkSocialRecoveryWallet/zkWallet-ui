@@ -10,6 +10,7 @@ import {
   BigNumberish,
 } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
+import type { PromiseOrValue } from "../../../common";
 import type {
   ERC20Mock,
   ERC20MockInterface,
@@ -417,11 +418,11 @@ export class ERC20Mock__factory extends ContractFactory {
   }
 
   override deploy(
-    name: string,
-    symbol: string,
-    initialAccount: string,
-    initialBalance: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    name: PromiseOrValue<string>,
+    symbol: PromiseOrValue<string>,
+    initialAccount: PromiseOrValue<string>,
+    initialBalance: PromiseOrValue<BigNumberish>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ERC20Mock> {
     return super.deploy(
       name,
@@ -432,11 +433,11 @@ export class ERC20Mock__factory extends ContractFactory {
     ) as Promise<ERC20Mock>;
   }
   override getDeployTransaction(
-    name: string,
-    symbol: string,
-    initialAccount: string,
-    initialBalance: BigNumberish,
-    overrides?: PayableOverrides & { from?: string | Promise<string> }
+    name: PromiseOrValue<string>,
+    symbol: PromiseOrValue<string>,
+    initialAccount: PromiseOrValue<string>,
+    initialBalance: PromiseOrValue<BigNumberish>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): TransactionRequest {
     return super.getDeployTransaction(
       name,

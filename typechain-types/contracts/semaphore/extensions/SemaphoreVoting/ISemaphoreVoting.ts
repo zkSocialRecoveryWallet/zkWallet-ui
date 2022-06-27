@@ -24,6 +24,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export interface ISemaphoreVotingInterface extends utils.Interface {
@@ -49,46 +50,54 @@ export interface ISemaphoreVotingInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "castVote",
     values: [
-      BigNumberish,
-      BytesLike,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish[]
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[]
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "castVote(uint256,bytes32,uint256,uint256,uint256[8])",
     values: [
-      BigNumberish,
-      BytesLike,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish[]
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[]
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "createPoll",
-    values: [BigNumberish, string, BigNumberish]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "createPoll(uint256,address,uint8)",
-    values: [BigNumberish, string, BigNumberish]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "endPoll",
-    values: [BigNumberish, BigNumberish]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "endPoll(uint256,uint256)",
-    values: [BigNumberish, BigNumberish]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "startPoll",
-    values: [BigNumberish, BigNumberish]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "startPoll(uint256,uint256)",
-    values: [BigNumberish, BigNumberish]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
 
   decodeFunctionResult(functionFragment: "castVote", data: BytesLike): Result;
@@ -209,172 +218,172 @@ export interface ISemaphoreVoting extends BaseContract {
 
   functions: {
     castVote(
-      groupId: BigNumberish,
-      vote: BytesLike,
-      nullifierHash: BigNumberish,
-      pollId: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      vote: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      pollId: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "castVote(uint256,bytes32,uint256,uint256,uint256[8])"(
-      groupId: BigNumberish,
-      vote: BytesLike,
-      nullifierHash: BigNumberish,
-      pollId: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      vote: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      pollId: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     createPoll(
-      pollId: BigNumberish,
-      coordinator: string,
-      depth: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      coordinator: PromiseOrValue<string>,
+      depth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "createPoll(uint256,address,uint8)"(
-      pollId: BigNumberish,
-      coordinator: string,
-      depth: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      coordinator: PromiseOrValue<string>,
+      depth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     endPoll(
-      pollId: BigNumberish,
-      decryptionKey: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      decryptionKey: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "endPoll(uint256,uint256)"(
-      pollId: BigNumberish,
-      decryptionKey: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      decryptionKey: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     startPoll(
-      pollId: BigNumberish,
-      encryptionKey: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      encryptionKey: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "startPoll(uint256,uint256)"(
-      pollId: BigNumberish,
-      encryptionKey: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      encryptionKey: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   castVote(
-    groupId: BigNumberish,
-    vote: BytesLike,
-    nullifierHash: BigNumberish,
-    pollId: BigNumberish,
-    proof: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    vote: PromiseOrValue<BytesLike>,
+    nullifierHash: PromiseOrValue<BigNumberish>,
+    pollId: PromiseOrValue<BigNumberish>,
+    proof: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "castVote(uint256,bytes32,uint256,uint256,uint256[8])"(
-    groupId: BigNumberish,
-    vote: BytesLike,
-    nullifierHash: BigNumberish,
-    pollId: BigNumberish,
-    proof: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    vote: PromiseOrValue<BytesLike>,
+    nullifierHash: PromiseOrValue<BigNumberish>,
+    pollId: PromiseOrValue<BigNumberish>,
+    proof: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   createPoll(
-    pollId: BigNumberish,
-    coordinator: string,
-    depth: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pollId: PromiseOrValue<BigNumberish>,
+    coordinator: PromiseOrValue<string>,
+    depth: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "createPoll(uint256,address,uint8)"(
-    pollId: BigNumberish,
-    coordinator: string,
-    depth: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pollId: PromiseOrValue<BigNumberish>,
+    coordinator: PromiseOrValue<string>,
+    depth: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   endPoll(
-    pollId: BigNumberish,
-    decryptionKey: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pollId: PromiseOrValue<BigNumberish>,
+    decryptionKey: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "endPoll(uint256,uint256)"(
-    pollId: BigNumberish,
-    decryptionKey: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pollId: PromiseOrValue<BigNumberish>,
+    decryptionKey: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   startPoll(
-    pollId: BigNumberish,
-    encryptionKey: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pollId: PromiseOrValue<BigNumberish>,
+    encryptionKey: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "startPoll(uint256,uint256)"(
-    pollId: BigNumberish,
-    encryptionKey: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    pollId: PromiseOrValue<BigNumberish>,
+    encryptionKey: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     castVote(
-      groupId: BigNumberish,
-      vote: BytesLike,
-      nullifierHash: BigNumberish,
-      pollId: BigNumberish,
-      proof: BigNumberish[],
+      groupId: PromiseOrValue<BigNumberish>,
+      vote: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      pollId: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     "castVote(uint256,bytes32,uint256,uint256,uint256[8])"(
-      groupId: BigNumberish,
-      vote: BytesLike,
-      nullifierHash: BigNumberish,
-      pollId: BigNumberish,
-      proof: BigNumberish[],
+      groupId: PromiseOrValue<BigNumberish>,
+      vote: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      pollId: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     createPoll(
-      pollId: BigNumberish,
-      coordinator: string,
-      depth: BigNumberish,
+      pollId: PromiseOrValue<BigNumberish>,
+      coordinator: PromiseOrValue<string>,
+      depth: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "createPoll(uint256,address,uint8)"(
-      pollId: BigNumberish,
-      coordinator: string,
-      depth: BigNumberish,
+      pollId: PromiseOrValue<BigNumberish>,
+      coordinator: PromiseOrValue<string>,
+      depth: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     endPoll(
-      pollId: BigNumberish,
-      decryptionKey: BigNumberish,
+      pollId: PromiseOrValue<BigNumberish>,
+      decryptionKey: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "endPoll(uint256,uint256)"(
-      pollId: BigNumberish,
-      decryptionKey: BigNumberish,
+      pollId: PromiseOrValue<BigNumberish>,
+      decryptionKey: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     startPoll(
-      pollId: BigNumberish,
-      encryptionKey: BigNumberish,
+      pollId: PromiseOrValue<BigNumberish>,
+      encryptionKey: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "startPoll(uint256,uint256)"(
-      pollId: BigNumberish,
-      encryptionKey: BigNumberish,
+      pollId: PromiseOrValue<BigNumberish>,
+      encryptionKey: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -382,155 +391,158 @@ export interface ISemaphoreVoting extends BaseContract {
   filters: {
     "PollCreated(uint256,address)"(
       pollId?: null,
-      coordinator?: string | null
+      coordinator?: PromiseOrValue<string> | null
     ): PollCreatedEventFilter;
     PollCreated(
       pollId?: null,
-      coordinator?: string | null
+      coordinator?: PromiseOrValue<string> | null
     ): PollCreatedEventFilter;
 
     "PollEnded(uint256,address,uint256)"(
       pollId?: null,
-      coordinator?: string | null,
+      coordinator?: PromiseOrValue<string> | null,
       decryptionKey?: null
     ): PollEndedEventFilter;
     PollEnded(
       pollId?: null,
-      coordinator?: string | null,
+      coordinator?: PromiseOrValue<string> | null,
       decryptionKey?: null
     ): PollEndedEventFilter;
 
     "PollStarted(uint256,address,uint256)"(
       pollId?: null,
-      coordinator?: string | null,
+      coordinator?: PromiseOrValue<string> | null,
       encryptionKey?: null
     ): PollStartedEventFilter;
     PollStarted(
       pollId?: null,
-      coordinator?: string | null,
+      coordinator?: PromiseOrValue<string> | null,
       encryptionKey?: null
     ): PollStartedEventFilter;
 
     "VoteAdded(uint256,bytes32)"(
-      pollId?: BigNumberish | null,
+      pollId?: PromiseOrValue<BigNumberish> | null,
       vote?: null
     ): VoteAddedEventFilter;
-    VoteAdded(pollId?: BigNumberish | null, vote?: null): VoteAddedEventFilter;
+    VoteAdded(
+      pollId?: PromiseOrValue<BigNumberish> | null,
+      vote?: null
+    ): VoteAddedEventFilter;
   };
 
   estimateGas: {
     castVote(
-      groupId: BigNumberish,
-      vote: BytesLike,
-      nullifierHash: BigNumberish,
-      pollId: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      vote: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      pollId: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "castVote(uint256,bytes32,uint256,uint256,uint256[8])"(
-      groupId: BigNumberish,
-      vote: BytesLike,
-      nullifierHash: BigNumberish,
-      pollId: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      vote: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      pollId: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     createPoll(
-      pollId: BigNumberish,
-      coordinator: string,
-      depth: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      coordinator: PromiseOrValue<string>,
+      depth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "createPoll(uint256,address,uint8)"(
-      pollId: BigNumberish,
-      coordinator: string,
-      depth: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      coordinator: PromiseOrValue<string>,
+      depth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     endPoll(
-      pollId: BigNumberish,
-      decryptionKey: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      decryptionKey: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "endPoll(uint256,uint256)"(
-      pollId: BigNumberish,
-      decryptionKey: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      decryptionKey: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     startPoll(
-      pollId: BigNumberish,
-      encryptionKey: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      encryptionKey: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "startPoll(uint256,uint256)"(
-      pollId: BigNumberish,
-      encryptionKey: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      encryptionKey: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     castVote(
-      groupId: BigNumberish,
-      vote: BytesLike,
-      nullifierHash: BigNumberish,
-      pollId: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      vote: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      pollId: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "castVote(uint256,bytes32,uint256,uint256,uint256[8])"(
-      groupId: BigNumberish,
-      vote: BytesLike,
-      nullifierHash: BigNumberish,
-      pollId: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      vote: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      pollId: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     createPoll(
-      pollId: BigNumberish,
-      coordinator: string,
-      depth: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      coordinator: PromiseOrValue<string>,
+      depth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "createPoll(uint256,address,uint8)"(
-      pollId: BigNumberish,
-      coordinator: string,
-      depth: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      coordinator: PromiseOrValue<string>,
+      depth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     endPoll(
-      pollId: BigNumberish,
-      decryptionKey: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      decryptionKey: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "endPoll(uint256,uint256)"(
-      pollId: BigNumberish,
-      decryptionKey: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      decryptionKey: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     startPoll(
-      pollId: BigNumberish,
-      encryptionKey: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      encryptionKey: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "startPoll(uint256,uint256)"(
-      pollId: BigNumberish,
-      encryptionKey: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      pollId: PromiseOrValue<BigNumberish>,
+      encryptionKey: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

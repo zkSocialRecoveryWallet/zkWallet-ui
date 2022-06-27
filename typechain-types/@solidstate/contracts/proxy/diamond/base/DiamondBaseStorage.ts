@@ -15,13 +15,14 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../../common";
 
 export declare namespace IDiamondWritable {
   export type FacetCutStruct = {
-    target: string;
-    action: BigNumberish;
-    selectors: BytesLike[];
+    target: PromiseOrValue<string>;
+    action: PromiseOrValue<BigNumberish>;
+    selectors: PromiseOrValue<BytesLike>[];
   };
 
   export type FacetCutStructOutput = [string, number, string[]] & {

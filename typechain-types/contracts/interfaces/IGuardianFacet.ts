@@ -20,43 +20,30 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
-
-export declare namespace IGuardianInternal {
-  export type GuardianDTOStruct = { hashId: BigNumberish };
-
-  export type GuardianDTOStructOutput = [BigNumber] & { hashId: BigNumber };
-}
 
 export interface IGuardianFacetInterface extends utils.Interface {
   functions: {
-    "addGuardians(uint256,uint256[],(uint256)[])": FunctionFragment;
+    "addGuardians(uint256,uint256[])": FunctionFragment;
     "guardianFacetVersion()": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
       | "addGuardians"
-      | "addGuardians(uint256,uint256[],(uint256)[])"
+      | "addGuardians(uint256,uint256[])"
       | "guardianFacetVersion"
       | "guardianFacetVersion()"
   ): FunctionFragment;
 
   encodeFunctionData(
     functionFragment: "addGuardians",
-    values: [
-      BigNumberish,
-      BigNumberish[],
-      IGuardianInternal.GuardianDTOStruct[]
-    ]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
-    functionFragment: "addGuardians(uint256,uint256[],(uint256)[])",
-    values: [
-      BigNumberish,
-      BigNumberish[],
-      IGuardianInternal.GuardianDTOStruct[]
-    ]
+    functionFragment: "addGuardians(uint256,uint256[])",
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
     functionFragment: "guardianFacetVersion",
@@ -72,7 +59,7 @@ export interface IGuardianFacetInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "addGuardians(uint256,uint256[],(uint256)[])",
+    functionFragment: "addGuardians(uint256,uint256[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -115,17 +102,15 @@ export interface IGuardianFacet extends BaseContract {
 
   functions: {
     addGuardians(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "addGuardians(uint256,uint256[],(uint256)[])"(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+    "addGuardians(uint256,uint256[])"(
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     guardianFacetVersion(overrides?: CallOverrides): Promise<[string]>;
@@ -134,17 +119,15 @@ export interface IGuardianFacet extends BaseContract {
   };
 
   addGuardians(
-    groupId: BigNumberish,
-    identityCommitments: BigNumberish[],
-    guardians: IGuardianInternal.GuardianDTOStruct[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    identityCommitments: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "addGuardians(uint256,uint256[],(uint256)[])"(
-    groupId: BigNumberish,
-    identityCommitments: BigNumberish[],
-    guardians: IGuardianInternal.GuardianDTOStruct[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+  "addGuardians(uint256,uint256[])"(
+    groupId: PromiseOrValue<BigNumberish>,
+    identityCommitments: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   guardianFacetVersion(overrides?: CallOverrides): Promise<string>;
@@ -153,16 +136,14 @@ export interface IGuardianFacet extends BaseContract {
 
   callStatic: {
     addGuardians(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      guardians: IGuardianInternal.GuardianDTOStruct[],
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
-    "addGuardians(uint256,uint256[],(uint256)[])"(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      guardians: IGuardianInternal.GuardianDTOStruct[],
+    "addGuardians(uint256,uint256[])"(
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -175,17 +156,15 @@ export interface IGuardianFacet extends BaseContract {
 
   estimateGas: {
     addGuardians(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "addGuardians(uint256,uint256[],(uint256)[])"(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+    "addGuardians(uint256,uint256[])"(
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     guardianFacetVersion(overrides?: CallOverrides): Promise<BigNumber>;
@@ -195,17 +174,15 @@ export interface IGuardianFacet extends BaseContract {
 
   populateTransaction: {
     addGuardians(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "addGuardians(uint256,uint256[],(uint256)[])"(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      guardians: IGuardianInternal.GuardianDTOStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+    "addGuardians(uint256,uint256[])"(
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     guardianFacetVersion(

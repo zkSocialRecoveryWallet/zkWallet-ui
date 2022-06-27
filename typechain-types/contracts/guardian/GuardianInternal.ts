@@ -15,6 +15,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export interface GuardianInternalInterface extends utils.Interface {
@@ -89,20 +90,20 @@ export interface GuardianInternal extends BaseContract {
 
   filters: {
     "GuardianAdded(uint256,uint256)"(
-      hashId?: BigNumberish | null,
+      hashId?: PromiseOrValue<BigNumberish> | null,
       effectiveTime?: null
     ): GuardianAddedEventFilter;
     GuardianAdded(
-      hashId?: BigNumberish | null,
+      hashId?: PromiseOrValue<BigNumberish> | null,
       effectiveTime?: null
     ): GuardianAddedEventFilter;
 
     "GuardianRemoved(uint256,uint256)"(
-      hashId?: BigNumberish | null,
+      hashId?: PromiseOrValue<BigNumberish> | null,
       effectiveTime?: null
     ): GuardianRemovedEventFilter;
     GuardianRemoved(
-      hashId?: BigNumberish | null,
+      hashId?: PromiseOrValue<BigNumberish> | null,
       effectiveTime?: null
     ): GuardianRemovedEventFilter;
   };

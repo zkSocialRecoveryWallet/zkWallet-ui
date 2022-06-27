@@ -169,6 +169,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.WalletFactoryDiamond__factory>;
     getContractFactory(
+      name: "CountersFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CountersFacet__factory>;
+    getContractFactory(
       name: "ERC20Facet",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC20Facet__factory>;
@@ -364,6 +368,26 @@ declare module "hardhat/types/runtime" {
       name: "IERC721ServiceInternal",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC721ServiceInternal__factory>;
+    getContractFactory(
+      name: "Counters",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.Counters__factory>;
+    getContractFactory(
+      name: "CountersInternal",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CountersInternal__factory>;
+    getContractFactory(
+      name: "CountersMock",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CountersMock__factory>;
+    getContractFactory(
+      name: "ICounters",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ICounters__factory>;
+    getContractFactory(
+      name: "ICountersInternal",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ICountersInternal__factory>;
     getContractFactory(
       name: "PoseidonT3",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -733,6 +757,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.WalletFactoryDiamond>;
     getContractAt(
+      name: "CountersFacet",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CountersFacet>;
+    getContractAt(
       name: "ERC20Facet",
       address: string,
       signer?: ethers.Signer
@@ -977,6 +1006,31 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IERC721ServiceInternal>;
+    getContractAt(
+      name: "Counters",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.Counters>;
+    getContractAt(
+      name: "CountersInternal",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CountersInternal>;
+    getContractAt(
+      name: "CountersMock",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CountersMock>;
+    getContractAt(
+      name: "ICounters",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ICounters>;
+    getContractAt(
+      name: "ICountersInternal",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ICountersInternal>;
     getContractAt(
       name: "PoseidonT3",
       address: string,

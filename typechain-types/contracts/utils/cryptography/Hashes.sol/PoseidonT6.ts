@@ -18,6 +18,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export interface PoseidonT6Interface extends utils.Interface {
@@ -32,13 +33,25 @@ export interface PoseidonT6Interface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "poseidon",
     values: [
-      [BigNumberish, BigNumberish, BigNumberish, BigNumberish, BigNumberish]
+      [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+      ]
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "poseidon(uint256[5])",
     values: [
-      [BigNumberish, BigNumberish, BigNumberish, BigNumberish, BigNumberish]
+      [
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
+      ]
     ]
   ): string;
 
@@ -80,22 +93,22 @@ export interface PoseidonT6 extends BaseContract {
   functions: {
     poseidon(
       arg0: [
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
       ],
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     "poseidon(uint256[5])"(
       arg0: [
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
       ],
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
@@ -103,22 +116,22 @@ export interface PoseidonT6 extends BaseContract {
 
   poseidon(
     arg0: [
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
     ],
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   "poseidon(uint256[5])"(
     arg0: [
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
     ],
     overrides?: CallOverrides
   ): Promise<BigNumber>;
@@ -126,22 +139,22 @@ export interface PoseidonT6 extends BaseContract {
   callStatic: {
     poseidon(
       arg0: [
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
       ],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "poseidon(uint256[5])"(
       arg0: [
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
       ],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -152,22 +165,22 @@ export interface PoseidonT6 extends BaseContract {
   estimateGas: {
     poseidon(
       arg0: [
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
       ],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "poseidon(uint256[5])"(
       arg0: [
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
       ],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
@@ -176,22 +189,22 @@ export interface PoseidonT6 extends BaseContract {
   populateTransaction: {
     poseidon(
       arg0: [
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
       ],
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "poseidon(uint256[5])"(
       arg0: [
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish,
-        BigNumberish
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>,
+        PromiseOrValue<BigNumberish>
       ],
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;

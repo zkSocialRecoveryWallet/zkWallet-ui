@@ -24,12 +24,13 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export declare namespace ISemaphoreInternal {
   export type VerifierStruct = {
-    contractAddress: string;
-    merkleTreeDepth: BigNumberish;
+    contractAddress: PromiseOrValue<string>;
+    merkleTreeDepth: PromiseOrValue<BigNumberish>;
   };
 
   export type VerifierStructOutput = [string, number] & {
@@ -74,21 +75,21 @@ export interface SemaphoreFacetInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "verifyProof",
     values: [
-      BigNumberish,
-      BytesLike,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish[]
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[]
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "verifyProof(uint256,bytes32,uint256,uint256,uint256[8])",
     values: [
-      BigNumberish,
-      BytesLike,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish[]
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[]
     ]
   ): string;
 
@@ -204,30 +205,30 @@ export interface SemaphoreFacet extends BaseContract {
 
     setVerifiers(
       _verifiers: ISemaphoreInternal.VerifierStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "setVerifiers((address,uint8)[])"(
       _verifiers: ISemaphoreInternal.VerifierStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     verifyProof(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "verifyProof(uint256,bytes32,uint256,uint256,uint256[8])"(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
@@ -237,30 +238,30 @@ export interface SemaphoreFacet extends BaseContract {
 
   setVerifiers(
     _verifiers: ISemaphoreInternal.VerifierStruct[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "setVerifiers((address,uint8)[])"(
     _verifiers: ISemaphoreInternal.VerifierStruct[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   verifyProof(
-    groupId: BigNumberish,
-    signal: BytesLike,
-    nullifierHash: BigNumberish,
-    externalNullifier: BigNumberish,
-    proof: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    signal: PromiseOrValue<BytesLike>,
+    nullifierHash: PromiseOrValue<BigNumberish>,
+    externalNullifier: PromiseOrValue<BigNumberish>,
+    proof: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "verifyProof(uint256,bytes32,uint256,uint256,uint256[8])"(
-    groupId: BigNumberish,
-    signal: BytesLike,
-    nullifierHash: BigNumberish,
-    externalNullifier: BigNumberish,
-    proof: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    signal: PromiseOrValue<BytesLike>,
+    nullifierHash: PromiseOrValue<BigNumberish>,
+    externalNullifier: PromiseOrValue<BigNumberish>,
+    proof: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -279,20 +280,20 @@ export interface SemaphoreFacet extends BaseContract {
     ): Promise<void>;
 
     verifyProof(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     "verifyProof(uint256,bytes32,uint256,uint256,uint256[8])"(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -304,20 +305,20 @@ export interface SemaphoreFacet extends BaseContract {
     NullifierHashAdded(nullifierHash?: null): NullifierHashAddedEventFilter;
 
     "OwnershipTransferred(address,address)"(
-      previousOwner?: string | null,
-      newOwner?: string | null
+      previousOwner?: PromiseOrValue<string> | null,
+      newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
     OwnershipTransferred(
-      previousOwner?: string | null,
-      newOwner?: string | null
+      previousOwner?: PromiseOrValue<string> | null,
+      newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
 
     "ProofVerified(uint256,bytes32)"(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       signal?: null
     ): ProofVerifiedEventFilter;
     ProofVerified(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       signal?: null
     ): ProofVerifiedEventFilter;
   };
@@ -329,30 +330,30 @@ export interface SemaphoreFacet extends BaseContract {
 
     setVerifiers(
       _verifiers: ISemaphoreInternal.VerifierStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "setVerifiers((address,uint8)[])"(
       _verifiers: ISemaphoreInternal.VerifierStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     verifyProof(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "verifyProof(uint256,bytes32,uint256,uint256,uint256[8])"(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
@@ -367,30 +368,30 @@ export interface SemaphoreFacet extends BaseContract {
 
     setVerifiers(
       _verifiers: ISemaphoreInternal.VerifierStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "setVerifiers((address,uint8)[])"(
       _verifiers: ISemaphoreInternal.VerifierStruct[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     verifyProof(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "verifyProof(uint256,bytes32,uint256,uint256,uint256[8])"(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

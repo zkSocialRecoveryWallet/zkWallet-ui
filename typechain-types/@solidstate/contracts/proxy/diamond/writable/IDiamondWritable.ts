@@ -24,13 +24,14 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../../common";
 
 export declare namespace IDiamondWritable {
   export type FacetCutStruct = {
-    target: string;
-    action: BigNumberish;
-    selectors: BytesLike[];
+    target: PromiseOrValue<string>;
+    action: PromiseOrValue<BigNumberish>;
+    selectors: PromiseOrValue<BytesLike>[];
   };
 
   export type FacetCutStructOutput = [string, number, string[]] & {
@@ -53,11 +54,19 @@ export interface IDiamondWritableInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "diamondCut",
-    values: [IDiamondWritable.FacetCutStruct[], string, BytesLike]
+    values: [
+      IDiamondWritable.FacetCutStruct[],
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "diamondCut((address,uint8,bytes4[])[],address,bytes)",
-    values: [IDiamondWritable.FacetCutStruct[], string, BytesLike]
+    values: [
+      IDiamondWritable.FacetCutStruct[],
+      PromiseOrValue<string>,
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
 
   decodeFunctionResult(functionFragment: "diamondCut", data: BytesLike): Result;
@@ -117,45 +126,45 @@ export interface IDiamondWritable extends BaseContract {
   functions: {
     diamondCut(
       facetCuts: IDiamondWritable.FacetCutStruct[],
-      target: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "diamondCut((address,uint8,bytes4[])[],address,bytes)"(
       facetCuts: IDiamondWritable.FacetCutStruct[],
-      target: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   diamondCut(
     facetCuts: IDiamondWritable.FacetCutStruct[],
-    target: string,
-    data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    target: PromiseOrValue<string>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "diamondCut((address,uint8,bytes4[])[],address,bytes)"(
     facetCuts: IDiamondWritable.FacetCutStruct[],
-    target: string,
-    data: BytesLike,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    target: PromiseOrValue<string>,
+    data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     diamondCut(
       facetCuts: IDiamondWritable.FacetCutStruct[],
-      target: string,
-      data: BytesLike,
+      target: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "diamondCut((address,uint8,bytes4[])[],address,bytes)"(
       facetCuts: IDiamondWritable.FacetCutStruct[],
-      target: string,
-      data: BytesLike,
+      target: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
@@ -176,32 +185,32 @@ export interface IDiamondWritable extends BaseContract {
   estimateGas: {
     diamondCut(
       facetCuts: IDiamondWritable.FacetCutStruct[],
-      target: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "diamondCut((address,uint8,bytes4[])[],address,bytes)"(
       facetCuts: IDiamondWritable.FacetCutStruct[],
-      target: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     diamondCut(
       facetCuts: IDiamondWritable.FacetCutStruct[],
-      target: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "diamondCut((address,uint8,bytes4[])[],address,bytes)"(
       facetCuts: IDiamondWritable.FacetCutStruct[],
-      target: string,
-      data: BytesLike,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      target: PromiseOrValue<string>,
+      data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

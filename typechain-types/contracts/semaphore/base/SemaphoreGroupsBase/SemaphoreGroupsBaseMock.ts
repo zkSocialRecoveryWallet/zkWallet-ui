@@ -24,6 +24,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export interface SemaphoreGroupsBaseMockInterface extends utils.Interface {
@@ -63,75 +64,95 @@ export interface SemaphoreGroupsBaseMockInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "addMember",
-    values: [BigNumberish, BigNumberish]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "addMember(uint256,uint256)",
-    values: [BigNumberish, BigNumberish]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "addMembers",
-    values: [BigNumberish, BigNumberish[]]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
     functionFragment: "addMembers(uint256,uint256[])",
-    values: [BigNumberish, BigNumberish[]]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
     functionFragment: "createGroup",
-    values: [BigNumberish, BigNumberish, BigNumberish, string]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "createGroup(uint256,uint8,uint256,address)",
-    values: [BigNumberish, BigNumberish, BigNumberish, string]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<string>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "getDepth",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getDepth(uint256)",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getGroupAdmin",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getGroupAdmin(uint256)",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getNumberOfLeaves",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getNumberOfLeaves(uint256)",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getRoot",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getRoot(uint256)",
-    values: [BigNumberish]
+    values: [PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "removeMember",
-    values: [BigNumberish, BigNumberish, BigNumberish[], BigNumberish[]]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BigNumberish>[]
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "removeMember(uint256,uint256,uint256[],uint8[])",
-    values: [BigNumberish, BigNumberish, BigNumberish[], BigNumberish[]]
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BigNumberish>[]
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "updateGroupAdmin",
-    values: [BigNumberish, string]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "updateGroupAdmin(uint256,address)",
-    values: [BigNumberish, string]
+    values: [PromiseOrValue<BigNumberish>, PromiseOrValue<string>]
   ): string;
 
   decodeFunctionResult(functionFragment: "addMember", data: BytesLike): Result;
@@ -362,397 +383,406 @@ export interface SemaphoreGroupsBaseMock extends BaseContract {
 
   functions: {
     addMember(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "addMember(uint256,uint256)"(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     addMembers(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "addMembers(uint256,uint256[])"(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     createGroup(
-      groupId: BigNumberish,
-      depth: BigNumberish,
-      zeroValue: BigNumberish,
-      admin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      depth: PromiseOrValue<BigNumberish>,
+      zeroValue: PromiseOrValue<BigNumberish>,
+      admin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "createGroup(uint256,uint8,uint256,address)"(
-      groupId: BigNumberish,
-      depth: BigNumberish,
-      zeroValue: BigNumberish,
-      admin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      depth: PromiseOrValue<BigNumberish>,
+      zeroValue: PromiseOrValue<BigNumberish>,
+      admin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getDepth(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[number]>;
 
     "getDepth(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[number]>;
 
     getGroupAdmin(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     "getGroupAdmin(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[string]>;
 
     getNumberOfLeaves(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     "getNumberOfLeaves(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     getRoot(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     "getRoot(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
     removeMember(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      proofSiblings: BigNumberish[],
-      proofPathIndices: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "removeMember(uint256,uint256,uint256[],uint8[])"(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      proofSiblings: BigNumberish[],
-      proofPathIndices: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     updateGroupAdmin(
-      groupId: BigNumberish,
-      newAdmin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "updateGroupAdmin(uint256,address)"(
-      groupId: BigNumberish,
-      newAdmin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   addMember(
-    groupId: BigNumberish,
-    identityCommitment: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    identityCommitment: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "addMember(uint256,uint256)"(
-    groupId: BigNumberish,
-    identityCommitment: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    identityCommitment: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   addMembers(
-    groupId: BigNumberish,
-    identityCommitments: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    identityCommitments: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "addMembers(uint256,uint256[])"(
-    groupId: BigNumberish,
-    identityCommitments: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    identityCommitments: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   createGroup(
-    groupId: BigNumberish,
-    depth: BigNumberish,
-    zeroValue: BigNumberish,
-    admin: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    depth: PromiseOrValue<BigNumberish>,
+    zeroValue: PromiseOrValue<BigNumberish>,
+    admin: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "createGroup(uint256,uint8,uint256,address)"(
-    groupId: BigNumberish,
-    depth: BigNumberish,
-    zeroValue: BigNumberish,
-    admin: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    depth: PromiseOrValue<BigNumberish>,
+    zeroValue: PromiseOrValue<BigNumberish>,
+    admin: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  getDepth(groupId: BigNumberish, overrides?: CallOverrides): Promise<number>;
+  getDepth(
+    groupId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<number>;
 
   "getDepth(uint256)"(
-    groupId: BigNumberish,
+    groupId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<number>;
 
   getGroupAdmin(
-    groupId: BigNumberish,
+    groupId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   "getGroupAdmin(uint256)"(
-    groupId: BigNumberish,
+    groupId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<string>;
 
   getNumberOfLeaves(
-    groupId: BigNumberish,
+    groupId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   "getNumberOfLeaves(uint256)"(
-    groupId: BigNumberish,
+    groupId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  getRoot(groupId: BigNumberish, overrides?: CallOverrides): Promise<BigNumber>;
+  getRoot(
+    groupId: PromiseOrValue<BigNumberish>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   "getRoot(uint256)"(
-    groupId: BigNumberish,
+    groupId: PromiseOrValue<BigNumberish>,
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
   removeMember(
-    groupId: BigNumberish,
-    identityCommitment: BigNumberish,
-    proofSiblings: BigNumberish[],
-    proofPathIndices: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    identityCommitment: PromiseOrValue<BigNumberish>,
+    proofSiblings: PromiseOrValue<BigNumberish>[],
+    proofPathIndices: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "removeMember(uint256,uint256,uint256[],uint8[])"(
-    groupId: BigNumberish,
-    identityCommitment: BigNumberish,
-    proofSiblings: BigNumberish[],
-    proofPathIndices: BigNumberish[],
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    identityCommitment: PromiseOrValue<BigNumberish>,
+    proofSiblings: PromiseOrValue<BigNumberish>[],
+    proofPathIndices: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   updateGroupAdmin(
-    groupId: BigNumberish,
-    newAdmin: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    newAdmin: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "updateGroupAdmin(uint256,address)"(
-    groupId: BigNumberish,
-    newAdmin: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    newAdmin: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     addMember(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "addMember(uint256,uint256)"(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     addMembers(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     "addMembers(uint256,uint256[])"(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     createGroup(
-      groupId: BigNumberish,
-      depth: BigNumberish,
-      zeroValue: BigNumberish,
-      admin: string,
+      groupId: PromiseOrValue<BigNumberish>,
+      depth: PromiseOrValue<BigNumberish>,
+      zeroValue: PromiseOrValue<BigNumberish>,
+      admin: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "createGroup(uint256,uint8,uint256,address)"(
-      groupId: BigNumberish,
-      depth: BigNumberish,
-      zeroValue: BigNumberish,
-      admin: string,
+      groupId: PromiseOrValue<BigNumberish>,
+      depth: PromiseOrValue<BigNumberish>,
+      zeroValue: PromiseOrValue<BigNumberish>,
+      admin: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
-    getDepth(groupId: BigNumberish, overrides?: CallOverrides): Promise<number>;
+    getDepth(
+      groupId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<number>;
 
     "getDepth(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<number>;
 
     getGroupAdmin(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     "getGroupAdmin(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<string>;
 
     getNumberOfLeaves(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getNumberOfLeaves(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getRoot(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getRoot(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     removeMember(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      proofSiblings: BigNumberish[],
-      proofPathIndices: BigNumberish[],
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     "removeMember(uint256,uint256,uint256[],uint8[])"(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      proofSiblings: BigNumberish[],
-      proofPathIndices: BigNumberish[],
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
     updateGroupAdmin(
-      groupId: BigNumberish,
-      newAdmin: string,
+      groupId: PromiseOrValue<BigNumberish>,
+      newAdmin: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "updateGroupAdmin(uint256,address)"(
-      groupId: BigNumberish,
-      newAdmin: string,
+      groupId: PromiseOrValue<BigNumberish>,
+      newAdmin: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
   };
 
   filters: {
     "GroupAdminUpdated(uint256,address,address)"(
-      groupId?: BigNumberish | null,
-      oldAdmin?: string | null,
-      newAdmin?: string | null
+      groupId?: PromiseOrValue<BigNumberish> | null,
+      oldAdmin?: PromiseOrValue<string> | null,
+      newAdmin?: PromiseOrValue<string> | null
     ): GroupAdminUpdatedEventFilter;
     GroupAdminUpdated(
-      groupId?: BigNumberish | null,
-      oldAdmin?: string | null,
-      newAdmin?: string | null
+      groupId?: PromiseOrValue<BigNumberish> | null,
+      oldAdmin?: PromiseOrValue<string> | null,
+      newAdmin?: PromiseOrValue<string> | null
     ): GroupAdminUpdatedEventFilter;
 
     "GroupCreated(uint256,uint8,uint256)"(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       depth?: null,
       zeroValue?: null
     ): GroupCreatedEventFilter;
     GroupCreated(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       depth?: null,
       zeroValue?: null
     ): GroupCreatedEventFilter;
 
     "LeafInserted(uint256,uint256,uint256)"(
-      treeId?: BigNumberish | null,
+      treeId?: PromiseOrValue<BigNumberish> | null,
       leaf?: null,
       root?: null
     ): LeafInsertedEventFilter;
     LeafInserted(
-      treeId?: BigNumberish | null,
+      treeId?: PromiseOrValue<BigNumberish> | null,
       leaf?: null,
       root?: null
     ): LeafInsertedEventFilter;
 
     "LeafRemoved(uint256,uint256,uint256)"(
-      treeId?: BigNumberish | null,
+      treeId?: PromiseOrValue<BigNumberish> | null,
       leaf?: null,
       root?: null
     ): LeafRemovedEventFilter;
     LeafRemoved(
-      treeId?: BigNumberish | null,
+      treeId?: PromiseOrValue<BigNumberish> | null,
       leaf?: null,
       root?: null
     ): LeafRemovedEventFilter;
 
     "MemberAdded(uint256,uint256,uint256)"(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       identityCommitment?: null,
       root?: null
     ): MemberAddedEventFilter;
     MemberAdded(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       identityCommitment?: null,
       root?: null
     ): MemberAddedEventFilter;
 
     "MemberRemoved(uint256,uint256,uint256)"(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       identityCommitment?: null,
       root?: null
     ): MemberRemovedEventFilter;
     MemberRemoved(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       identityCommitment?: null,
       root?: null
     ): MemberRemovedEventFilter;
 
     "OwnershipTransferred(address,address)"(
-      previousOwner?: string | null,
-      newOwner?: string | null
+      previousOwner?: PromiseOrValue<string> | null,
+      newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
     OwnershipTransferred(
-      previousOwner?: string | null,
-      newOwner?: string | null
+      previousOwner?: PromiseOrValue<string> | null,
+      newOwner?: PromiseOrValue<string> | null
     ): OwnershipTransferredEventFilter;
 
     "TreeCreated(uint256,uint8)"(
@@ -764,221 +794,221 @@ export interface SemaphoreGroupsBaseMock extends BaseContract {
 
   estimateGas: {
     addMember(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "addMember(uint256,uint256)"(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     addMembers(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "addMembers(uint256,uint256[])"(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     createGroup(
-      groupId: BigNumberish,
-      depth: BigNumberish,
-      zeroValue: BigNumberish,
-      admin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      depth: PromiseOrValue<BigNumberish>,
+      zeroValue: PromiseOrValue<BigNumberish>,
+      admin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "createGroup(uint256,uint8,uint256,address)"(
-      groupId: BigNumberish,
-      depth: BigNumberish,
-      zeroValue: BigNumberish,
-      admin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      depth: PromiseOrValue<BigNumberish>,
+      zeroValue: PromiseOrValue<BigNumberish>,
+      admin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getDepth(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getDepth(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getGroupAdmin(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getGroupAdmin(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getNumberOfLeaves(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getNumberOfLeaves(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getRoot(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     "getRoot(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     removeMember(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      proofSiblings: BigNumberish[],
-      proofPathIndices: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "removeMember(uint256,uint256,uint256[],uint8[])"(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      proofSiblings: BigNumberish[],
-      proofPathIndices: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     updateGroupAdmin(
-      groupId: BigNumberish,
-      newAdmin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "updateGroupAdmin(uint256,address)"(
-      groupId: BigNumberish,
-      newAdmin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     addMember(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "addMember(uint256,uint256)"(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     addMembers(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "addMembers(uint256,uint256[])"(
-      groupId: BigNumberish,
-      identityCommitments: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitments: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     createGroup(
-      groupId: BigNumberish,
-      depth: BigNumberish,
-      zeroValue: BigNumberish,
-      admin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      depth: PromiseOrValue<BigNumberish>,
+      zeroValue: PromiseOrValue<BigNumberish>,
+      admin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "createGroup(uint256,uint8,uint256,address)"(
-      groupId: BigNumberish,
-      depth: BigNumberish,
-      zeroValue: BigNumberish,
-      admin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      depth: PromiseOrValue<BigNumberish>,
+      zeroValue: PromiseOrValue<BigNumberish>,
+      admin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getDepth(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "getDepth(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getGroupAdmin(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "getGroupAdmin(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getNumberOfLeaves(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "getNumberOfLeaves(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     getRoot(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "getRoot(uint256)"(
-      groupId: BigNumberish,
+      groupId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     removeMember(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      proofSiblings: BigNumberish[],
-      proofPathIndices: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "removeMember(uint256,uint256,uint256[],uint8[])"(
-      groupId: BigNumberish,
-      identityCommitment: BigNumberish,
-      proofSiblings: BigNumberish[],
-      proofPathIndices: BigNumberish[],
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     updateGroupAdmin(
-      groupId: BigNumberish,
-      newAdmin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "updateGroupAdmin(uint256,address)"(
-      groupId: BigNumberish,
-      newAdmin: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      newAdmin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

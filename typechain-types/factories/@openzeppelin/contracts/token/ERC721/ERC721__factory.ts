@@ -3,6 +3,7 @@
 /* eslint-disable */
 import { Signer, utils, Contract, ContractFactory, Overrides } from "ethers";
 import type { Provider, TransactionRequest } from "@ethersproject/providers";
+import type { PromiseOrValue } from "../../../../../common";
 import type {
   ERC721,
   ERC721Interface,
@@ -378,16 +379,16 @@ export class ERC721__factory extends ContractFactory {
   }
 
   override deploy(
-    name_: string,
-    symbol_: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    name_: PromiseOrValue<string>,
+    symbol_: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ERC721> {
     return super.deploy(name_, symbol_, overrides || {}) as Promise<ERC721>;
   }
   override getDeployTransaction(
-    name_: string,
-    symbol_: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    name_: PromiseOrValue<string>,
+    symbol_: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): TransactionRequest {
     return super.getDeployTransaction(name_, symbol_, overrides || {});
   }

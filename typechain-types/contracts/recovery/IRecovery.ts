@@ -24,6 +24,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../common";
 
 export interface IRecoveryInterface extends utils.Interface {
@@ -87,23 +88,23 @@ export interface IRecoveryInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "recover",
     values: [
-      BigNumberish,
-      BytesLike,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish[],
-      string
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<string>
     ]
   ): string;
   encodeFunctionData(
     functionFragment: "recover(uint256,bytes32,uint256,uint256,uint256[8],address)",
     values: [
-      BigNumberish,
-      BytesLike,
-      BigNumberish,
-      BigNumberish,
-      BigNumberish[],
-      string
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<string>
     ]
   ): string;
   encodeFunctionData(
@@ -238,31 +239,31 @@ export interface IRecovery extends BaseContract {
     "getRecoveryStatus()"(overrides?: CallOverrides): Promise<[number]>;
 
     recover(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "recover(uint256,bytes32,uint256,uint256,uint256[8],address)"(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     resetRecovery(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     "resetRecovery()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
@@ -283,31 +284,31 @@ export interface IRecovery extends BaseContract {
   "getRecoveryStatus()"(overrides?: CallOverrides): Promise<number>;
 
   recover(
-    groupId: BigNumberish,
-    signal: BytesLike,
-    nullifierHash: BigNumberish,
-    externalNullifier: BigNumberish,
-    proof: BigNumberish[],
-    newOwner: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    signal: PromiseOrValue<BytesLike>,
+    nullifierHash: PromiseOrValue<BigNumberish>,
+    externalNullifier: PromiseOrValue<BigNumberish>,
+    proof: PromiseOrValue<BigNumberish>[],
+    newOwner: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "recover(uint256,bytes32,uint256,uint256,uint256[8],address)"(
-    groupId: BigNumberish,
-    signal: BytesLike,
-    nullifierHash: BigNumberish,
-    externalNullifier: BigNumberish,
-    proof: BigNumberish[],
-    newOwner: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
+    groupId: PromiseOrValue<BigNumberish>,
+    signal: PromiseOrValue<BytesLike>,
+    nullifierHash: PromiseOrValue<BigNumberish>,
+    externalNullifier: PromiseOrValue<BigNumberish>,
+    proof: PromiseOrValue<BigNumberish>[],
+    newOwner: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   resetRecovery(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   "resetRecovery()"(
-    overrides?: Overrides & { from?: string | Promise<string> }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
@@ -328,22 +329,22 @@ export interface IRecovery extends BaseContract {
     "getRecoveryStatus()"(overrides?: CallOverrides): Promise<number>;
 
     recover(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      newOwner: string,
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
     "recover(uint256,bytes32,uint256,uint256,uint256[8],address)"(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      newOwner: string,
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      newOwner: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -388,31 +389,31 @@ export interface IRecovery extends BaseContract {
     "getRecoveryStatus()"(overrides?: CallOverrides): Promise<BigNumber>;
 
     recover(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "recover(uint256,bytes32,uint256,uint256,uint256[8],address)"(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     resetRecovery(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     "resetRecovery()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
@@ -444,31 +445,31 @@ export interface IRecovery extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     recover(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "recover(uint256,bytes32,uint256,uint256,uint256[8],address)"(
-      groupId: BigNumberish,
-      signal: BytesLike,
-      nullifierHash: BigNumberish,
-      externalNullifier: BigNumberish,
-      proof: BigNumberish[],
-      newOwner: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
+      groupId: PromiseOrValue<BigNumberish>,
+      signal: PromiseOrValue<BytesLike>,
+      nullifierHash: PromiseOrValue<BigNumberish>,
+      externalNullifier: PromiseOrValue<BigNumberish>,
+      proof: PromiseOrValue<BigNumberish>[],
+      newOwner: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     resetRecovery(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     "resetRecovery()"(
-      overrides?: Overrides & { from?: string | Promise<string> }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

@@ -15,6 +15,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export interface ISemaphoreVotingInternalInterface extends utils.Interface {
@@ -122,40 +123,43 @@ export interface ISemaphoreVotingInternal extends BaseContract {
   filters: {
     "PollCreated(uint256,address)"(
       pollId?: null,
-      coordinator?: string | null
+      coordinator?: PromiseOrValue<string> | null
     ): PollCreatedEventFilter;
     PollCreated(
       pollId?: null,
-      coordinator?: string | null
+      coordinator?: PromiseOrValue<string> | null
     ): PollCreatedEventFilter;
 
     "PollEnded(uint256,address,uint256)"(
       pollId?: null,
-      coordinator?: string | null,
+      coordinator?: PromiseOrValue<string> | null,
       decryptionKey?: null
     ): PollEndedEventFilter;
     PollEnded(
       pollId?: null,
-      coordinator?: string | null,
+      coordinator?: PromiseOrValue<string> | null,
       decryptionKey?: null
     ): PollEndedEventFilter;
 
     "PollStarted(uint256,address,uint256)"(
       pollId?: null,
-      coordinator?: string | null,
+      coordinator?: PromiseOrValue<string> | null,
       encryptionKey?: null
     ): PollStartedEventFilter;
     PollStarted(
       pollId?: null,
-      coordinator?: string | null,
+      coordinator?: PromiseOrValue<string> | null,
       encryptionKey?: null
     ): PollStartedEventFilter;
 
     "VoteAdded(uint256,bytes32)"(
-      pollId?: BigNumberish | null,
+      pollId?: PromiseOrValue<BigNumberish> | null,
       vote?: null
     ): VoteAddedEventFilter;
-    VoteAdded(pollId?: BigNumberish | null, vote?: null): VoteAddedEventFilter;
+    VoteAdded(
+      pollId?: PromiseOrValue<BigNumberish> | null,
+      vote?: null
+    ): VoteAddedEventFilter;
   };
 
   estimateGas: {};

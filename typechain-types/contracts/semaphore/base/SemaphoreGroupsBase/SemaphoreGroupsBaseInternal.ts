@@ -15,6 +15,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export interface SemaphoreGroupsBaseInternalInterface extends utils.Interface {
@@ -174,67 +175,67 @@ export interface SemaphoreGroupsBaseInternal extends BaseContract {
 
   filters: {
     "GroupAdminUpdated(uint256,address,address)"(
-      groupId?: BigNumberish | null,
-      oldAdmin?: string | null,
-      newAdmin?: string | null
+      groupId?: PromiseOrValue<BigNumberish> | null,
+      oldAdmin?: PromiseOrValue<string> | null,
+      newAdmin?: PromiseOrValue<string> | null
     ): GroupAdminUpdatedEventFilter;
     GroupAdminUpdated(
-      groupId?: BigNumberish | null,
-      oldAdmin?: string | null,
-      newAdmin?: string | null
+      groupId?: PromiseOrValue<BigNumberish> | null,
+      oldAdmin?: PromiseOrValue<string> | null,
+      newAdmin?: PromiseOrValue<string> | null
     ): GroupAdminUpdatedEventFilter;
 
     "GroupCreated(uint256,uint8,uint256)"(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       depth?: null,
       zeroValue?: null
     ): GroupCreatedEventFilter;
     GroupCreated(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       depth?: null,
       zeroValue?: null
     ): GroupCreatedEventFilter;
 
     "LeafInserted(uint256,uint256,uint256)"(
-      treeId?: BigNumberish | null,
+      treeId?: PromiseOrValue<BigNumberish> | null,
       leaf?: null,
       root?: null
     ): LeafInsertedEventFilter;
     LeafInserted(
-      treeId?: BigNumberish | null,
+      treeId?: PromiseOrValue<BigNumberish> | null,
       leaf?: null,
       root?: null
     ): LeafInsertedEventFilter;
 
     "LeafRemoved(uint256,uint256,uint256)"(
-      treeId?: BigNumberish | null,
+      treeId?: PromiseOrValue<BigNumberish> | null,
       leaf?: null,
       root?: null
     ): LeafRemovedEventFilter;
     LeafRemoved(
-      treeId?: BigNumberish | null,
+      treeId?: PromiseOrValue<BigNumberish> | null,
       leaf?: null,
       root?: null
     ): LeafRemovedEventFilter;
 
     "MemberAdded(uint256,uint256,uint256)"(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       identityCommitment?: null,
       root?: null
     ): MemberAddedEventFilter;
     MemberAdded(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       identityCommitment?: null,
       root?: null
     ): MemberAddedEventFilter;
 
     "MemberRemoved(uint256,uint256,uint256)"(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       identityCommitment?: null,
       root?: null
     ): MemberRemovedEventFilter;
     MemberRemoved(
-      groupId?: BigNumberish | null,
+      groupId?: PromiseOrValue<BigNumberish> | null,
       identityCommitment?: null,
       root?: null
     ): MemberRemovedEventFilter;

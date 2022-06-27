@@ -187,16 +187,9 @@ const _abi = [
   {
     inputs: [
       {
-        components: [
-          {
-            internalType: "uint256",
-            name: "hashId",
-            type: "uint256",
-          },
-        ],
-        internalType: "struct IGuardianInternal.GuardianDTO[]",
+        internalType: "uint256[]",
         name: "guardians",
-        type: "tuple[]",
+        type: "uint256[]",
       },
     ],
     name: "removeGuardians",
@@ -227,16 +220,9 @@ const _abi = [
   {
     inputs: [
       {
-        components: [
-          {
-            internalType: "uint256",
-            name: "hashId",
-            type: "uint256",
-          },
-        ],
-        internalType: "struct IGuardianInternal.GuardianDTO[]",
+        internalType: "uint256[]",
         name: "guardians",
-        type: "tuple[]",
+        type: "uint256[]",
       },
     ],
     name: "setInitialGuardians",

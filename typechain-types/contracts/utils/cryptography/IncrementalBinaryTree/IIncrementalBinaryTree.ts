@@ -15,6 +15,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "../../../../common";
 
 export interface IIncrementalBinaryTreeInterface extends utils.Interface {
@@ -105,23 +106,23 @@ export interface IIncrementalBinaryTree extends BaseContract {
 
   filters: {
     "LeafInserted(uint256,uint256,uint256)"(
-      treeId?: BigNumberish | null,
+      treeId?: PromiseOrValue<BigNumberish> | null,
       leaf?: null,
       root?: null
     ): LeafInsertedEventFilter;
     LeafInserted(
-      treeId?: BigNumberish | null,
+      treeId?: PromiseOrValue<BigNumberish> | null,
       leaf?: null,
       root?: null
     ): LeafInsertedEventFilter;
 
     "LeafRemoved(uint256,uint256,uint256)"(
-      treeId?: BigNumberish | null,
+      treeId?: PromiseOrValue<BigNumberish> | null,
       leaf?: null,
       root?: null
     ): LeafRemovedEventFilter;
     LeafRemoved(
-      treeId?: BigNumberish | null,
+      treeId?: PromiseOrValue<BigNumberish> | null,
       leaf?: null,
       root?: null
     ): LeafRemovedEventFilter;
