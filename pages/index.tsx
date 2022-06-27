@@ -89,6 +89,42 @@ const Home: NextPage = () => {
         signer);
       console.log("guardianTest: ", guardianTest)
 
+      const erc20Test: any = await new Contract(
+        eRC20FacetAddress,
+        ERC20FacetAbi.abi,
+        signer)
+      console.log("erc20Test: ", erc20Test)
+
+      const erc721Test: any = await new Contract(
+        eRC721FacetAddress,
+        ERC721FacetAbi.abi,
+        signer)
+      console.log("erc721Test: ", erc721Test)
+
+      const recoveryTest: any = await new Contract(
+        recoveryFacetAddress,
+        RecoveryFacetAbi.abi,
+        signer)
+      console.log("recoveryTest: ", recoveryTest)
+
+      const semaphoreTest: any = await new Contract(
+        semaphoreFacetAddress,
+        SemaphoreFacetAbi.abi,
+        signer)
+      console.log("semaphoreTest: ", semaphoreTest)
+
+      const semaphoreGroupsTest: any = await new Contract(
+        semaphoreGroupsFacetAddress,
+        SemaphoreGroupsFacetAbi.abi,
+        signer)
+      console.log("semaphoreGroupsTest: ", semaphoreGroupsTest)
+
+      const semaphoreVotingTest: any = await new Contract(
+        semaphoreVotingFacetAddress,
+        SemaphoreVotingFacetAbi.abi,
+        signer)
+      console.log("semaphoreVotingTest: ", semaphoreVotingTest)
+
       facets = [
         {
           name: "GuardianFacet",
@@ -154,6 +190,7 @@ const Home: NextPage = () => {
           address: semaphoreVotingFacetAddress,
         },
       ];
+      console.log("facets: ", facets)
 
       facetCuts = [
         {
@@ -207,6 +244,8 @@ const Home: NextPage = () => {
         },
       ];
 
+      console.log("facetCuts: ", facetCuts)
+
       const identityCommitments: BigNumber[] = [
         BigNumber.from(
           BigInt(
@@ -231,6 +270,8 @@ const Home: NextPage = () => {
         WalletFactoryFacetAbi.abi,
         signer
       );
+
+      console.log("contract: ", contract)
 
        //check if contract is callable
        try {
