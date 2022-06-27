@@ -83,6 +83,12 @@ const Home: NextPage = () => {
         { merkleTreeDepth: depth, contractAddress: verifier20Address },
       ];
 
+      const guardianTest: any = await new Contract(
+        guardianFacetAddress,
+        GuardianFacetAbi.abi,
+        signer);
+      console.log("guardianTest: ", guardianTest)
+
       facets = [
         {
           name: "GuardianFacet",
