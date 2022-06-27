@@ -62,10 +62,9 @@ const Home: NextPage = () => {
 
       const ethersProvider = new providers.Web3Provider(provider)
       const signer = ethersProvider.getSigner()
-      console.log(signer)
+      const message = await signer.signMessage("Sign this message to login!")      
       const signerAddress: string = await signer.getAddress() as string
       console.log("signer address: ",  signerAddress)
-      const message = await signer.signMessage("Sign this message to login!")
       console.log("message: ", message)
       let version: string;
       let facets: DeployedContract[];
