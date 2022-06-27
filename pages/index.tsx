@@ -265,8 +265,9 @@ const Home: NextPage = () => {
       ];
     
 
+      
       const contract: any  = new Contract(
-        process.env.NEXT_PUBLIC_FACTORY_DIAMOND_ADDRESS as string,
+        "0xb9853e45b3537975035159ece4E9F53EC18480Fd",
         WalletFactoryFacetAbi.abi,
         signer
       );
