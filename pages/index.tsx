@@ -31,7 +31,7 @@ import styles from '../styles/Home.module.css'
 
 
 const Home: NextPage = () => {
-  const [logs, setLogs] = React.useState("Connect your wallet to recover!")
+  const [logs, setLogs] = React.useState("Connect your wallet to create a new wallet!")
   const [hashId, setHashId] = useState(randomNumberInRange(1, 10000000));
   const [connected, setConnected] = useState(false);
   const [walletAddresses, setWalletAddresses] = useState<string[]>([]);
@@ -62,6 +62,7 @@ const Home: NextPage = () => {
 
       const ethersProvider = new providers.Web3Provider(provider)
       const signer = ethersProvider.getSigner()
+      console.log(signer)
       const signerAddress: string = await signer.getAddress() as string
       console.log("signer address: ",  signerAddress)
       const message = await signer.signMessage("Sign this message to login!")
