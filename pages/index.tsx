@@ -60,6 +60,8 @@ const Home: NextPage = () => {
       let semaphoreGroupsFacetAddress: string = "0x7bA44FAF27B18d04Af0950f30617B5AAACceC038";
       let semaphoreVotingFacetAddress: string = "0x43133D828f1E4c209eB60B4fEbD01221C72E4Ca4";
 
+      await provider.request({ method: "eth_requestAccounts" })
+
       const ethersProvider = new providers.Web3Provider(provider)
       const signer = ethersProvider.getSigner()
       const message = await signer.signMessage("Sign this message to login!")      
