@@ -21,6 +21,15 @@
   height: 70px;
 }
 
+.connection {
+  color: #1e00de;
+  margin-top: 0;
+  line-height: 1.5;
+  font-size: 1rem;
+  height: 20px;
+}
+
+
 .footer {
   display: flex;
   flex: 1;
@@ -124,4 +133,6 @@
   }
 }
 
-
+.invalid {
+  color: #c98c88;
+}

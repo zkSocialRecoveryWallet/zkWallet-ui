@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export { Counters__factory } from "./Counters__factory";
+export { CountersFacet__factory } from "./CountersFacet__factory";
 export { CountersInternal__factory } from "./CountersInternal__factory";
 export { CountersMock__factory } from "./CountersMock__factory";
 export { ICounters__factory } from "./ICounters__factory";

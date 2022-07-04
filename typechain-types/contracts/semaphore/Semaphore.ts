@@ -29,15 +29,26 @@ import type {
 
 export interface SemaphoreInterface extends utils.Interface {
   functions: {
+    "getVerifier(uint8)": FunctionFragment;
     "verifyProof(uint256,bytes32,uint256,uint256,uint256[8])": FunctionFragment;
   };
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "getVerifier"
+      | "getVerifier(uint8)"
       | "verifyProof"
       | "verifyProof(uint256,bytes32,uint256,uint256,uint256[8])"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "getVerifier",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getVerifier(uint8)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
   encodeFunctionData(
     functionFragment: "verifyProof",
     values: [
@@ -59,6 +70,14 @@ export interface SemaphoreInterface extends utils.Interface {
     ]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "getVerifier",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getVerifier(uint8)",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "verifyProof",
     data: BytesLike
@@ -132,6 +151,16 @@ export interface Semaphore extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    getVerifier(
+      merkleTreeDepth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "getVerifier(uint8)"(
+      merkleTreeDepth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     verifyProof(
       groupId: PromiseOrValue<BigNumberish>,
       signal: PromiseOrValue<BytesLike>,
@@ -150,6 +179,16 @@ export interface Semaphore extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
+
+  getVerifier(
+    merkleTreeDepth: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "getVerifier(uint8)"(
+    merkleTreeDepth: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
 
   verifyProof(
     groupId: PromiseOrValue<BigNumberish>,
@@ -170,6 +209,16 @@ export interface Semaphore extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    getVerifier(
+      merkleTreeDepth: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "getVerifier(uint8)"(
+      merkleTreeDepth: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
     verifyProof(
       groupId: PromiseOrValue<BigNumberish>,
       signal: PromiseOrValue<BytesLike>,
@@ -206,6 +255,16 @@ export interface Semaphore extends BaseContract {
   };
 
   estimateGas: {
+    getVerifier(
+      merkleTreeDepth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "getVerifier(uint8)"(
+      merkleTreeDepth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     verifyProof(
       groupId: PromiseOrValue<BigNumberish>,
       signal: PromiseOrValue<BytesLike>,
@@ -226,6 +285,16 @@ export interface Semaphore extends BaseContract {
   };
 
   populateTransaction: {
+    getVerifier(
+      merkleTreeDepth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "getVerifier(uint8)"(
+      merkleTreeDepth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     verifyProof(
       groupId: PromiseOrValue<BigNumberish>,
       signal: PromiseOrValue<BytesLike>,

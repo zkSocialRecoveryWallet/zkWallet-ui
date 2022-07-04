@@ -27,6 +27,18 @@ import type {
   PromiseOrValue,
 } from "../../../common";
 
+export declare namespace IWalletFactoryInternal {
+  export type VerifierDTOStruct = {
+    merkleTreeDepth: PromiseOrValue<BigNumberish>;
+    contractAddress: PromiseOrValue<string>;
+  };
+
+  export type VerifierDTOStructOutput = [number, string] & {
+    merkleTreeDepth: number;
+    contractAddress: string;
+  };
+}
+
 export declare namespace WalletFactoryStorage {
   export type FacetStruct = {
     name: PromiseOrValue<string>;
@@ -45,8 +57,8 @@ export interface IWalletFactoryInterface extends utils.Interface {
   functions: {
     "addFacet(string,address,string)": FunctionFragment;
     "addGuardian(bytes32,bytes32)": FunctionFragment;
-    "createWallet(bytes32,address)": FunctionFragment;
-    "createWalletDeterministic(bytes32,bytes32)": FunctionFragment;
+    "createWallet(bytes32,address,(uint8,address)[])": FunctionFragment;
+    "createWalletDeterministic(bytes32,address,(uint8,address)[],bytes32)": FunctionFragment;
     "getDiamond()": FunctionFragment;
     "getFacet(uint256)": FunctionFragment;
     "getFacetIndex(address)": FunctionFragment;
@@ -64,9 +76,9 @@ export interface IWalletFactoryInterface extends utils.Interface {
       | "addGuardian"
       | "addGuardian(bytes32,bytes32)"
       | "createWallet"
-      | "createWallet(bytes32,address)"
+      | "createWallet(bytes32,address,(uint8,address)[])"
       | "createWalletDeterministic"
-      | "createWalletDeterministic(bytes32,bytes32)"
+      | "createWalletDeterministic(bytes32,address,(uint8,address)[],bytes32)"
       | "getDiamond"
       | "getDiamond()"
       | "getFacet"
@@ -111,19 +123,37 @@ export interface IWalletFactoryInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "createWallet",
-    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      IWalletFactoryInternal.VerifierDTOStruct[]
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "createWallet(bytes32,address)",
-    values: [PromiseOrValue<BytesLike>, PromiseOrValue<string>]
+    functionFragment: "createWallet(bytes32,address,(uint8,address)[])",
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      IWalletFactoryInternal.VerifierDTOStruct[]
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "createWalletDeterministic",
-    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BytesLike>]
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      IWalletFactoryInternal.VerifierDTOStruct[],
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
-    functionFragment: "createWalletDeterministic(bytes32,bytes32)",
-    values: [PromiseOrValue<BytesLike>, PromiseOrValue<BytesLike>]
+    functionFragment: "createWalletDeterministic(bytes32,address,(uint8,address)[],bytes32)",
+    values: [
+      PromiseOrValue<BytesLike>,
+      PromiseOrValue<string>,
+      IWalletFactoryInternal.VerifierDTOStruct[],
+      PromiseOrValue<BytesLike>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "getDiamond",
@@ -205,7 +235,7 @@ export interface IWalletFactoryInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "createWallet(bytes32,address)",
+    functionFragment: "createWallet(bytes32,address,(uint8,address)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -213,7 +243,7 @@ export interface IWalletFactoryInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "createWalletDeterministic(bytes32,bytes32)",
+    functionFragment: "createWalletDeterministic(bytes32,address,(uint8,address)[],bytes32)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "getDiamond", data: BytesLike): Result;
@@ -272,7 +302,7 @@ export interface IWalletFactoryInterface extends utils.Interface {
     "FacetIsRemoved(address)": EventFragment;
     "GuardianAdded(bytes32,bytes32)": EventFragment;
     "GuardianRemoved(bytes32,bytes32)": EventFragment;
-    "NewDiamondWallet(address)": EventFragment;
+    "WalletIsCreated(address)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "DiamondIsSet"): EventFragment;
@@ -291,8 +321,8 @@ export interface IWalletFactoryInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "GuardianRemoved(bytes32,bytes32)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "NewDiamondWallet"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "NewDiamondWallet(address)"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "WalletIsCreated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "WalletIsCreated(address)"): EventFragment;
 }
 
 export interface DiamondIsSetEventObject {
@@ -346,16 +376,15 @@ export type GuardianRemovedEvent = TypedEvent<
 
 export type GuardianRemovedEventFilter = TypedEventFilter<GuardianRemovedEvent>;
 
-export interface NewDiamondWalletEventObject {
+export interface WalletIsCreatedEventObject {
   instance: string;
 }
-export type NewDiamondWalletEvent = TypedEvent<
+export type WalletIsCreatedEvent = TypedEvent<
   [string],
-  NewDiamondWalletEventObject
+  WalletIsCreatedEventObject
 >;
 
-export type NewDiamondWalletEventFilter =
-  TypedEventFilter<NewDiamondWalletEvent>;
+export type WalletIsCreatedEventFilter = TypedEventFilter<WalletIsCreatedEvent>;
 
 export interface IWalletFactory extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -413,23 +442,29 @@ export interface IWalletFactory extends BaseContract {
     createWallet(
       hashId: PromiseOrValue<BytesLike>,
       owner: PromiseOrValue<string>,
+      verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "createWallet(bytes32,address)"(
+    "createWallet(bytes32,address,(uint8,address)[])"(
       hashId: PromiseOrValue<BytesLike>,
       owner: PromiseOrValue<string>,
+      verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     createWalletDeterministic(
       hashId: PromiseOrValue<BytesLike>,
+      owner: PromiseOrValue<string>,
+      verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
       salt: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
-    "createWalletDeterministic(bytes32,bytes32)"(
+    "createWalletDeterministic(bytes32,address,(uint8,address)[],bytes32)"(
       hashId: PromiseOrValue<BytesLike>,
+      owner: PromiseOrValue<string>,
+      verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
       salt: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
@@ -536,23 +571,29 @@ export interface IWalletFactory extends BaseContract {
   createWallet(
     hashId: PromiseOrValue<BytesLike>,
     owner: PromiseOrValue<string>,
+    verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "createWallet(bytes32,address)"(
+  "createWallet(bytes32,address,(uint8,address)[])"(
     hashId: PromiseOrValue<BytesLike>,
     owner: PromiseOrValue<string>,
+    verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   createWalletDeterministic(
     hashId: PromiseOrValue<BytesLike>,
+    owner: PromiseOrValue<string>,
+    verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
     salt: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
-  "createWalletDeterministic(bytes32,bytes32)"(
+  "createWalletDeterministic(bytes32,address,(uint8,address)[],bytes32)"(
     hashId: PromiseOrValue<BytesLike>,
+    owner: PromiseOrValue<string>,
+    verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
     salt: PromiseOrValue<BytesLike>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
@@ -659,26 +700,32 @@ export interface IWalletFactory extends BaseContract {
     createWallet(
       hashId: PromiseOrValue<BytesLike>,
       owner: PromiseOrValue<string>,
+      verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
       overrides?: CallOverrides
     ): Promise<string>;
 
-    "createWallet(bytes32,address)"(
+    "createWallet(bytes32,address,(uint8,address)[])"(
       hashId: PromiseOrValue<BytesLike>,
       owner: PromiseOrValue<string>,
+      verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
       overrides?: CallOverrides
     ): Promise<string>;
 
     createWalletDeterministic(
       hashId: PromiseOrValue<BytesLike>,
+      owner: PromiseOrValue<string>,
+      verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
       salt: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<string>;
 
-    "createWalletDeterministic(bytes32,bytes32)"(
+    "createWalletDeterministic(bytes32,address,(uint8,address)[],bytes32)"(
       hashId: PromiseOrValue<BytesLike>,
+      owner: PromiseOrValue<string>,
+      verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
       salt: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
-    ): Promise<void>;
+    ): Promise<string>;
 
     getDiamond(overrides?: CallOverrides): Promise<string>;
 
@@ -789,8 +836,8 @@ export interface IWalletFactory extends BaseContract {
       guardian?: null
     ): GuardianRemovedEventFilter;
 
-    "NewDiamondWallet(address)"(instance?: null): NewDiamondWalletEventFilter;
-    NewDiamondWallet(instance?: null): NewDiamondWalletEventFilter;
+    "WalletIsCreated(address)"(instance?: null): WalletIsCreatedEventFilter;
+    WalletIsCreated(instance?: null): WalletIsCreatedEventFilter;
   };
 
   estimateGas: {
@@ -823,23 +870,29 @@ export interface IWalletFactory extends BaseContract {
     createWallet(
       hashId: PromiseOrValue<BytesLike>,
       owner: PromiseOrValue<string>,
+      verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "createWallet(bytes32,address)"(
+    "createWallet(bytes32,address,(uint8,address)[])"(
       hashId: PromiseOrValue<BytesLike>,
       owner: PromiseOrValue<string>,
+      verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     createWalletDeterministic(
       hashId: PromiseOrValue<BytesLike>,
+      owner: PromiseOrValue<string>,
+      verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
       salt: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
-    "createWalletDeterministic(bytes32,bytes32)"(
+    "createWalletDeterministic(bytes32,address,(uint8,address)[],bytes32)"(
       hashId: PromiseOrValue<BytesLike>,
+      owner: PromiseOrValue<string>,
+      verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
       salt: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
@@ -943,23 +996,29 @@ export interface IWalletFactory extends BaseContract {
     createWallet(
       hashId: PromiseOrValue<BytesLike>,
       owner: PromiseOrValue<string>,
+      verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "createWallet(bytes32,address)"(
+    "createWallet(bytes32,address,(uint8,address)[])"(
       hashId: PromiseOrValue<BytesLike>,
       owner: PromiseOrValue<string>,
+      verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     createWalletDeterministic(
       hashId: PromiseOrValue<BytesLike>,
+      owner: PromiseOrValue<string>,
+      verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
       salt: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
-    "createWalletDeterministic(bytes32,bytes32)"(
+    "createWalletDeterministic(bytes32,address,(uint8,address)[],bytes32)"(
       hashId: PromiseOrValue<BytesLike>,
+      owner: PromiseOrValue<string>,
+      verifiers: IWalletFactoryInternal.VerifierDTOStruct[],
       salt: PromiseOrValue<BytesLike>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;

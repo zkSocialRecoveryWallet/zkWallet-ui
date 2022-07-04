@@ -3,6 +3,8 @@
 /* eslint-disable */
 import type * as diamond from "./diamond";
 export type { diamond };
+import type * as ether from "./ether";
+export type { ether };
 import type * as facets from "./facets";
 export type { facets };
 import type * as guardian from "./guardian";

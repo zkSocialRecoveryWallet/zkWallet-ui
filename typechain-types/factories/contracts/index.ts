@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export * as diamond from "./diamond";
+export * as ether from "./ether";
 export * as facets from "./facets";
 export * as guardian from "./guardian";
 export * as interfaces from "./interfaces";

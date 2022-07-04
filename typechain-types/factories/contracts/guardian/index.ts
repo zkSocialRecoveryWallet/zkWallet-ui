@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export { Guardian__factory } from "./Guardian__factory";
+export { GuardianFacet__factory } from "./GuardianFacet__factory";
 export { GuardianInternal__factory } from "./GuardianInternal__factory";
 export { IGuardian__factory } from "./IGuardian__factory";
 export { IGuardianInternal__factory } from "./IGuardianInternal__factory";
