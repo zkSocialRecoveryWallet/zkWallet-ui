@@ -31,6 +31,7 @@ const Home: NextPage = () => {
   const [signerAddress, setSignerAddress] = useState<string>("")
   const [connected, setConnected] = useState(false);
   const [walletAddresses, setWalletAddresses] = useState<string[]>([]);
+  const [latestWalletAddresses, setLatestWalletAddresses] = useState<string>("");
   const [cookies, setCookies] = useCookies(["WALLET_ADDRESSES"]);
   const [walletCreated, setWalletCreated] = useState(false);
 
@@ -110,15 +111,24 @@ const Home: NextPage = () => {
       walletFactory = "0x1D7517e85eF2c0b6741D2c61a911c00D88f45a90";
       etherServiceFacetAddress = "0x53fB90541C8c17D9Aca0c4F566D4BE5BC450B36b";
     } else if (provider.chainId === "0x89") {
-      verifier20Address = "0x727C8e95D76Feef514c1AF34d4CDAE61266FC2Ba";
-      guardianFacetAddress= "0x9b28bED203EDd813d6D278FC8AF9743CEeB081A0";
-      eRC20FacetAddress = "0xf6CBd386fAE126414Ac3eAD9b6419Ed620f17446";
-      eRC721FacetAddress = "0xc241533F9D0F9DEC506d5D8da68C430BAFd26e5A";
-      recoveryFacetAddress = "0x1CB9e127D7f25C2dE99de822B72B47da85a3D37E";
-      semaphoreFacetAddress = "0x0D47a2Ca986fCCAFCe7b93178383c64855241704";
-      semaphoreGroupsFacetAddress = "0xb1a9662b07263CB7419eBa90fA7cF835ee686965";
-      walletFactory = "0x083409136b251DC1A8c47958874C80197424dFdF";
-      etherServiceFacetAddress = "0x17aBCcd552D3D026dCfDA1BB1E3F4C107Fcb288b";
+      // verifier20Address = "0x727C8e95D76Feef514c1AF34d4CDAE61266FC2Ba";
+      // guardianFacetAddress= "0x9b28bED203EDd813d6D278FC8AF9743CEeB081A0";
+      // eRC20FacetAddress = "0xf6CBd386fAE126414Ac3eAD9b6419Ed620f17446";
+      // eRC721FacetAddress = "0xc241533F9D0F9DEC506d5D8da68C430BAFd26e5A";
+      // recoveryFacetAddress = "0x1CB9e127D7f25C2dE99de822B72B47da85a3D37E";
+      // semaphoreFacetAddress = "0x0D47a2Ca986fCCAFCe7b93178383c64855241704";
+      // semaphoreGroupsFacetAddress = "0xb1a9662b07263CB7419eBa90fA7cF835ee686965";
+      // walletFactory = "0x083409136b251DC1A8c47958874C80197424dFdF";
+      // etherServiceFacetAddress = "0x17aBCcd552D3D026dCfDA1BB1E3F4C107Fcb288b";
+      verifier20Address = "0x1A51d1C41be8a8A8F3092C65Ca0c3a0777a65f06";
+      guardianFacetAddress= "0x07F9ACE7F8a2AeD3cC6FA75fAf88C2A9e5a86B11";
+      eRC20FacetAddress = "0x9022A8A723551deDE188c7fec6d313c9EcE775B2";
+      eRC721FacetAddress = "0xf3b003cD0b892A4a2Ec9Ebf34EA071363F5e7E53";
+      recoveryFacetAddress = "0x435D3A43C780a4121D8a67d572b7c6d29fDD13Cd";
+      semaphoreFacetAddress = "0xc2E46D83f4264294C44A327482223e405bF12a6B";
+      semaphoreGroupsFacetAddress = "0x661432580f2267cFe28087F0E95A36943Eb5A02D";
+      walletFactory = "0xaC71914E2A22f92d3F75106043aA4E7248Eda9C3";
+      etherServiceFacetAddress = "0x8A2b8203aec1b11d130A7Db6D0D87D5c44995095";
     } else {
       console.log("provider.chainId", provider.chainId)
       setConnection("Please connect to Polygon Mainnet or Harmony Devnet!")
@@ -154,45 +164,37 @@ const Home: NextPage = () => {
             } else {
               setWalletAddresses([...walletAddresses,  newWalletAddress]);
             }
-            setCookies("WALLET_ADDRESSES", [...walletAddresses,  newWalletAddress]);
-
-            walletDiamond = new Contract(newWalletAddress, ZkWalletDiamondAbi.abi, signer);
+            setCookies("WALLET_ADDRESSES", [...walletAddresses,  newWalletAddress]); 
+            setLatestWalletAddresses(newWalletAddress); 
+            setLogs(`Your wallet is created: ${newWalletAddress}`)
+            
+            walletDiamond = new Contract(latestWalletAddresses, ZkWalletDiamondAbi.abi, signer);
             console.log("walletDiamond: ", await walletDiamond.version())
 
             const guardianInstance: Contract | IGuardianFacet = await new Contract(guardianFacetAddress, GuardianFacetAbi.abi, signer);
             const guardianFacetVersion = await guardianInstance.guardianFacetVersion();
             console.log("guardianFacetVersion: ", guardianFacetVersion)
             console.log(await instance.getFacets())
+
+            setLogs("Adding SemaphoreGroup to your wallet..please wait...")
           
-            semaphoreGroupsInstance = await new Contract(newWalletAddress, SemaphoreGroupsFacetAbi.abi, signer)
+            semaphoreGroupsInstance = await new Contract(latestWalletAddresses, SemaphoreGroupsFacetAbi.abi, signer)
             console.log(semaphoreGroupsInstance)
 
             const semaphoreGroupsFacetVersion = await semaphoreGroupsInstance.semaphoreGroupsFacetVersion()
             console.log("semaphoreGroupsFacetVersion: ", semaphoreGroupsFacetVersion)
-            if (semaphoreGroupsFacetVersion === "0.1.0.alpha") {   
-              try {
-                setLogs("Creating SemaphoreGroups to your wallet...")
-                console.log("facets: ", await walletDiamond.facets())
-                const groupTransaction = await semaphoreGroupsInstance.createGroup(defaultGroupId, depth, 0, signerAddress);
-                const receiptGroup = await groupTransaction.wait();
-                console.log("receiptGroup: ", receiptGroup)                   
-                setLogs("Your Wallet is ready")
-                setWalletCreated(true)
-
-              } catch (groupTransactionError) {
-                setLogs("Error: can not create SemaphoreGroups for your wallet!")
-                console.log("groupTransactionError: ", groupTransactionError)
-              }                 
-
-            } else {
-              setLogs("One of the Facets version is not supported by this dApp!")
-            }
+            const groupTransaction = await semaphoreGroupsInstance.createGroup(defaultGroupId, depth, 0, signerAddress);
+            const receiptGroup = await groupTransaction.wait();
+            console.log("receiptGroup: ", receiptGroup)                   
+            setLogs("Your Wallet is ready")
+            setWalletCreated(true)
           } else {
             setLogs("NewDiamondWallet event not found!")
           }
         } catch (createWalletError) {
           setLogs("Error creating your wallet. Please try again.")
-        }
+        }              
+
       } else {
         setLogs(`The Wallet Facory: ${process.env.NEXT_PUBLIC_FACTORY_DIAMOND_ADDRESS}  is not supported by this dApp!`)
       }

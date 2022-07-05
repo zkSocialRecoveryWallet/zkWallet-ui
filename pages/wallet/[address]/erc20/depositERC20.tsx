@@ -135,14 +135,22 @@ const DepositERC20 = () => {
 
       try {
         const approveTx = await erc20Intance.approve(walletAddress, utils.parseUnits(tokenAmount.toString(), tokenDecimals))
-        console.log(approveTx)          
+        console.log(approveTx)
+        const receipt = await approveTx.wait()
+        console.log("receipt", await approveTx.wait())       
+  
+      } catch (error) {
+        setLogs("You are not able to approve ERC20, see console for more info")
+        console.log("error", error)
+      }
+
+      try {
         const tx = await instance.depositERC20(tokenAddress, utils.parseUnits(tokenAmount.toString(), tokenDecimals))
         console.log("receipt", await tx.wait())
         setLogs("ERC20 deposited!")
-  
-      } catch (error) {
+      } catch (depositError) {
         setLogs("You are not able to deposit ERC20, see console for more info")
-        console.log("error", error)
+        console.log("error", depositError)
       }
     }
 
