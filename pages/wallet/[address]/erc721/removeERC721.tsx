@@ -219,9 +219,9 @@ const RemoveERC721 = () => {
                 className=
                 {`form-control ${errors.tokenAddress ? 'is-invalid' : ''}`}
               </input>
-              <div className={styles.invalid}>
+              {/* <div className={styles.invalid}>
                 {errors.tokenAddress?.message}
-              </div>
+              </div> */}
               <Button
                 type="submit"
                 fullWidth

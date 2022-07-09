@@ -213,7 +213,7 @@ const RegisterERC20 = () => {
                 className=
                 {`form-control ${errors.tokenAddress ? 'is-invalid' : ''}`}
               </input>
-              <div className={styles.invalid}>{errors.tokenAddress?.message}</div>
+              {/* <div className={styles.invalid}>{errors.tokenAddress?.message}</div> */}
               <Button
                 type="submit"
                 fullWidth

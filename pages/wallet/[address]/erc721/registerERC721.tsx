@@ -27,6 +27,7 @@ import CutomHead from '../../../component/Head'
 import Footer from '../../../component/Footer'
 
 import ERC721ServiceFacetAbi from '../../../../contracts/token/ERC721/ERC721ServiceFacet.sol/ERC721ServiceFacet.json'
+import ERC721Abi from '../../../../contracts/@openzeppelin/contracts/token/ERC721/ERC721.sol/ERC721.json'
 
 const theme = createTheme()
 import styles from '../../../../styles/Home.module.css'
@@ -133,7 +134,7 @@ const RegisterERC721 = () => {
   async function registerERC721(tokenAddress: string) {
     const instance: any = await new Contract(
       walletAddress,
-      ERC721FacetAbi.abi,
+      ERC721ServiceFacetAbi.abi,
       signer,
     )
 
@@ -208,9 +209,9 @@ const RegisterERC721 = () => {
                 className=
                 {`form-control ${errors.tokenAddress ? 'is-invalid' : ''}`}
               </input>
-              <div className={styles.invalid}>
+              {/* <div className={styles.invalid}>
                 {errors.tokenAddress?.message}
-              </div>
+              </div> */}
               <Button
                 type="submit"
                 fullWidth

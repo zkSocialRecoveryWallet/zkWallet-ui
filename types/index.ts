@@ -33,5 +33,5 @@ export interface TrackedERC721Tokens {
   tokenName: string
   tokenSymbol: string
   tokenAddress: string
-  uri: string
+  tokenUri: string
 }
