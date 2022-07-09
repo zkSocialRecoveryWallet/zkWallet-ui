@@ -19,6 +19,7 @@ import {
   TableCell,
   TableBody,
   Paper,
+  TextField,
 } from '@mui/material'
 
 import BackToERC20 from '../../../component/BackToERC20'
@@ -222,7 +223,7 @@ const TransferERC20 = () => {
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <form onSubmit={handleSubmit(onSubmitHandler)}>
-              <input
+              <TextField
                 type="text"
                 placeholder="ERC20 token address"
                 id="tokenAddress"
@@ -230,11 +231,11 @@ const TransferERC20 = () => {
               >
                 className=
                 {`form-control ${errors.tokenAddress ? 'is-invalid' : ''}`}
-              </input>
+              </TextField>
               <div className={styles.invalid}>
                 {errors.tokenAddress?.message}
               </div>
-              <input
+              <TextField
                 type="text"
                 placeholder="To address"
                 id="toAddress"
@@ -242,9 +243,9 @@ const TransferERC20 = () => {
               >
                 className=
                 {`form-control ${errors.toAddress ? 'is-invalid' : ''}`}
-              </input>
+              </TextField>
               <div className={styles.invalid}>{errors.toAddress?.message}</div>
-              <input
+              <TextField
                 type="float"
                 placeholder="ERC20 token amount"
                 id="tokenAmount"
@@ -252,7 +253,7 @@ const TransferERC20 = () => {
               >
                 className=
                 {`form-control ${errors.tokenAmount ? 'is-invalid' : ''}`}
-              </input>
+              </TextField>
               <div className={styles.invalid}>
                 {errors.tokenAmount?.message}
               </div>

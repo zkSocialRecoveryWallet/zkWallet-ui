@@ -19,6 +19,7 @@ import {
   TableCell,
   TableBody,
   Paper,
+  TextField,
 } from '@mui/material'
 
 import BackToERC20 from '../../../component/BackToERC20'
@@ -210,7 +211,7 @@ const RemoveERC20 = () => {
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <form onSubmit={handleSubmit(onSubmitHandler)}>
-              <input
+              <TextField
                 type="text"
                 placeholder="ERC20 token address"
                 id="tokenAddress"
@@ -218,7 +219,7 @@ const RemoveERC20 = () => {
               >
                 className=
                 {`form-control ${errors.tokenAddress ? 'is-invalid' : ''}`}
-              </input>
+              </TextField>
               {/* <div className={styles.invalid}>
                 {errors.tokenAddress?.message}
               </div> */}

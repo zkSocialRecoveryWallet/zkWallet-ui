@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as Yup from 'yup'
 import { useRouter } from 'next/router'
-import { Button, Container, CssBaseline } from '@mui/material'
+import { Button, Container, CssBaseline, TextField } from '@mui/material'
 
 import BackToWallet from '../../component/BackToWallet'
 import CutomHead from '../../component/Head'
@@ -116,7 +116,7 @@ const Ownership = () => {
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <form onSubmit={handleSubmit(onSubmitHandler)}>
-              <input
+              <TextField
                 type="text"
                 placeholder="New owner address"
                 id="newOwner"
@@ -124,7 +124,7 @@ const Ownership = () => {
               >
                 className=
                 {`form-control ${errors.newOwner ? 'is-invalid' : ''}`}
-              </input>
+              </TextField>
               {/* <div className={styles.invalid}>{errors.newOwner?.message}</div> */}
               <Button
                 type="submit"

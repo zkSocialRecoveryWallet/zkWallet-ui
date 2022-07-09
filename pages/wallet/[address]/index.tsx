@@ -17,6 +17,7 @@ import {
   ListItem,
   ListItemIcon,
   ThemeProvider,
+  TextField,
 } from '@mui/material'
 
 import AddBoxIcon from '@mui/icons-material/AddBox'
@@ -157,7 +158,7 @@ const Wallet = () => {
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <form onSubmit={handleSubmit(onSubmitHandler)}>
-              <input
+              <TextField
                 type="text"
                 placeholder="To address"
                 id="toAddress"
@@ -165,16 +166,15 @@ const Wallet = () => {
               >
                 className=
                 {`form-control ${errors.toAddress ? 'is-invalid' : ''}`}
-              </input>
+              </TextField>
               <div className={styles.invalid}>{errors.toAddress?.message}</div>
-              <input
+              <TextField
                 type="float"
                 placeholder="Amount to send"
-                id="tokenAmount"
                 {...register('amount')}
               >
                 className={`form-control ${errors.amount ? 'is-invalid' : ''}`}
-              </input>
+              </TextField>
               <div className={styles.invalid}>{errors.amount?.message}</div>
               <Button
                 type="submit"

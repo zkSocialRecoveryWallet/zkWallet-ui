@@ -19,6 +19,7 @@ import {
   TableCell,
   TableBody,
   Paper,
+  TextField,
 } from '@mui/material'
 
 import BackToERC721 from '../../../component/BackToERC721'
@@ -200,7 +201,7 @@ const RegisterERC721 = () => {
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <form onSubmit={handleSubmit(onSubmitHandler)}>
-              <input
+              <TextField
                 type="text"
                 placeholder="ERC721 token address"
                 id="tokenAddress"
@@ -208,7 +209,7 @@ const RegisterERC721 = () => {
               >
                 className=
                 {`form-control ${errors.tokenAddress ? 'is-invalid' : ''}`}
-              </input>
+              </TextField>
               {/* <div className={styles.invalid}>
                 {errors.tokenAddress?.message}
               </div> */}
