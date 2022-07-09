@@ -1,62 +1,69 @@
-import detectEthereumProvider from "@metamask/detect-provider"
-import { Contract, providers } from "ethers"
-import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
-import { useRouter } from "next/router"
-import { Button, Container, CssBaseline, Input} from "@mui/material";
+import detectEthereumProvider from '@metamask/detect-provider'
+import { Contract, providers } from 'ethers'
+import React, { useState, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as Yup from 'yup'
+import { useRouter } from 'next/router'
+import { Button, Container, CssBaseline, Input } from '@mui/material'
 
-import BackToWallet from "../../component/BackToWallet";
-import CutomHead from "../../component/Head";
-import Footer from "../../component/Footer";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import OwnableAbi from "../../../contracts/@solidstate/contracts/access/ownable/Ownable.sol/Ownable.json";
+import BackToWallet from '../../component/BackToWallet'
+import CutomHead from '../../component/Head'
+import Footer from '../../component/Footer'
+import { createTheme, ThemeProvider } from '@mui/material/styles'
+import OwnableAbi from '../../../contracts/@solidstate/contracts/access/ownable/Ownable.sol/Ownable.json'
 
-const theme = createTheme();
+const theme = createTheme()
 import styles from '../../../styles/Home.module.css'
 
 const Ownership = () => {
-  const [logs, setLogs] = React.useState("")
-  const [connection, setConnection] = useState("");
+  const [logs, setLogs] = React.useState('')
+  const [connection, setConnection] = useState('')
   const [provider, setProvider] = useState<any>()
   const [signer, setSigner] = useState<providers.JsonRpcSigner>()
-  const [signerAddress, setSignerAddress] = useState<string>("")
-  const [walletAddress, setWalletAddress] = useState<string>("");
+  const [signerAddress, setSignerAddress] = useState<string>('')
+  const [walletAddress, setWalletAddress] = useState<string>('')
   const router = useRouter()
   const { address } = router.query
 
   useEffect(() => {
     const fetchProvider = async () => {
-      const provider =  (await detectEthereumProvider()) as any;
+      const provider = (await detectEthereumProvider()) as any
+      setProvider(provider)
 
-      if (provider.chainId === "0x635ae020") {
-        setConnection("You are connected to  Harmony Devnet.")
-      } else if (provider.chainId === "0x89") {
-        setConnection("You are connected to  Polygon Mainnet.")
+      if (provider.chainId === '0x635ae020') {
+        setConnection('You are connected to  Harmony Devnet.')
+      } else if (provider.chainId === '0x89') {
+        setConnection('You are connected to  Polygon Mainnet.')
+      } else if (provider.chainId === '0xa') {
+        setConnection('You are connected to  Optimism Mainnet.')
+      } else if (provider.chainId === '0x440') {
+        setConnection('You are connected to Metis Mainnet.')
+      } else if (provider.chainId === '0x120') {
+        setConnection('You are connected to Boba Mainnet.')
       } else {
-        setConnection("Please connect to Polygon Mainnet or Harmony Devnet!")
+        setConnection(
+          'Please connect to Polygon-, Optimism-, Mentis-, Boba mainnet or Harmony Devnet!',
+        )
       }
 
-      await provider.request({ method: "eth_requestAccounts" })
-      setProvider(provider)
+      await provider.request({ method: 'eth_requestAccounts' })
 
       const ethersProvider = new providers.Web3Provider(provider)
       const signerData = ethersProvider.getSigner()
       setSigner(signerData)
-      const signerAddress: string = await signerData.getAddress() as string
+      const signerAddress: string = (await signerData.getAddress()) as string
       setSignerAddress(signerAddress)
     }
-  
+
     // call the function
     fetchProvider()
       // make sure to catch any error
-      .catch(console.error);
-
-  }, [signer, setSigner, setSignerAddress, setProvider]);
+      .catch(console.error)
+  }, [signer])
 
   useEffect(() => {
-    const addressString : string = address as string
+    const addressString: string = address as string
     setWalletAddress(addressString)
   }, [address, setWalletAddress])
 
@@ -64,73 +71,82 @@ const Ownership = () => {
     transferOwnership(input.newOwner)
   }
 
-  
-  // form validation rules 
+  // form validation rules
   const validationSchema = Yup.object().shape({
     newOwner: Yup.string()
       .length(42, 'Address must be 42 characters long')
-      .required('newOwner is required'),    
-  });
+      .required('newOwner is required'),
+  })
 
-  const formOptions = { 
-      resolver: yupResolver(validationSchema),
-  };
+  const formOptions = {
+    resolver: yupResolver(validationSchema),
+  }
 
   const { handleSubmit, register, formState } = useForm(formOptions)
-  const { errors } = formState;
+  const { errors } = formState
 
-  async function transferOwnership(newOwner: string) { 
-    const ownableIntance: any = await new Contract(walletAddress, OwnableAbi.abi, signer)
+  async function transferOwnership(newOwner: string) {
+    const ownableIntance: any = await new Contract(
+      walletAddress,
+      OwnableAbi.abi,
+      signer,
+    )
 
     try {
       const tx = await ownableIntance.transferOwnership(newOwner)
-    
-      console.log("receipt", await tx.wait())
-      setLogs("Ownership transfered!")
 
+      console.log('receipt', await tx.wait())
+      setLogs('Ownership transfered!')
     } catch (error) {
-      setLogs("You are not able to transfer ownership, see console for more info")
-      console.log("error", error)
+      setLogs(
+        'You are not able to transfer ownership, see console for more info',
+      )
+      console.log('error', error)
     }
   }
 
-  return <div className={styles.container}>
-    <CutomHead />
-    <main className={styles.main}>
-        <h1 className={styles.title}>
-          Accept Ownership
-        </h1>               
+  return (
+    <div className={styles.container}>
+      <CutomHead />
+      <main className={styles.main}>
+        <h1 className={styles.title}>Accept Ownership</h1>
         <div>Your wallet: {address}</div>
-        <div className={styles.logs}>{logs}</div>          
+        <div className={styles.logs}>{logs}</div>
         <ThemeProvider theme={theme}>
           <Container component="main" maxWidth="xs">
             <CssBaseline />
-             <form onSubmit={handleSubmit(onSubmitHandler)} > 
-                <Input                    
-                  type="text" 
-                  placeholder="New owner address"
-                  id="newOwner"                  
-                  {...register("newOwner")} > 
-                  className={`form-control ${errors.newOwner ? 'is-invalid' : ''}`}                 
-                </Input>  
-                <div className={styles.invalid}>{errors.newOwner?.message}</div>           
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  sx={{ mt: 3, mb: 2 }}
-                >
-                  Transfer ownership
-                </Button>            
-              </form>
-              <div className={styles.connection}>{connection}</div>     
-              <BackToWallet walletAddress={walletAddress}/>        
+            <form onSubmit={handleSubmit(onSubmitHandler)}>
+              <Input
+                type="text"
+                placeholder="New owner address"
+                id="newOwner"
+                {...register('newOwner')}
+              >
+                className=
+                {`form-control ${errors.newOwner ? 'is-invalid' : ''}`}
+              </Input>
+              <div className={styles.invalid}>{errors.newOwner?.message}</div>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Transfer ownership
+              </Button>
+            </form>
+            <div className={styles.connection}>{connection}</div>
+            <BackToWallet walletAddress={walletAddress} />
           </Container>
         </ThemeProvider>
-    </main>
-    <Footer/>
-
-  </div>
+        <div hidden>
+          {provider}
+          {signerAddress}
+        </div>
+      </main>
+      <Footer />
+    </div>
+  )
 }
 
 export default Ownership
