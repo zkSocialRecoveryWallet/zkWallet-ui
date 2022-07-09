@@ -207,6 +207,7 @@ const Home: NextPage = () => {
           setLogs('Error creating your wallet. Please try again.')
         }
       } else {
+        console.log(cookies)
         setLogs(
           `The Wallet Facory: ${process.env.NEXT_PUBLIC_FACTORY_DIAMOND_ADDRESS}  is not supported by this dApp!`,
         )
@@ -276,7 +277,6 @@ const Home: NextPage = () => {
             </Box>
           </Container>
         </ThemeProvider>
-        <div hidden>{cookies}</div>
       </main>
       <Footer />
     </div>
