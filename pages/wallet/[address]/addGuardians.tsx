@@ -111,7 +111,7 @@ const Guardians = ({ guardians }: IndexProps) => {
 
   const { handleSubmit, register } = useForm()
 
-  const handleChange = (event: SelectChangeEvent<typeof guardianId>) => {
+  const handleChange = (event: SelectChangeEvent<typeof inputGuardians>) => {
     const {
       target: { value },
     } = event
