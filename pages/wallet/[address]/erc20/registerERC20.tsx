@@ -27,6 +27,7 @@ import CutomHead from '../../../component/Head'
 import Footer from '../../../component/Footer'
 
 import ERC20ServiceFacetAbi from '../../../../contracts/token/ERC20/ERC20ServiceFacet.sol/ERC20ServiceFacet.json'
+import ERC20Abi from '../../../../contracts/@openzeppelin/contracts/token/ERC20/ERC20.sol/ERC20.json'
 
 const theme = createTheme()
 import styles from '../../../../styles/Home.module.css'
