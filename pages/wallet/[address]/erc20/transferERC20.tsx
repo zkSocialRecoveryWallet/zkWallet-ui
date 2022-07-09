@@ -10,7 +10,6 @@ import {
   Button,
   Container,
   CssBaseline,
-  Input,
   createTheme,
   ThemeProvider,
   TableContainer,
@@ -223,7 +222,7 @@ const TransferERC20 = () => {
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <form onSubmit={handleSubmit(onSubmitHandler)}>
-              <Input
+              <input
                 type="text"
                 placeholder="ERC20 token address"
                 id="tokenAddress"
@@ -231,11 +230,11 @@ const TransferERC20 = () => {
               >
                 className=
                 {`form-control ${errors.tokenAddress ? 'is-invalid' : ''}`}
-              </Input>
+              </input>
               <div className={styles.invalid}>
                 {errors.tokenAddress?.message}
               </div>
-              <Input
+              <input
                 type="text"
                 placeholder="To address"
                 id="toAddress"
@@ -243,9 +242,9 @@ const TransferERC20 = () => {
               >
                 className=
                 {`form-control ${errors.toAddress ? 'is-invalid' : ''}`}
-              </Input>
+              </input>
               <div className={styles.invalid}>{errors.toAddress?.message}</div>
-              <Input
+              <input
                 type="float"
                 placeholder="ERC20 token amount"
                 id="tokenAmount"
@@ -253,7 +252,7 @@ const TransferERC20 = () => {
               >
                 className=
                 {`form-control ${errors.tokenAmount ? 'is-invalid' : ''}`}
-              </Input>
+              </input>
               <div className={styles.invalid}>
                 {errors.tokenAmount?.message}
               </div>

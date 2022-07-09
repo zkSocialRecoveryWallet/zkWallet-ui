@@ -232,7 +232,7 @@ const ApproveERC20 = () => {
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <form onSubmit={handleSubmit(onSubmitHandler)}>
-              <Input
+              <input
                 type="text"
                 placeholder="ERC20 token address"
                 id="tokenAddress"
@@ -240,11 +240,11 @@ const ApproveERC20 = () => {
               >
                 className=
                 {`form-control ${errors.tokenAddress ? 'is-invalid' : ''}`}
-              </Input>
+              </input>
               <div className={styles.invalid}>
                 {errors.tokenAddress?.message}
               </div>
-              <Input
+              <input
                 type="text"
                 placeholder="Spender address"
                 id="spenderAddress"
@@ -252,11 +252,11 @@ const ApproveERC20 = () => {
               >
                 className=
                 {`form-control ${errors.spenderAddress ? 'is-invalid' : ''}`}
-              </Input>
+              </input>
               <div className={styles.invalid}>
                 {errors.spenderAddress?.message}
               </div>
-              <Input
+              <input
                 type="float"
                 placeholder="ERC20 token amount"
                 id="tokenAmount"
@@ -264,7 +264,7 @@ const ApproveERC20 = () => {
               >
                 className=
                 {`form-control ${errors.tokenAmount ? 'is-invalid' : ''}`}
-              </Input>
+              </input>
               <div className={styles.invalid}>
                 {errors.tokenAmount?.message}
               </div>

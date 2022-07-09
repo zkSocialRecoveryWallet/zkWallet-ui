@@ -10,7 +10,6 @@ import {
   Button,
   Container,
   CssBaseline,
-  Input,
   createTheme,
   ThemeProvider,
   TableContainer,
@@ -211,7 +210,7 @@ const RemoveERC20 = () => {
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <form onSubmit={handleSubmit(onSubmitHandler)}>
-              <Input
+              <input
                 type="text"
                 placeholder="ERC20 token address"
                 id="tokenAddress"
@@ -219,7 +218,7 @@ const RemoveERC20 = () => {
               >
                 className=
                 {`form-control ${errors.tokenAddress ? 'is-invalid' : ''}`}
-              </Input>
+              </input>
               <div className={styles.invalid}>
                 {errors.tokenAddress?.message}
               </div>

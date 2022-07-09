@@ -11,7 +11,6 @@ import {
   Button,
   Container,
   CssBaseline,
-  Input,
   createTheme,
   Link,
   List,
@@ -158,7 +157,7 @@ const Wallet = () => {
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <form onSubmit={handleSubmit(onSubmitHandler)}>
-              <Input
+              <input
                 type="text"
                 placeholder="To address"
                 id="toAddress"
@@ -166,16 +165,16 @@ const Wallet = () => {
               >
                 className=
                 {`form-control ${errors.toAddress ? 'is-invalid' : ''}`}
-              </Input>
+              </input>
               <div className={styles.invalid}>{errors.toAddress?.message}</div>
-              <Input
+              <input
                 type="float"
                 placeholder="Amount to send"
                 id="tokenAmount"
                 {...register('amount')}
               >
                 className={`form-control ${errors.amount ? 'is-invalid' : ''}`}
-              </Input>
+              </input>
               <div className={styles.invalid}>{errors.amount?.message}</div>
               <Button
                 type="submit"

@@ -116,7 +116,7 @@ const Ownership = () => {
           <Container component="main" maxWidth="xs">
             <CssBaseline />
             <form onSubmit={handleSubmit(onSubmitHandler)}>
-              <Input
+              <input
                 type="text"
                 placeholder="New owner address"
                 id="newOwner"
@@ -124,7 +124,7 @@ const Ownership = () => {
               >
                 className=
                 {`form-control ${errors.newOwner ? 'is-invalid' : ''}`}
-              </Input>
+              </input>
               <div className={styles.invalid}>{errors.newOwner?.message}</div>
               <Button
                 type="submit"
