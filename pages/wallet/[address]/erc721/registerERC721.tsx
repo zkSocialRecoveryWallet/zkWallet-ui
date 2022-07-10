@@ -2,13 +2,16 @@ import detectEthereumProvider from '@metamask/detect-provider'
 import { Contract, providers } from 'ethers'
 import { useRouter } from 'next/router'
 import React, { useState, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as Yup from 'yup'
 
 import {
-  Box,
-  List,
-  ListItem,
-  ListItemIcon,
-  Link,
+  Button,
+  Container,
+  CssBaseline,
+  createTheme,
+  ThemeProvider,
   TableContainer,
   Table,
   TableHead,
@@ -16,29 +19,30 @@ import {
   TableCell,
   TableBody,
   Paper,
+  TextField,
 } from '@mui/material'
 
-import AddModeratorIcon from '@mui/icons-material/AddModerator'
-
+import BackToERC721 from '../../../component/BackToERC721'
 import BackToWallet from '../../../component/BackToWallet'
 import CutomHead from '../../../component/Head'
 import Footer from '../../../component/Footer'
 
-import ERC20ServiceFacetAbi from '../../../../contracts/token/ERC20/ERC20ServiceFacet.sol/ERC20ServiceFacet.json'
-import ERC20Abi from '../../../../contracts/@openzeppelin/contracts/token/ERC20/ERC20.sol/ERC20.json'
+import ERC721ServiceFacetAbi from '../../../../contracts/token/ERC721/ERC721ServiceFacet.sol/ERC721ServiceFacet.json'
+import ERC721Abi from '../../../../contracts/@openzeppelin/contracts/token/ERC721/ERC721.sol/ERC721.json'
+
+const theme = createTheme()
 import styles from '../../../../styles/Home.module.css'
 
-import { parseBalance } from '../../../../lib/utils'
-import { TrackedTokens } from '../../../../types'
+import { TrackedERC721Tokens } from '../../../../types'
 
-
-const Erc20 = () => {
+const RegisterERC721 = () => {
+  const [logs, setLogs] = React.useState('')
   const [connection, setConnection] = useState('')
   const [provider, setProvider] = useState<any>()
   const [signer, setSigner] = useState<providers.JsonRpcSigner>()
   const [signerAddress, setSignerAddress] = useState<string>('')
   const [walletAddress, setWalletAddress] = useState<string>('')
-  const [trackedTokens, setTrackedTokens] = useState<TrackedTokens[]>([])
+  const [trackedTokens, setTrackedTokens] = useState<TrackedERC721Tokens[]>([])
   const router = useRouter()
   const { address } = router.query
 
@@ -50,12 +54,8 @@ const Erc20 = () => {
         setConnection('You are connected to  Harmony Devnet.')
       } else if (provider.chainId === '0x89') {
         setConnection('You are connected to  Polygon Mainnet.')
-      } else if (provider.chainId === '0xa') {
-        setConnection('You are connected to  Optimism Mainnet.')
       } else {
-        setConnection(
-          'Please connect to Polygon-, Optimism mainnet or Harmony Devnet!',
-        )
+        setConnection('Please connect to Polygon Mainnet or Harmony Devnet!')
       }
 
       await provider.request({ method: 'eth_requestAccounts' })
@@ -66,38 +66,43 @@ const Erc20 = () => {
       const signerAddress: string = (await signerData.getAddress()) as string
       setSignerAddress(signerAddress)
 
-      const erc20FacetIntance: any = await new Contract(
+      const erc721FacetIntance: any = await new Contract(
         walletAddress,
-        ERC20ServiceFacetAbi.abi,
+        ERC721ServiceFacetAbi.abi,
         signer,
       )
 
-      const trackedTokens = await erc20FacetIntance.getAllTrackedERC20Tokens()
+      const trackedTokens = await erc721FacetIntance.getAllTrackedERC721Tokens()
       if (trackedTokens.length > 0) {
-        const tmpTrackedTokens: TrackedTokens[] = []
+        const tmpTrackedTokens: TrackedERC721Tokens[] = []
         for (let i = 0; i < trackedTokens.length; i++) {
           const tokenAddress = trackedTokens[i]
-          const balance = await erc20FacetIntance.balanceOfERC20(tokenAddress)
-          const erc20Intance: any = await new Contract(
+          const erc721Intance: any = await new Contract(
             tokenAddress,
-            ERC20Abi.abi,
+            ERC721Abi.abi,
             signer,
           )
-          const tokenName = await erc20Intance.name()
-          const tokenSymbol = await erc20Intance.symbol()
+          const tokenUri = await erc721Intance.tokenURI(walletAddress)
+          const tokenName = await erc721Intance.name()
+          const tokenSymbol = await erc721Intance.symbol()
           tmpTrackedTokens[i] = {
             tokenName,
             tokenSymbol,
             tokenAddress,
-            balance: parseBalance(balance),
+            tokenUri,
           }
         }
-        console.log(tmpTrackedTokens)
         setTrackedTokens(tmpTrackedTokens)
       }
     }
 
-   fetchProvider().catch(console.error)
+    setTimeout(() => {
+      // call the function
+      fetchProvider()
+        // make sure to catch any error
+        .catch(console.error)
+    }, 3000)
+
   }, [walletAddress, signer, signerAddress, provider])
 
   useEffect(() => {
@@ -105,29 +110,52 @@ const Erc20 = () => {
     setWalletAddress(addressString)
   }, [address])
 
+  const onSubmitHandler = (input: any) => {
+    registerERC721(input.tokenAddress)
+  }
+
+  // form validation rules
+  const validationSchema = Yup.object().shape({
+    tokenAddress: Yup.string()
+      .length(42, 'Address must be 42 characters long')
+      .required('tokenAddress is required'),
+  })
+
+  const formOptions = {
+    resolver: yupResolver(validationSchema),
+  }
+
+  const { handleSubmit, register, formState } = useForm(formOptions)
+  const { errors } = formState
+
+  async function registerERC721(tokenAddress: string) {
+    const instance: any = await new Contract(
+      walletAddress,
+      ERC721ServiceFacetAbi.abi,
+      signer,
+    )
+
+    try {
+      const tx = await instance.registerERC721(tokenAddress)
+
+      console.log('receipt', await tx.wait())
+
+      setLogs('ERC721 tracked!')
+    } catch (error) {
+      setLogs('You are not able to tracked ERC721, see console for more info')
+      console.log('error', error)
+    }
+  }
+
   return (
     <div className={styles.container}>
       <CutomHead />
       <main className={styles.main}>
-        <h1 className={styles.title}>ERC20 tokens</h1>
-        <div>Your wallet: {walletAddress}</div>
+        <h1 className={styles.title}>Register ERC721 token</h1>
+        <div>Your wallet: {address}</div>
         {trackedTokens.length !== 0 && <h3>Tracked tokens:</h3>}
         {trackedTokens.length === 0 && (
           <div className={styles.logs}>No tokens are currently tracked!</div>
-        )}
-
-        {trackedTokens.length === 0 && (
-          <div className={styles.logs}>
-            Please{' '}
-            <u>
-              <a href={'erc20/registerERC20'}>register</a>
-            </u>{' '}
-            or
-            <u>
-              <a href={'erc20/deposit'}> deposit</a>
-            </u>{' '}
-            a ERC20 token
-          </div>
         )}
         {trackedTokens.length !== 0 && (
           <TableContainer component={Paper}>
@@ -164,44 +192,37 @@ const Erc20 = () => {
             </Table>
           </TableContainer>
         )}
-
-        <br />
-        <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
-          <List>
-            <ListItem>
-              <ListItemIcon>
-                <AddModeratorIcon />{' '}
-                <Link href={'erc20/registerERC20'}>Register token</Link>
-              </ListItemIcon>
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <AddModeratorIcon />{' '}
-                <Link href={'erc20/depositERC20'}>Deposit token</Link>
-              </ListItemIcon>
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <AddModeratorIcon />{' '}
-                <Link href={'erc20/approveERC20'}>Approve token</Link>
-              </ListItemIcon>
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <AddModeratorIcon />{' '}
-                <Link href={'erc20/transferERC20'}>Transfer token</Link>
-              </ListItemIcon>
-            </ListItem>
-            <ListItem>
-              <ListItemIcon>
-                <AddModeratorIcon />{' '}
-                <Link href={'erc20/removeERC20'}>Remove token</Link>
-              </ListItemIcon>
-            </ListItem>
-          </List>
-          <div className={styles.connection}>{connection}</div>
-          <BackToWallet walletAddress={walletAddress} />
-        </Box>
+        <div className={styles.logs}>{logs}</div>
+        <ThemeProvider theme={theme}>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <form onSubmit={handleSubmit(onSubmitHandler)}>
+              <TextField
+                type="text"
+                placeholder="ERC721 token address"
+                id="tokenAddress"
+                {...register('tokenAddress')}
+              >
+                className=
+                {`form-control ${errors.tokenAddress ? 'is-invalid' : ''}`}
+              </TextField>
+              {/* <div className={styles.invalid}>
+                {errors.tokenAddress?.message}
+              </div> */}
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2 }}
+              >
+                Register ERC721 token
+              </Button>
+            </form>
+            <div className={styles.connection}>{connection}</div>
+            <BackToERC721 walletAddress={walletAddress} />
+            <BackToWallet walletAddress={walletAddress} />
+          </Container>
+        </ThemeProvider>
         <div hidden>{signerAddress}</div>
       </main>
       <Footer />
@@ -209,4 +230,4 @@ const Erc20 = () => {
   )
 }
 
-export default Erc20
+export default RegisterERC721
