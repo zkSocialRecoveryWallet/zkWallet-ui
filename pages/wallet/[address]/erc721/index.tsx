@@ -34,7 +34,6 @@ import { TrackedERC721Tokens } from '../../../../types'
 const Erc721 = () => {
   const [connection, setConnection] = useState('')
   const [signer, setSigner] = useState<providers.JsonRpcSigner>()
-  const [provider, setProvider] = useState<any>()
   const [signerAddress, setSignerAddress] = useState<string>('')
   const [walletAddress, setWalletAddress] = useState<string>('')
   const [trackedTokens, setTrackedTokens] = useState<TrackedERC721Tokens[]>([])
@@ -44,7 +43,6 @@ const Erc721 = () => {
   useEffect(() => {
     const fetchProvider = async () => {
       const provider = (await detectEthereumProvider()) as any
-      setProvider(provider)
       if (provider.chainId === '0x635ae020') {
         setConnection('You are connected to  Harmony Devnet.')
       } else if (provider.chainId === '0x89') {
@@ -102,7 +100,7 @@ const Erc721 = () => {
         // make sure to catch any error
         .catch(console.error)
     }, 3000)
-  }, [walletAddress, signer, signerAddress, provider])
+  }, [walletAddress, signer, signerAddress])
 
   useEffect(() => {
     const addressString: string = address as string
@@ -207,7 +205,6 @@ const Erc721 = () => {
         </Box>
       </main>
       <div className={styles.connection}>{connection}</div>
-      <div hidden>{signerAddress}</div>
       <Footer />
     </div>
   )

@@ -202,7 +202,6 @@ const Erc20 = () => {
           <div className={styles.connection}>{connection}</div>
           <BackToWallet walletAddress={walletAddress} />
         </Box>
-        <div hidden>{signerAddress}</div>
       </main>
       <Footer />
     </div>

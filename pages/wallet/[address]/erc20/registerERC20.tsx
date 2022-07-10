@@ -39,7 +39,6 @@ import { TrackedTokens } from '../../../../types'
 const RegisterERC20 = () => {
   const [logs, setLogs] = React.useState('')
   const [connection, setConnection] = useState('')
-  const [provider, setProvider] = useState<any>()
   const [signer, setSigner] = useState<providers.JsonRpcSigner>()
   const [signerAddress, setSignerAddress] = useState<string>('')
   const [walletAddress, setWalletAddress] = useState<string>('')
@@ -50,7 +49,6 @@ const RegisterERC20 = () => {
   useEffect(() => {
     const fetchProvider = async () => {
       const provider = (await detectEthereumProvider()) as any
-      setProvider(provider)
       if (provider.chainId === '0x635ae020') {
         setConnection('You are connected to  Harmony Devnet.')
       } else if (provider.chainId === '0x89') {
@@ -232,7 +230,6 @@ const RegisterERC20 = () => {
             <BackToWallet walletAddress={walletAddress} />
           </Container>
         </ThemeProvider>
-        <div hidden>{signerAddress}</div>
       </main>
       <Footer />
     </div>
