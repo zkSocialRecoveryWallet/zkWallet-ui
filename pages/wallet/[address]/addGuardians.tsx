@@ -98,10 +98,7 @@ const Guardians = ({ guardians }: IndexProps) => {
       setSignerAddress(newSignerAddress)
     }
 
-    // call the function
-    fetchProvider()
-      // make sure to catch any error
-      .catch(console.error)
+    fetchProvider().catch(console.error)
   }, [address, walletAddress, signer, signerAddress])
 
   useEffect(() => {
