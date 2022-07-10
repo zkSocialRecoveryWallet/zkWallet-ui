@@ -89,7 +89,6 @@ const Erc721 = () => {
             tokenUri,
           }
         }
-        console.log(tmpTrackedTokens)
         setTrackedTokens(tmpTrackedTokens)
       }
     }

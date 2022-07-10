@@ -92,7 +92,6 @@ const Erc20 = () => {
             balance: parseBalance(balance),
           }
         }
-        console.log(tmpTrackedTokens)
         setTrackedTokens(tmpTrackedTokens)
       }
     }

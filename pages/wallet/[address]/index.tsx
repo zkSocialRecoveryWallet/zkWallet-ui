@@ -50,7 +50,6 @@ const Wallet = () => {
 
   useEffect(() => {
     const addressString: string = address as string
-    console.log('addressString', addressString)
     setWalletAddress(addressString)
   }, [address])
 
@@ -91,7 +90,6 @@ const Wallet = () => {
   
         try {
           const etherBalance = await etherServiceFacetInstance.getEtherBalance()
-          console.log('etherBalance', etherBalance)
           setWalletBalance(parseBalance(etherBalance))
         } catch(error) {
           console.log('error', error)

@@ -127,7 +127,6 @@ const Guardians = ({ guardians }: IndexProps) => {
   async function addGuardians(input: any) {
     const identityCommitments: BigNumber[] = []
     for (let i = 0; i < input.guardians.length; i++) {
-      console.log('input', input.guardians[i])
       const id: string = input.guardians[i]
       const response = await fetch('/api/guardians-id', {
         method: 'POST',
@@ -156,7 +155,6 @@ const Guardians = ({ guardians }: IndexProps) => {
       GuardianFacetAbi.abi,
       signer,
     )
-    console.log('guardians', await guardianIntance.getGuardians(1))
     try {
       const tx = await guardianIntance.addGuardians(
         groupId,

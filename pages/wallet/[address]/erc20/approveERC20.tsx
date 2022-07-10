@@ -164,7 +164,6 @@ const ApproveERC20 = () => {
       signer,
     )
     const tokenDecimals = await erc20Intance.decimals()
-    console.log('tokenDecimals', tokenDecimals)
 
     try {
       const tx = await instance.approveERC20(
