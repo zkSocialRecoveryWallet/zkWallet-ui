@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { Guardian } from "./Guardian";
+export type { GuardianFacet } from "./GuardianFacet";
 export type { GuardianInternal } from "./GuardianInternal";
 export type { IGuardian } from "./IGuardian";
 export type { IGuardianInternal } from "./IGuardianInternal";

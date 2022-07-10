@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { Counters } from "./Counters";
+export type { CountersFacet } from "./CountersFacet";
 export type { CountersInternal } from "./CountersInternal";
 export type { CountersMock } from "./CountersMock";
 export type { ICounters } from "./ICounters";

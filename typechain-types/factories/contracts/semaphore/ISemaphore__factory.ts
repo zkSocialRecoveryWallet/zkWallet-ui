@@ -32,6 +32,25 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "uint8",
+        name: "merkleTreeDepth",
+        type: "uint8",
+      },
+    ],
+    name: "getVerifier",
+    outputs: [
+      {
+        internalType: "contract IVerifier",
+        name: "",
+        type: "address",
+      },
+    ],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "uint256",
         name: "groupId",
         type: "uint256",

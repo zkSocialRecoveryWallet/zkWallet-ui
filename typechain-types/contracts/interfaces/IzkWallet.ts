@@ -27,8 +27,30 @@ import type {
   PromiseOrValue,
 } from "../../common";
 
+export declare namespace GuardianStorage {
+  export type GuardianStruct = {
+    hashId: PromiseOrValue<BigNumberish>;
+    status: PromiseOrValue<BigNumberish>;
+    timestamp: PromiseOrValue<BigNumberish>;
+  };
+
+  export type GuardianStructOutput = [BigNumber, number, BigNumber] & {
+    hashId: BigNumber;
+    status: number;
+    timestamp: BigNumber;
+  };
+}
+
+export declare namespace IGuardianInternal {
+  export type GuardianDTOStruct = { hashId: PromiseOrValue<BigNumberish> };
+
+  export type GuardianDTOStructOutput = [BigNumber] & { hashId: BigNumber };
+}
+
 export interface IzkWalletInterface extends utils.Interface {
   functions: {
+    "addGuardian(uint256)": FunctionFragment;
+    "addGuardian(uint256,uint256,uint256)": FunctionFragment;
     "addGuardians(uint256,uint256[])": FunctionFragment;
     "addMember(uint256,uint256)": FunctionFragment;
     "addMembers(uint256,uint256[])": FunctionFragment;
@@ -36,25 +58,37 @@ export interface IzkWalletInterface extends utils.Interface {
     "approveERC721(address,address,uint256)": FunctionFragment;
     "balanceOfERC20(address)": FunctionFragment;
     "balanceOfERC721(address)": FunctionFragment;
+    "cancelPendingGuardians()": FunctionFragment;
     "createGroup(uint256,uint8,uint256,address)": FunctionFragment;
+    "depositERC20(address,uint256)": FunctionFragment;
+    "depositERC721(address,uint256)": FunctionFragment;
     "getAllTrackedERC20Tokens()": FunctionFragment;
     "getAllTrackedERC721Tokens()": FunctionFragment;
     "getGroupAdmin(uint256)": FunctionFragment;
+    "getGuardian(uint256)": FunctionFragment;
+    "getGuardians(bool)": FunctionFragment;
     "getMajority()": FunctionFragment;
     "getRecoveryCounter()": FunctionFragment;
     "getRecoveryNominee()": FunctionFragment;
     "getRecoveryStatus()": FunctionFragment;
+    "getVerifier(uint8)": FunctionFragment;
     "guardianFacetVersion()": FunctionFragment;
+    "numGuardians(bool)": FunctionFragment;
     "ownerOfERC721(address,uint256)": FunctionFragment;
     "recover(uint256,bytes32,uint256,uint256,uint256[8],address)": FunctionFragment;
     "registerERC20(address)": FunctionFragment;
     "registerERC721(address)": FunctionFragment;
     "removeERC20(address)": FunctionFragment;
     "removeERC721(address)": FunctionFragment;
+    "removeGuardian(uint256)": FunctionFragment;
+    "removeGuardian(uint256,uint256,uint256,uint256[],uint8[])": FunctionFragment;
+    "removeGuardians(uint256[])": FunctionFragment;
     "removeMember(uint256,uint256,uint256[],uint8[])": FunctionFragment;
+    "requireMajority((uint256)[])": FunctionFragment;
     "resetRecovery()": FunctionFragment;
     "safeTransferERC721From(address,address,address,uint256)": FunctionFragment;
     "safeTransferERC721From(address,address,address,uint256,bytes)": FunctionFragment;
+    "setInitialGuardians(uint256[])": FunctionFragment;
     "transferERC20(address,address,uint256)": FunctionFragment;
     "transferERC20From(address,address,address,uint256)": FunctionFragment;
     "transferERC721(address,address,uint256)": FunctionFragment;
@@ -66,6 +100,8 @@ export interface IzkWalletInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
+      | "addGuardian(uint256)"
+      | "addGuardian(uint256,uint256,uint256)"
       | "addGuardians"
       | "addGuardians(uint256,uint256[])"
       | "addMember"
@@ -80,14 +116,24 @@ export interface IzkWalletInterface extends utils.Interface {
       | "balanceOfERC20(address)"
       | "balanceOfERC721"
       | "balanceOfERC721(address)"
+      | "cancelPendingGuardians"
+      | "cancelPendingGuardians()"
       | "createGroup"
       | "createGroup(uint256,uint8,uint256,address)"
+      | "depositERC20"
+      | "depositERC20(address,uint256)"
+      | "depositERC721"
+      | "depositERC721(address,uint256)"
       | "getAllTrackedERC20Tokens"
       | "getAllTrackedERC20Tokens()"
       | "getAllTrackedERC721Tokens"
       | "getAllTrackedERC721Tokens()"
       | "getGroupAdmin"
       | "getGroupAdmin(uint256)"
+      | "getGuardian"
+      | "getGuardian(uint256)"
+      | "getGuardians"
+      | "getGuardians(bool)"
       | "getMajority"
       | "getMajority()"
       | "getRecoveryCounter"
@@ -96,8 +142,12 @@ export interface IzkWalletInterface extends utils.Interface {
       | "getRecoveryNominee()"
       | "getRecoveryStatus"
       | "getRecoveryStatus()"
+      | "getVerifier"
+      | "getVerifier(uint8)"
       | "guardianFacetVersion"
       | "guardianFacetVersion()"
+      | "numGuardians"
+      | "numGuardians(bool)"
       | "ownerOfERC721"
       | "ownerOfERC721(address,uint256)"
       | "recover"
@@ -110,12 +160,20 @@ export interface IzkWalletInterface extends utils.Interface {
       | "removeERC20(address)"
       | "removeERC721"
       | "removeERC721(address)"
+      | "removeGuardian(uint256)"
+      | "removeGuardian(uint256,uint256,uint256,uint256[],uint8[])"
+      | "removeGuardians"
+      | "removeGuardians(uint256[])"
       | "removeMember"
       | "removeMember(uint256,uint256,uint256[],uint8[])"
+      | "requireMajority"
+      | "requireMajority((uint256)[])"
       | "resetRecovery"
       | "resetRecovery()"
       | "safeTransferERC721From(address,address,address,uint256)"
       | "safeTransferERC721From(address,address,address,uint256,bytes)"
+      | "setInitialGuardians"
+      | "setInitialGuardians(uint256[])"
       | "transferERC20"
       | "transferERC20(address,address,uint256)"
       | "transferERC20From"
@@ -132,6 +190,18 @@ export interface IzkWalletInterface extends utils.Interface {
       | "version()"
   ): FunctionFragment;
 
+  encodeFunctionData(
+    functionFragment: "addGuardian(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "addGuardian(uint256,uint256,uint256)",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
+  ): string;
   encodeFunctionData(
     functionFragment: "addGuardians",
     values: [PromiseOrValue<BigNumberish>, PromiseOrValue<BigNumberish>[]]
@@ -205,6 +275,14 @@ export interface IzkWalletInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "cancelPendingGuardians",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "cancelPendingGuardians()",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "createGroup",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -221,6 +299,22 @@ export interface IzkWalletInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<string>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "depositERC20",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "depositERC20(address,uint256)",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "depositERC721",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "depositERC721(address,uint256)",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getAllTrackedERC20Tokens",
@@ -245,6 +339,22 @@ export interface IzkWalletInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "getGroupAdmin(uint256)",
     values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getGuardian",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getGuardian(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getGuardians",
+    values: [PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getGuardians(bool)",
+    values: [PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "getMajority",
@@ -279,12 +389,28 @@ export interface IzkWalletInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
+    functionFragment: "getVerifier",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getVerifier(uint8)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
     functionFragment: "guardianFacetVersion",
     values?: undefined
   ): string;
   encodeFunctionData(
     functionFragment: "guardianFacetVersion()",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "numGuardians",
+    values: [PromiseOrValue<boolean>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "numGuardians(bool)",
+    values: [PromiseOrValue<boolean>]
   ): string;
   encodeFunctionData(
     functionFragment: "ownerOfERC721",
@@ -349,6 +475,28 @@ export interface IzkWalletInterface extends utils.Interface {
     values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
+    functionFragment: "removeGuardian(uint256)",
+    values: [PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "removeGuardian(uint256,uint256,uint256,uint256[],uint8[])",
+    values: [
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[],
+      PromiseOrValue<BigNumberish>[]
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "removeGuardians",
+    values: [PromiseOrValue<BigNumberish>[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "removeGuardians(uint256[])",
+    values: [PromiseOrValue<BigNumberish>[]]
+  ): string;
+  encodeFunctionData(
     functionFragment: "removeMember",
     values: [
       PromiseOrValue<BigNumberish>,
@@ -365,6 +513,14 @@ export interface IzkWalletInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>[],
       PromiseOrValue<BigNumberish>[]
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "requireMajority",
+    values: [IGuardianInternal.GuardianDTOStruct[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "requireMajority((uint256)[])",
+    values: [IGuardianInternal.GuardianDTOStruct[]]
   ): string;
   encodeFunctionData(
     functionFragment: "resetRecovery",
@@ -392,6 +548,14 @@ export interface IzkWalletInterface extends utils.Interface {
       PromiseOrValue<BigNumberish>,
       PromiseOrValue<BytesLike>
     ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setInitialGuardians",
+    values: [PromiseOrValue<BigNumberish>[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setInitialGuardians(uint256[])",
+    values: [PromiseOrValue<BigNumberish>[]]
   ): string;
   encodeFunctionData(
     functionFragment: "transferERC20",
@@ -493,6 +657,14 @@ export interface IzkWalletInterface extends utils.Interface {
   encodeFunctionData(functionFragment: "version()", values?: undefined): string;
 
   decodeFunctionResult(
+    functionFragment: "addGuardian(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "addGuardian(uint256,uint256,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "addGuardians",
     data: BytesLike
   ): Result;
@@ -543,11 +715,35 @@ export interface IzkWalletInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "cancelPendingGuardians",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "cancelPendingGuardians()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "createGroup",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "createGroup(uint256,uint8,uint256,address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "depositERC20",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "depositERC20(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "depositERC721",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "depositERC721(address,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -572,6 +768,22 @@ export interface IzkWalletInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "getGroupAdmin(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getGuardian",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getGuardian(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getGuardians",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getGuardians(bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -607,11 +819,27 @@ export interface IzkWalletInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "getVerifier",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getVerifier(uint8)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "guardianFacetVersion",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "guardianFacetVersion()",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "numGuardians",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "numGuardians(bool)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -660,11 +888,35 @@ export interface IzkWalletInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "removeGuardian(uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "removeGuardian(uint256,uint256,uint256,uint256[],uint8[])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "removeGuardians",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "removeGuardians(uint256[])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "removeMember",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "removeMember(uint256,uint256,uint256[],uint8[])",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "requireMajority",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "requireMajority((uint256)[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -681,6 +933,14 @@ export interface IzkWalletInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "safeTransferERC721From(address,address,address,uint256,bytes)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setInitialGuardians",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setInitialGuardians(uint256[])",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -735,12 +995,16 @@ export interface IzkWalletInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "version()", data: BytesLike): Result;
 
   events: {
+    "ERC20Deposited(address,uint256)": EventFragment;
     "ERC20TokenRemoved(address)": EventFragment;
     "ERC20TokenTracked(address)": EventFragment;
+    "ERC721Deposited(address,uint256)": EventFragment;
     "ERC721TokenRemoved(address)": EventFragment;
     "ERC721TokenTracked(address)": EventFragment;
     "GroupAdminUpdated(uint256,address,address)": EventFragment;
     "GroupCreated(uint256,uint8,uint256)": EventFragment;
+    "GuardianAdded(uint256,uint256)": EventFragment;
+    "GuardianRemoved(uint256,uint256)": EventFragment;
     "MemberAdded(uint256,uint256,uint256)": EventFragment;
     "MemberRemoved(uint256,uint256,uint256)": EventFragment;
     "NullifierHashAdded(uint256)": EventFragment;
@@ -749,10 +1013,18 @@ export interface IzkWalletInterface extends utils.Interface {
     "RecoveryUpdated(uint8,uint256,address,uint8)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "ERC20Deposited"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ERC20Deposited(address,uint256)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ERC20TokenRemoved"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ERC20TokenRemoved(address)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ERC20TokenTracked"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ERC20TokenTracked(address)"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ERC721Deposited"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ERC721Deposited(address,uint256)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ERC721TokenRemoved"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ERC721TokenRemoved(address)"
@@ -768,6 +1040,14 @@ export interface IzkWalletInterface extends utils.Interface {
   getEvent(nameOrSignatureOrTopic: "GroupCreated"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "GroupCreated(uint256,uint8,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "GuardianAdded"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "GuardianAdded(uint256,uint256)"
+  ): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "GuardianRemoved"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "GuardianRemoved(uint256,uint256)"
   ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "MemberAdded"): EventFragment;
   getEvent(
@@ -793,6 +1073,17 @@ export interface IzkWalletInterface extends utils.Interface {
   ): EventFragment;
 }
 
+export interface ERC20DepositedEventObject {
+  tokenAddress: string;
+  amount: BigNumber;
+}
+export type ERC20DepositedEvent = TypedEvent<
+  [string, BigNumber],
+  ERC20DepositedEventObject
+>;
+
+export type ERC20DepositedEventFilter = TypedEventFilter<ERC20DepositedEvent>;
+
 export interface ERC20TokenRemovedEventObject {
   tokenAddress: string;
 }
@@ -814,6 +1105,17 @@ export type ERC20TokenTrackedEvent = TypedEvent<
 
 export type ERC20TokenTrackedEventFilter =
   TypedEventFilter<ERC20TokenTrackedEvent>;
+
+export interface ERC721DepositedEventObject {
+  tokenAddress: string;
+  tokenId: BigNumber;
+}
+export type ERC721DepositedEvent = TypedEvent<
+  [string, BigNumber],
+  ERC721DepositedEventObject
+>;
+
+export type ERC721DepositedEventFilter = TypedEventFilter<ERC721DepositedEvent>;
 
 export interface ERC721TokenRemovedEventObject {
   tokenAddress: string;
@@ -861,6 +1163,28 @@ export type GroupCreatedEvent = TypedEvent<
 >;
 
 export type GroupCreatedEventFilter = TypedEventFilter<GroupCreatedEvent>;
+
+export interface GuardianAddedEventObject {
+  hashId: BigNumber;
+  effectiveTime: BigNumber;
+}
+export type GuardianAddedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  GuardianAddedEventObject
+>;
+
+export type GuardianAddedEventFilter = TypedEventFilter<GuardianAddedEvent>;
+
+export interface GuardianRemovedEventObject {
+  hashId: BigNumber;
+  effectiveTime: BigNumber;
+}
+export type GuardianRemovedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  GuardianRemovedEventObject
+>;
+
+export type GuardianRemovedEventFilter = TypedEventFilter<GuardianRemovedEvent>;
 
 export interface MemberAddedEventObject {
   groupId: BigNumber;
@@ -955,6 +1279,18 @@ export interface IzkWallet extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    "addGuardian(uint256)"(
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "addGuardian(uint256,uint256,uint256)"(
+      groupId: PromiseOrValue<BigNumberish>,
+      hashId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     addGuardians(
       groupId: PromiseOrValue<BigNumberish>,
       identityCommitments: PromiseOrValue<BigNumberish>[],
@@ -1039,6 +1375,14 @@ export interface IzkWallet extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    cancelPendingGuardians(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "cancelPendingGuardians()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     createGroup(
       groupId: PromiseOrValue<BigNumberish>,
       depth: PromiseOrValue<BigNumberish>,
@@ -1052,6 +1396,30 @@ export interface IzkWallet extends BaseContract {
       depth: PromiseOrValue<BigNumberish>,
       zeroValue: PromiseOrValue<BigNumberish>,
       admin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    depositERC20(
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "depositERC20(address,uint256)"(
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    depositERC721(
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "depositERC721(address,uint256)"(
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1077,6 +1445,26 @@ export interface IzkWallet extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
+    getGuardian(
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "getGuardian(uint256)"(
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    getGuardians(
+      includePendingAddition: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<[GuardianStorage.GuardianStructOutput[]]>;
+
+    "getGuardians(bool)"(
+      includePendingAddition: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<[GuardianStorage.GuardianStructOutput[]]>;
+
     getMajority(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     "getMajority()"(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -1093,9 +1481,29 @@ export interface IzkWallet extends BaseContract {
 
     "getRecoveryStatus()"(overrides?: CallOverrides): Promise<[number]>;
 
+    getVerifier(
+      merkleTreeDepth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "getVerifier(uint8)"(
+      merkleTreeDepth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     guardianFacetVersion(overrides?: CallOverrides): Promise<[string]>;
 
     "guardianFacetVersion()"(overrides?: CallOverrides): Promise<[string]>;
+
+    numGuardians(
+      includePendingAddition: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
+
+    "numGuardians(bool)"(
+      includePendingAddition: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<[BigNumber]>;
 
     ownerOfERC721(
       token: PromiseOrValue<string>,
@@ -1169,6 +1577,30 @@ export interface IzkWallet extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
+    "removeGuardian(uint256)"(
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "removeGuardian(uint256,uint256,uint256,uint256[],uint8[])"(
+      groupId: PromiseOrValue<BigNumberish>,
+      hashId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    removeGuardians(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "removeGuardians(uint256[])"(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
     removeMember(
       groupId: PromiseOrValue<BigNumberish>,
       identityCommitment: PromiseOrValue<BigNumberish>,
@@ -1184,6 +1616,16 @@ export interface IzkWallet extends BaseContract {
       proofPathIndices: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
+
+    requireMajority(
+      guardians: IGuardianInternal.GuardianDTOStruct[],
+      overrides?: CallOverrides
+    ): Promise<[void]>;
+
+    "requireMajority((uint256)[])"(
+      guardians: IGuardianInternal.GuardianDTOStruct[],
+      overrides?: CallOverrides
+    ): Promise<[void]>;
 
     resetRecovery(
       overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1207,6 +1649,16 @@ export interface IzkWallet extends BaseContract {
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    setInitialGuardians(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "setInitialGuardians(uint256[])"(
+      guardians: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
@@ -1305,6 +1757,18 @@ export interface IzkWallet extends BaseContract {
     "version()"(overrides?: CallOverrides): Promise<[string]>;
   };
 
+  "addGuardian(uint256)"(
+    hashId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "addGuardian(uint256,uint256,uint256)"(
+    groupId: PromiseOrValue<BigNumberish>,
+    hashId: PromiseOrValue<BigNumberish>,
+    identityCommitment: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   addGuardians(
     groupId: PromiseOrValue<BigNumberish>,
     identityCommitments: PromiseOrValue<BigNumberish>[],
@@ -1389,6 +1853,14 @@ export interface IzkWallet extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  cancelPendingGuardians(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "cancelPendingGuardians()"(
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   createGroup(
     groupId: PromiseOrValue<BigNumberish>,
     depth: PromiseOrValue<BigNumberish>,
@@ -1402,6 +1874,30 @@ export interface IzkWallet extends BaseContract {
     depth: PromiseOrValue<BigNumberish>,
     zeroValue: PromiseOrValue<BigNumberish>,
     admin: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  depositERC20(
+    token: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "depositERC20(address,uint256)"(
+    token: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  depositERC721(
+    token: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "depositERC721(address,uint256)"(
+    token: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1423,6 +1919,26 @@ export interface IzkWallet extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  getGuardian(
+    hashId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "getGuardian(uint256)"(
+    hashId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  getGuardians(
+    includePendingAddition: PromiseOrValue<boolean>,
+    overrides?: CallOverrides
+  ): Promise<GuardianStorage.GuardianStructOutput[]>;
+
+  "getGuardians(bool)"(
+    includePendingAddition: PromiseOrValue<boolean>,
+    overrides?: CallOverrides
+  ): Promise<GuardianStorage.GuardianStructOutput[]>;
+
   getMajority(overrides?: CallOverrides): Promise<BigNumber>;
 
   "getMajority()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1439,9 +1955,29 @@ export interface IzkWallet extends BaseContract {
 
   "getRecoveryStatus()"(overrides?: CallOverrides): Promise<number>;
 
+  getVerifier(
+    merkleTreeDepth: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "getVerifier(uint8)"(
+    merkleTreeDepth: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   guardianFacetVersion(overrides?: CallOverrides): Promise<string>;
 
   "guardianFacetVersion()"(overrides?: CallOverrides): Promise<string>;
+
+  numGuardians(
+    includePendingAddition: PromiseOrValue<boolean>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
+
+  "numGuardians(bool)"(
+    includePendingAddition: PromiseOrValue<boolean>,
+    overrides?: CallOverrides
+  ): Promise<BigNumber>;
 
   ownerOfERC721(
     token: PromiseOrValue<string>,
@@ -1515,6 +2051,30 @@ export interface IzkWallet extends BaseContract {
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
+  "removeGuardian(uint256)"(
+    hashId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "removeGuardian(uint256,uint256,uint256,uint256[],uint8[])"(
+    groupId: PromiseOrValue<BigNumberish>,
+    hashId: PromiseOrValue<BigNumberish>,
+    identityCommitment: PromiseOrValue<BigNumberish>,
+    proofSiblings: PromiseOrValue<BigNumberish>[],
+    proofPathIndices: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  removeGuardians(
+    guardians: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "removeGuardians(uint256[])"(
+    guardians: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   removeMember(
     groupId: PromiseOrValue<BigNumberish>,
     identityCommitment: PromiseOrValue<BigNumberish>,
@@ -1530,6 +2090,16 @@ export interface IzkWallet extends BaseContract {
     proofPathIndices: PromiseOrValue<BigNumberish>[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
+
+  requireMajority(
+    guardians: IGuardianInternal.GuardianDTOStruct[],
+    overrides?: CallOverrides
+  ): Promise<void>;
+
+  "requireMajority((uint256)[])"(
+    guardians: IGuardianInternal.GuardianDTOStruct[],
+    overrides?: CallOverrides
+  ): Promise<void>;
 
   resetRecovery(
     overrides?: Overrides & { from?: PromiseOrValue<string> }
@@ -1553,6 +2123,16 @@ export interface IzkWallet extends BaseContract {
     to: PromiseOrValue<string>,
     tokenId: PromiseOrValue<BigNumberish>,
     data: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  setInitialGuardians(
+    guardians: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "setInitialGuardians(uint256[])"(
+    guardians: PromiseOrValue<BigNumberish>[],
     overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
@@ -1651,6 +2231,18 @@ export interface IzkWallet extends BaseContract {
   "version()"(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
+    "addGuardian(uint256)"(
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "addGuardian(uint256,uint256,uint256)"(
+      groupId: PromiseOrValue<BigNumberish>,
+      hashId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     addGuardians(
       groupId: PromiseOrValue<BigNumberish>,
       identityCommitments: PromiseOrValue<BigNumberish>[],
@@ -1735,6 +2327,10 @@ export interface IzkWallet extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    cancelPendingGuardians(overrides?: CallOverrides): Promise<void>;
+
+    "cancelPendingGuardians()"(overrides?: CallOverrides): Promise<void>;
+
     createGroup(
       groupId: PromiseOrValue<BigNumberish>,
       depth: PromiseOrValue<BigNumberish>,
@@ -1748,6 +2344,30 @@ export interface IzkWallet extends BaseContract {
       depth: PromiseOrValue<BigNumberish>,
       zeroValue: PromiseOrValue<BigNumberish>,
       admin: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    depositERC20(
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "depositERC20(address,uint256)"(
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    depositERC721(
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "depositERC721(address,uint256)"(
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1769,6 +2389,26 @@ export interface IzkWallet extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
+    getGuardian(
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<GuardianStorage.GuardianStructOutput>;
+
+    "getGuardian(uint256)"(
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<GuardianStorage.GuardianStructOutput>;
+
+    getGuardians(
+      includePendingAddition: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<GuardianStorage.GuardianStructOutput[]>;
+
+    "getGuardians(bool)"(
+      includePendingAddition: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<GuardianStorage.GuardianStructOutput[]>;
+
     getMajority(overrides?: CallOverrides): Promise<BigNumber>;
 
     "getMajority()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1785,9 +2425,29 @@ export interface IzkWallet extends BaseContract {
 
     "getRecoveryStatus()"(overrides?: CallOverrides): Promise<number>;
 
+    getVerifier(
+      merkleTreeDepth: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
+    "getVerifier(uint8)"(
+      merkleTreeDepth: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<string>;
+
     guardianFacetVersion(overrides?: CallOverrides): Promise<string>;
 
     "guardianFacetVersion()"(overrides?: CallOverrides): Promise<string>;
+
+    numGuardians(
+      includePendingAddition: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "numGuardians(bool)"(
+      includePendingAddition: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     ownerOfERC721(
       token: PromiseOrValue<string>,
@@ -1861,6 +2521,30 @@ export interface IzkWallet extends BaseContract {
       overrides?: CallOverrides
     ): Promise<void>;
 
+    "removeGuardian(uint256)"(
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<boolean>;
+
+    "removeGuardian(uint256,uint256,uint256,uint256[],uint8[])"(
+      groupId: PromiseOrValue<BigNumberish>,
+      hashId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    removeGuardians(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "removeGuardians(uint256[])"(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     removeMember(
       groupId: PromiseOrValue<BigNumberish>,
       identityCommitment: PromiseOrValue<BigNumberish>,
@@ -1874,6 +2558,16 @@ export interface IzkWallet extends BaseContract {
       identityCommitment: PromiseOrValue<BigNumberish>,
       proofSiblings: PromiseOrValue<BigNumberish>[],
       proofPathIndices: PromiseOrValue<BigNumberish>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    requireMajority(
+      guardians: IGuardianInternal.GuardianDTOStruct[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "requireMajority((uint256)[])"(
+      guardians: IGuardianInternal.GuardianDTOStruct[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1895,6 +2589,16 @@ export interface IzkWallet extends BaseContract {
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setInitialGuardians(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "setInitialGuardians(uint256[])"(
+      guardians: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -1994,6 +2698,15 @@ export interface IzkWallet extends BaseContract {
   };
 
   filters: {
+    "ERC20Deposited(address,uint256)"(
+      tokenAddress?: PromiseOrValue<string> | null,
+      amount?: null
+    ): ERC20DepositedEventFilter;
+    ERC20Deposited(
+      tokenAddress?: PromiseOrValue<string> | null,
+      amount?: null
+    ): ERC20DepositedEventFilter;
+
     "ERC20TokenRemoved(address)"(
       tokenAddress?: null
     ): ERC20TokenRemovedEventFilter;
@@ -2005,6 +2718,15 @@ export interface IzkWallet extends BaseContract {
     ERC20TokenTracked(
       tokenAddress?: PromiseOrValue<string> | null
     ): ERC20TokenTrackedEventFilter;
+
+    "ERC721Deposited(address,uint256)"(
+      tokenAddress?: PromiseOrValue<string> | null,
+      tokenId?: null
+    ): ERC721DepositedEventFilter;
+    ERC721Deposited(
+      tokenAddress?: PromiseOrValue<string> | null,
+      tokenId?: null
+    ): ERC721DepositedEventFilter;
 
     "ERC721TokenRemoved(address)"(
       tokenAddress?: PromiseOrValue<string> | null
@@ -2041,6 +2763,24 @@ export interface IzkWallet extends BaseContract {
       depth?: null,
       zeroValue?: null
     ): GroupCreatedEventFilter;
+
+    "GuardianAdded(uint256,uint256)"(
+      hashId?: PromiseOrValue<BigNumberish> | null,
+      effectiveTime?: null
+    ): GuardianAddedEventFilter;
+    GuardianAdded(
+      hashId?: PromiseOrValue<BigNumberish> | null,
+      effectiveTime?: null
+    ): GuardianAddedEventFilter;
+
+    "GuardianRemoved(uint256,uint256)"(
+      hashId?: PromiseOrValue<BigNumberish> | null,
+      effectiveTime?: null
+    ): GuardianRemovedEventFilter;
+    GuardianRemoved(
+      hashId?: PromiseOrValue<BigNumberish> | null,
+      effectiveTime?: null
+    ): GuardianRemovedEventFilter;
 
     "MemberAdded(uint256,uint256,uint256)"(
       groupId?: PromiseOrValue<BigNumberish> | null,
@@ -2096,6 +2836,18 @@ export interface IzkWallet extends BaseContract {
   };
 
   estimateGas: {
+    "addGuardian(uint256)"(
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "addGuardian(uint256,uint256,uint256)"(
+      groupId: PromiseOrValue<BigNumberish>,
+      hashId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     addGuardians(
       groupId: PromiseOrValue<BigNumberish>,
       identityCommitments: PromiseOrValue<BigNumberish>[],
@@ -2180,6 +2932,14 @@ export interface IzkWallet extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    cancelPendingGuardians(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "cancelPendingGuardians()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     createGroup(
       groupId: PromiseOrValue<BigNumberish>,
       depth: PromiseOrValue<BigNumberish>,
@@ -2193,6 +2953,30 @@ export interface IzkWallet extends BaseContract {
       depth: PromiseOrValue<BigNumberish>,
       zeroValue: PromiseOrValue<BigNumberish>,
       admin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    depositERC20(
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "depositERC20(address,uint256)"(
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    depositERC721(
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "depositERC721(address,uint256)"(
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -2216,6 +3000,26 @@ export interface IzkWallet extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getGuardian(
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "getGuardian(uint256)"(
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    getGuardians(
+      includePendingAddition: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "getGuardians(bool)"(
+      includePendingAddition: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     getMajority(overrides?: CallOverrides): Promise<BigNumber>;
 
     "getMajority()"(overrides?: CallOverrides): Promise<BigNumber>;
@@ -2232,9 +3036,29 @@ export interface IzkWallet extends BaseContract {
 
     "getRecoveryStatus()"(overrides?: CallOverrides): Promise<BigNumber>;
 
+    getVerifier(
+      merkleTreeDepth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "getVerifier(uint8)"(
+      merkleTreeDepth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     guardianFacetVersion(overrides?: CallOverrides): Promise<BigNumber>;
 
     "guardianFacetVersion()"(overrides?: CallOverrides): Promise<BigNumber>;
+
+    numGuardians(
+      includePendingAddition: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "numGuardians(bool)"(
+      includePendingAddition: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     ownerOfERC721(
       token: PromiseOrValue<string>,
@@ -2308,6 +3132,30 @@ export interface IzkWallet extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
+    "removeGuardian(uint256)"(
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "removeGuardian(uint256,uint256,uint256,uint256[],uint8[])"(
+      groupId: PromiseOrValue<BigNumberish>,
+      hashId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    removeGuardians(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "removeGuardians(uint256[])"(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
     removeMember(
       groupId: PromiseOrValue<BigNumberish>,
       identityCommitment: PromiseOrValue<BigNumberish>,
@@ -2322,6 +3170,16 @@ export interface IzkWallet extends BaseContract {
       proofSiblings: PromiseOrValue<BigNumberish>[],
       proofPathIndices: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    requireMajority(
+      guardians: IGuardianInternal.GuardianDTOStruct[],
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    "requireMajority((uint256)[])"(
+      guardians: IGuardianInternal.GuardianDTOStruct[],
+      overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     resetRecovery(
@@ -2346,6 +3204,16 @@ export interface IzkWallet extends BaseContract {
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    setInitialGuardians(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "setInitialGuardians(uint256[])"(
+      guardians: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
@@ -2445,6 +3313,18 @@ export interface IzkWallet extends BaseContract {
   };
 
   populateTransaction: {
+    "addGuardian(uint256)"(
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "addGuardian(uint256,uint256,uint256)"(
+      groupId: PromiseOrValue<BigNumberish>,
+      hashId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     addGuardians(
       groupId: PromiseOrValue<BigNumberish>,
       identityCommitments: PromiseOrValue<BigNumberish>[],
@@ -2529,6 +3409,14 @@ export interface IzkWallet extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    cancelPendingGuardians(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "cancelPendingGuardians()"(
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     createGroup(
       groupId: PromiseOrValue<BigNumberish>,
       depth: PromiseOrValue<BigNumberish>,
@@ -2542,6 +3430,30 @@ export interface IzkWallet extends BaseContract {
       depth: PromiseOrValue<BigNumberish>,
       zeroValue: PromiseOrValue<BigNumberish>,
       admin: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    depositERC20(
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "depositERC20(address,uint256)"(
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    depositERC721(
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "depositERC721(address,uint256)"(
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -2571,6 +3483,26 @@ export interface IzkWallet extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    getGuardian(
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "getGuardian(uint256)"(
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    getGuardians(
+      includePendingAddition: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "getGuardians(bool)"(
+      includePendingAddition: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     getMajority(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     "getMajority()"(overrides?: CallOverrides): Promise<PopulatedTransaction>;
@@ -2597,11 +3529,31 @@ export interface IzkWallet extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    getVerifier(
+      merkleTreeDepth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "getVerifier(uint8)"(
+      merkleTreeDepth: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     guardianFacetVersion(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     "guardianFacetVersion()"(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    numGuardians(
+      includePendingAddition: PromiseOrValue<boolean>,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "numGuardians(bool)"(
+      includePendingAddition: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -2677,6 +3629,30 @@ export interface IzkWallet extends BaseContract {
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
+    "removeGuardian(uint256)"(
+      hashId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "removeGuardian(uint256,uint256,uint256,uint256[],uint8[])"(
+      groupId: PromiseOrValue<BigNumberish>,
+      hashId: PromiseOrValue<BigNumberish>,
+      identityCommitment: PromiseOrValue<BigNumberish>,
+      proofSiblings: PromiseOrValue<BigNumberish>[],
+      proofPathIndices: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    removeGuardians(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "removeGuardians(uint256[])"(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
     removeMember(
       groupId: PromiseOrValue<BigNumberish>,
       identityCommitment: PromiseOrValue<BigNumberish>,
@@ -2691,6 +3667,16 @@ export interface IzkWallet extends BaseContract {
       proofSiblings: PromiseOrValue<BigNumberish>[],
       proofPathIndices: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    requireMajority(
+      guardians: IGuardianInternal.GuardianDTOStruct[],
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    "requireMajority((uint256)[])"(
+      guardians: IGuardianInternal.GuardianDTOStruct[],
+      overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
     resetRecovery(
@@ -2715,6 +3701,16 @@ export interface IzkWallet extends BaseContract {
       to: PromiseOrValue<string>,
       tokenId: PromiseOrValue<BigNumberish>,
       data: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setInitialGuardians(
+      guardians: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "setInitialGuardians(uint256[])"(
+      guardians: PromiseOrValue<BigNumberish>[],
       overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 

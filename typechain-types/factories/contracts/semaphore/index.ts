@@ -7,4 +7,6 @@ export { ISemaphore__factory } from "./ISemaphore__factory";
 export { ISemaphoreGroups__factory } from "./ISemaphoreGroups__factory";
 export { ISemaphoreInternal__factory } from "./ISemaphoreInternal__factory";
 export { Semaphore__factory } from "./Semaphore__factory";
+export { SemaphoreFacet__factory } from "./SemaphoreFacet__factory";
+export { SemaphoreGroupsFacet__factory } from "./SemaphoreGroupsFacet__factory";
 export { SemaphoreInternal__factory } from "./SemaphoreInternal__factory";

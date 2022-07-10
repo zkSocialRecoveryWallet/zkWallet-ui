@@ -14,25 +14,6 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: true,
-        internalType: "uint256",
-        name: "index",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "newValue",
-        type: "uint256",
-      },
-    ],
-    name: "Decremented",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
         indexed: false,
         internalType: "address",
         name: "wallet",
@@ -122,51 +103,13 @@ const _abi = [
     anonymous: false,
     inputs: [
       {
-        indexed: true,
-        internalType: "uint256",
-        name: "index",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "newValue",
-        type: "uint256",
-      },
-    ],
-    name: "Incremented",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
         indexed: false,
         internalType: "address",
         name: "instance",
         type: "address",
       },
     ],
-    name: "NewDiamondWallet",
-    type: "event",
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "uint256",
-        name: "index",
-        type: "uint256",
-      },
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "newValue",
-        type: "uint256",
-      },
-    ],
-    name: "Reset",
+    name: "WalletIsCreated",
     type: "event",
   },
   {
@@ -235,6 +178,23 @@ const _abi = [
         name: "owner",
         type: "address",
       },
+      {
+        components: [
+          {
+            internalType: "uint8",
+            name: "merkleTreeDepth",
+            type: "uint8",
+          },
+          {
+            internalType: "address",
+            name: "contractAddress",
+            type: "address",
+          },
+        ],
+        internalType: "struct IWalletFactoryInternal.VerifierDTO[]",
+        name: "verifier",
+        type: "tuple[]",
+      },
     ],
     name: "createWallet",
     outputs: [
@@ -255,13 +215,41 @@ const _abi = [
         type: "bytes32",
       },
       {
+        internalType: "address",
+        name: "owner",
+        type: "address",
+      },
+      {
+        components: [
+          {
+            internalType: "uint8",
+            name: "merkleTreeDepth",
+            type: "uint8",
+          },
+          {
+            internalType: "address",
+            name: "contractAddress",
+            type: "address",
+          },
+        ],
+        internalType: "struct IWalletFactoryInternal.VerifierDTO[]",
+        name: "verifiers",
+        type: "tuple[]",
+      },
+      {
         internalType: "bytes32",
         name: "salt",
         type: "bytes32",
       },
     ],
     name: "createWalletDeterministic",
-    outputs: [],
+    outputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address",
+      },
+    ],
     stateMutability: "nonpayable",
     type: "function",
   },

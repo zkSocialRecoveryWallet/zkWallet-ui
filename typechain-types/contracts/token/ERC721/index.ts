@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { ERC721Service } from "./ERC721Service";
+export type { ERC721ServiceFacet } from "./ERC721ServiceFacet";
 export type { ERC721ServiceInternal } from "./ERC721ServiceInternal";
 export type { IERC721Service } from "./IERC721Service";
 export type { IERC721ServiceInternal } from "./IERC721ServiceInternal";

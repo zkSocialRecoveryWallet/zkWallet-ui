@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export type { ERC20Service } from "./ERC20Service";
+export type { ERC20ServiceFacet } from "./ERC20ServiceFacet";
 export type { ERC20ServiceInternal } from "./ERC20ServiceInternal";
 export type { ERC20ServiceMock } from "./ERC20ServiceMock";
 export type { IERC20Service } from "./IERC20Service";
