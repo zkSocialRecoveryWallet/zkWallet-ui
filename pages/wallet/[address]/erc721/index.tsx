@@ -24,21 +24,20 @@ import BackToWallet from '../../../component/BackToWallet'
 import CutomHead from '../../../component/Head'
 import Footer from '../../../component/Footer'
 
-import ERC20ServiceFacetAbi from '../../../../contracts/token/ERC20/ERC20ServiceFacet.sol/ERC20ServiceFacet.json'
-import ERC20Abi from '../../../../contracts/@openzeppelin/contracts/token/ERC20/ERC20.sol/ERC20.json'
+import ERC721ServiceFacetAbi from '../../../../contracts/token/ERC721/ERC721ServiceFacet.sol/ERC721ServiceFacet.json'
+import ERC721Abi from '../../../../contracts/@openzeppelin/contracts/token/ERC721/ERC721.sol/ERC721.json'
 import styles from '../../../../styles/Home.module.css'
 
-import { parseBalance } from '../../../../lib/utils'
-import { TrackedTokens } from '../../../../types'
+import { TrackedERC721Tokens } from '../../../../types'
 
 
-const Erc20 = () => {
+const Erc721 = () => {
   const [connection, setConnection] = useState('')
-  const [provider, setProvider] = useState<any>()
   const [signer, setSigner] = useState<providers.JsonRpcSigner>()
+  const [provider, setProvider] = useState<any>()
   const [signerAddress, setSignerAddress] = useState<string>('')
   const [walletAddress, setWalletAddress] = useState<string>('')
-  const [trackedTokens, setTrackedTokens] = useState<TrackedTokens[]>([])
+  const [trackedTokens, setTrackedTokens] = useState<TrackedERC721Tokens[]>([])
   const router = useRouter()
   const { address } = router.query
 
@@ -66,30 +65,30 @@ const Erc20 = () => {
       const signerAddress: string = (await signerData.getAddress()) as string
       setSignerAddress(signerAddress)
 
-      const erc20FacetIntance: any = await new Contract(
+      const erc721FacetIntance: any = await new Contract(
         walletAddress,
-        ERC20ServiceFacetAbi.abi,
+        ERC721ServiceFacetAbi.abi,
         signer,
       )
 
-      const trackedTokens = await erc20FacetIntance.getAllTrackedERC20Tokens()
+      const trackedTokens = await erc721FacetIntance.getAllTrackedERC721Tokens()
       if (trackedTokens.length > 0) {
-        const tmpTrackedTokens: TrackedTokens[] = []
+        const tmpTrackedTokens: TrackedERC721Tokens[] = []
         for (let i = 0; i < trackedTokens.length; i++) {
           const tokenAddress = trackedTokens[i]
-          const balance = await erc20FacetIntance.balanceOfERC20(tokenAddress)
-          const erc20Intance: any = await new Contract(
+          const erc721Intance: any = await new Contract(
             tokenAddress,
-            ERC20Abi.abi,
+            ERC721Abi.abi,
             signer,
           )
-          const tokenName = await erc20Intance.name()
-          const tokenSymbol = await erc20Intance.symbol()
+          const tokenName = await erc721Intance.name()
+          const tokenSymbol = await erc721Intance.symbol()
+          const tokenUri = await erc721Intance.tokenURI(walletAddress)
           tmpTrackedTokens[i] = {
             tokenName,
             tokenSymbol,
             tokenAddress,
-            balance: parseBalance(balance),
+            tokenUri,
           }
         }
         console.log(tmpTrackedTokens)
@@ -97,7 +96,12 @@ const Erc20 = () => {
       }
     }
 
-   fetchProvider().catch(console.error)
+    setTimeout(() => {
+      // call the function
+      fetchProvider()
+        // make sure to catch any error
+        .catch(console.error)
+    }, 3000)
   }, [walletAddress, signer, signerAddress, provider])
 
   useEffect(() => {
@@ -109,7 +113,7 @@ const Erc20 = () => {
     <div className={styles.container}>
       <CutomHead />
       <main className={styles.main}>
-        <h1 className={styles.title}>ERC20 tokens</h1>
+        <h1 className={styles.title}>ERC721 tokens</h1>
         <div>Your wallet: {walletAddress}</div>
         {trackedTokens.length !== 0 && <h3>Tracked tokens:</h3>}
         {trackedTokens.length === 0 && (
@@ -120,13 +124,13 @@ const Erc20 = () => {
           <div className={styles.logs}>
             Please{' '}
             <u>
-              <a href={'erc20/registerERC20'}>register</a>
+              <a href={'erc721/registerERC721'}>register</a>
             </u>{' '}
             or
             <u>
-              <a href={'erc20/deposit'}> deposit</a>
+              <a href={'erc721/deposit'}> deposit</a>
             </u>{' '}
-            a ERC20 token
+            a ERC721 token
           </div>
         )}
         {trackedTokens.length !== 0 && (
@@ -140,7 +144,7 @@ const Erc20 = () => {
                 <TableRow>
                   <TableCell align="left">Token name</TableCell>
                   <TableCell align="left">Token address</TableCell>
-                  <TableCell align="left">Token balance</TableCell>
+                  <TableCell align="left">Token url</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -156,7 +160,7 @@ const Erc20 = () => {
                       {row.tokenAddress}
                     </TableCell>
                     <TableCell component="th" scope="row" align="left">
-                      {row.balance} {row.tokenSymbol}
+                      {row.balance} {row.tokenUri}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -171,42 +175,42 @@ const Erc20 = () => {
             <ListItem>
               <ListItemIcon>
                 <AddModeratorIcon />{' '}
-                <Link href={'erc20/registerERC20'}>Register token</Link>
+                <Link href={'erc721/registerERC721'}>Register token</Link>
               </ListItemIcon>
             </ListItem>
             <ListItem>
               <ListItemIcon>
                 <AddModeratorIcon />{' '}
-                <Link href={'erc20/depositERC20'}>Deposit token</Link>
+                <Link href={'erc721/depositERC721'}>Deposit token</Link>
               </ListItemIcon>
             </ListItem>
             <ListItem>
               <ListItemIcon>
                 <AddModeratorIcon />{' '}
-                <Link href={'erc20/approveERC20'}>Approve token</Link>
+                <Link href={'erc721/approveERC721'}>Approve token</Link>
               </ListItemIcon>
             </ListItem>
             <ListItem>
               <ListItemIcon>
                 <AddModeratorIcon />{' '}
-                <Link href={'erc20/transferERC20'}>Transfer token</Link>
+                <Link href={'erc721/transferERC721'}>Transfer token</Link>
               </ListItemIcon>
             </ListItem>
             <ListItem>
               <ListItemIcon>
                 <AddModeratorIcon />{' '}
-                <Link href={'erc20/removeERC20'}>Remove token</Link>
+                <Link href={'erc721/removeERC721'}>Remove token</Link>
               </ListItemIcon>
             </ListItem>
           </List>
-          <div className={styles.connection}>{connection}</div>
           <BackToWallet walletAddress={walletAddress} />
         </Box>
-        <div hidden>{signerAddress}</div>
       </main>
+      <div className={styles.connection}>{connection}</div>
+      <div hidden>{signerAddress}</div>
       <Footer />
     </div>
   )
 }
 
-export default Erc20
+export default Erc721

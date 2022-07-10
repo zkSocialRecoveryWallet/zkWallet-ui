@@ -1,7 +1,6 @@
 import detectEthereumProvider from '@metamask/detect-provider'
 import { Contract, providers, utils } from 'ethers'
 import type { NextPage } from 'next'
-import Image from 'next/image'
 import { useForm } from 'react-hook-form'
 import React, { useState, useEffect } from 'react'
 import { useCookies } from 'react-cookie'
@@ -229,10 +228,7 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <CutomHead />
       <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to</h1>
-        <a href="https://simplicy.io">
-          <Image src="/images/zkWallet.png" alt="zkWalllet" width={600} />
-        </a>
+        <h1 className={styles.title}>Welcome to zkWallet by Simplicy</h1>
         <div className={styles.logs}>{logs}</div>
         <br />
         <br />
