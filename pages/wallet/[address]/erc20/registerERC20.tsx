@@ -108,10 +108,7 @@ const RegisterERC20 = () => {
         .catch(console.error)
     }, 3000)
 
-    const addressString: string = address as string
-    setWalletAddress(addressString)
   }, [
-    address,
     walletAddress,
     signer,
     setSigner,
