@@ -31,6 +31,7 @@ export interface IERC20ServiceInterface extends utils.Interface {
   functions: {
     "approveERC20(address,address,uint256)": FunctionFragment;
     "balanceOfERC20(address)": FunctionFragment;
+    "depositERC20(address,uint256)": FunctionFragment;
     "getAllTrackedERC20Tokens()": FunctionFragment;
     "registerERC20(address)": FunctionFragment;
     "removeERC20(address)": FunctionFragment;
@@ -44,6 +45,8 @@ export interface IERC20ServiceInterface extends utils.Interface {
       | "approveERC20(address,address,uint256)"
       | "balanceOfERC20"
       | "balanceOfERC20(address)"
+      | "depositERC20"
+      | "depositERC20(address,uint256)"
       | "getAllTrackedERC20Tokens"
       | "getAllTrackedERC20Tokens()"
       | "registerERC20"
@@ -79,6 +82,14 @@ export interface IERC20ServiceInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "balanceOfERC20(address)",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "depositERC20",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "depositERC20(address,uint256)",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getAllTrackedERC20Tokens",
@@ -153,6 +164,14 @@ export interface IERC20ServiceInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "balanceOfERC20(address)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "depositERC20",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "depositERC20(address,uint256)",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -197,15 +216,31 @@ export interface IERC20ServiceInterface extends utils.Interface {
   ): Result;
 
   events: {
+    "ERC20Deposited(address,uint256)": EventFragment;
     "ERC20TokenRemoved(address)": EventFragment;
     "ERC20TokenTracked(address)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "ERC20Deposited"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ERC20Deposited(address,uint256)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ERC20TokenRemoved"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ERC20TokenRemoved(address)"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ERC20TokenTracked"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ERC20TokenTracked(address)"): EventFragment;
 }
+
+export interface ERC20DepositedEventObject {
+  tokenAddress: string;
+  amount: BigNumber;
+}
+export type ERC20DepositedEvent = TypedEvent<
+  [string, BigNumber],
+  ERC20DepositedEventObject
+>;
+
+export type ERC20DepositedEventFilter = TypedEventFilter<ERC20DepositedEvent>;
 
 export interface ERC20TokenRemovedEventObject {
   tokenAddress: string;
@@ -279,6 +314,18 @@ export interface IERC20Service extends BaseContract {
       token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
+
+    depositERC20(
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "depositERC20(address,uint256)"(
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     getAllTrackedERC20Tokens(overrides?: CallOverrides): Promise<[string[]]>;
 
@@ -361,6 +408,18 @@ export interface IERC20Service extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  depositERC20(
+    token: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "depositERC20(address,uint256)"(
+    token: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   getAllTrackedERC20Tokens(overrides?: CallOverrides): Promise<string[]>;
 
   "getAllTrackedERC20Tokens()"(overrides?: CallOverrides): Promise<string[]>;
@@ -440,6 +499,18 @@ export interface IERC20Service extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    depositERC20(
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "depositERC20(address,uint256)"(
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     getAllTrackedERC20Tokens(overrides?: CallOverrides): Promise<string[]>;
 
     "getAllTrackedERC20Tokens()"(overrides?: CallOverrides): Promise<string[]>;
@@ -496,6 +567,15 @@ export interface IERC20Service extends BaseContract {
   };
 
   filters: {
+    "ERC20Deposited(address,uint256)"(
+      tokenAddress?: PromiseOrValue<string> | null,
+      amount?: null
+    ): ERC20DepositedEventFilter;
+    ERC20Deposited(
+      tokenAddress?: PromiseOrValue<string> | null,
+      amount?: null
+    ): ERC20DepositedEventFilter;
+
     "ERC20TokenRemoved(address)"(
       tokenAddress?: null
     ): ERC20TokenRemovedEventFilter;
@@ -532,6 +612,18 @@ export interface IERC20Service extends BaseContract {
     "balanceOfERC20(address)"(
       token: PromiseOrValue<string>,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    depositERC20(
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "depositERC20(address,uint256)"(
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getAllTrackedERC20Tokens(overrides?: CallOverrides): Promise<BigNumber>;
@@ -612,6 +704,18 @@ export interface IERC20Service extends BaseContract {
     "balanceOfERC20(address)"(
       token: PromiseOrValue<string>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    depositERC20(
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "depositERC20(address,uint256)"(
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getAllTrackedERC20Tokens(

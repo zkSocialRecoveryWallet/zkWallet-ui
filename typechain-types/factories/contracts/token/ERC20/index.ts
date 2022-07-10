@@ -2,6 +2,7 @@
 /* tslint:disable */
 /* eslint-disable */
 export { ERC20Service__factory } from "./ERC20Service__factory";
+export { ERC20ServiceFacet__factory } from "./ERC20ServiceFacet__factory";
 export { ERC20ServiceInternal__factory } from "./ERC20ServiceInternal__factory";
 export { ERC20ServiceMock__factory } from "./ERC20ServiceMock__factory";
 export { IERC20Service__factory } from "./IERC20Service__factory";

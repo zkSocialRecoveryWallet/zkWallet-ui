@@ -31,6 +31,7 @@ export interface ERC721ServiceInterface extends utils.Interface {
   functions: {
     "approveERC721(address,address,uint256)": FunctionFragment;
     "balanceOfERC721(address)": FunctionFragment;
+    "depositERC721(address,uint256)": FunctionFragment;
     "getAllTrackedERC721Tokens()": FunctionFragment;
     "ownerOfERC721(address,uint256)": FunctionFragment;
     "registerERC721(address)": FunctionFragment;
@@ -47,6 +48,8 @@ export interface ERC721ServiceInterface extends utils.Interface {
       | "approveERC721(address,address,uint256)"
       | "balanceOfERC721"
       | "balanceOfERC721(address)"
+      | "depositERC721"
+      | "depositERC721(address,uint256)"
       | "getAllTrackedERC721Tokens"
       | "getAllTrackedERC721Tokens()"
       | "ownerOfERC721"
@@ -86,6 +89,14 @@ export interface ERC721ServiceInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "balanceOfERC721(address)",
     values: [PromiseOrValue<string>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "depositERC721",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "depositERC721(address,uint256)",
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getAllTrackedERC721Tokens",
@@ -190,6 +201,14 @@ export interface ERC721ServiceInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "depositERC721",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "depositERC721(address,uint256)",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "getAllTrackedERC721Tokens",
     data: BytesLike
   ): Result;
@@ -247,10 +266,15 @@ export interface ERC721ServiceInterface extends utils.Interface {
   ): Result;
 
   events: {
+    "ERC721Deposited(address,uint256)": EventFragment;
     "ERC721TokenRemoved(address)": EventFragment;
     "ERC721TokenTracked(address)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "ERC721Deposited"): EventFragment;
+  getEvent(
+    nameOrSignatureOrTopic: "ERC721Deposited(address,uint256)"
+  ): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ERC721TokenRemoved"): EventFragment;
   getEvent(
     nameOrSignatureOrTopic: "ERC721TokenRemoved(address)"
@@ -260,6 +284,17 @@ export interface ERC721ServiceInterface extends utils.Interface {
     nameOrSignatureOrTopic: "ERC721TokenTracked(address)"
   ): EventFragment;
 }
+
+export interface ERC721DepositedEventObject {
+  tokenAddress: string;
+  tokenId: BigNumber;
+}
+export type ERC721DepositedEvent = TypedEvent<
+  [string, BigNumber],
+  ERC721DepositedEventObject
+>;
+
+export type ERC721DepositedEventFilter = TypedEventFilter<ERC721DepositedEvent>;
 
 export interface ERC721TokenRemovedEventObject {
   tokenAddress: string;
@@ -333,6 +368,18 @@ export interface ERC721Service extends BaseContract {
       token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
+
+    depositERC721(
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
+
+    "depositERC721(address,uint256)"(
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<ContractTransaction>;
 
     getAllTrackedERC721Tokens(overrides?: CallOverrides): Promise<[string[]]>;
 
@@ -444,6 +491,18 @@ export interface ERC721Service extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  depositERC721(
+    token: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
+  "depositERC721(address,uint256)"(
+    token: PromiseOrValue<string>,
+    tokenId: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
+  ): Promise<ContractTransaction>;
+
   getAllTrackedERC721Tokens(overrides?: CallOverrides): Promise<string[]>;
 
   "getAllTrackedERC721Tokens()"(overrides?: CallOverrides): Promise<string[]>;
@@ -552,6 +611,18 @@ export interface ERC721Service extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    depositERC721(
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    "depositERC721(address,uint256)"(
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
     getAllTrackedERC721Tokens(overrides?: CallOverrides): Promise<string[]>;
 
     "getAllTrackedERC721Tokens()"(overrides?: CallOverrides): Promise<string[]>;
@@ -637,6 +708,15 @@ export interface ERC721Service extends BaseContract {
   };
 
   filters: {
+    "ERC721Deposited(address,uint256)"(
+      tokenAddress?: PromiseOrValue<string> | null,
+      tokenId?: null
+    ): ERC721DepositedEventFilter;
+    ERC721Deposited(
+      tokenAddress?: PromiseOrValue<string> | null,
+      tokenId?: null
+    ): ERC721DepositedEventFilter;
+
     "ERC721TokenRemoved(address)"(
       tokenAddress?: PromiseOrValue<string> | null
     ): ERC721TokenRemovedEventFilter;
@@ -675,6 +755,18 @@ export interface ERC721Service extends BaseContract {
     "balanceOfERC721(address)"(
       token: PromiseOrValue<string>,
       overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
+    depositERC721(
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<BigNumber>;
+
+    "depositERC721(address,uint256)"(
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getAllTrackedERC721Tokens(overrides?: CallOverrides): Promise<BigNumber>;
@@ -786,6 +878,18 @@ export interface ERC721Service extends BaseContract {
     "balanceOfERC721(address)"(
       token: PromiseOrValue<string>,
       overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    depositERC721(
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
+    ): Promise<PopulatedTransaction>;
+
+    "depositERC721(address,uint256)"(
+      token: PromiseOrValue<string>,
+      tokenId: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getAllTrackedERC721Tokens(

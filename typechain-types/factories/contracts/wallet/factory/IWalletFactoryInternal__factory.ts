@@ -109,7 +109,7 @@ const _abi = [
         type: "address",
       },
     ],
-    name: "NewDiamondWallet",
+    name: "WalletIsCreated",
     type: "event",
   },
 ];

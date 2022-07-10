@@ -13,6 +13,14 @@ import * as Contracts from ".";
 declare module "hardhat/types/runtime" {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
+      name: "AccessControl",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.AccessControl__factory>;
+    getContractFactory(
+      name: "IAccessControl",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IAccessControl__factory>;
+    getContractFactory(
       name: "ERC20",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC20__factory>;
@@ -28,6 +36,22 @@ declare module "hardhat/types/runtime" {
       name: "ERC721",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC721__factory>;
+    getContractFactory(
+      name: "ERC721Burnable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721Burnable__factory>;
+    getContractFactory(
+      name: "ERC721Enumerable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721Enumerable__factory>;
+    getContractFactory(
+      name: "ERC721URIStorage",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721URIStorage__factory>;
+    getContractFactory(
+      name: "IERC721Enumerable",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC721Enumerable__factory>;
     getContractFactory(
       name: "IERC721Metadata",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -141,6 +165,30 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Proxy__factory>;
     getContractFactory(
+      name: "IERC20Base",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20Base__factory>;
+    getContractFactory(
+      name: "IERC20Extended",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20Extended__factory>;
+    getContractFactory(
+      name: "IERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20__factory>;
+    getContractFactory(
+      name: "IERC20Internal",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20Internal__factory>;
+    getContractFactory(
+      name: "ISolidStateERC20",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ISolidStateERC20__factory>;
+    getContractFactory(
+      name: "IERC20Metadata",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20Metadata__factory>;
+    getContractFactory(
       name: "IERC721Receiver",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IERC721Receiver__factory>;
@@ -153,10 +201,6 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ISimplicyWalletDiamond__factory>;
     getContractFactory(
-      name: "IWalletFactoryDiamond",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IWalletFactoryDiamond__factory>;
-    getContractFactory(
       name: "SimplicyDiamond",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SimplicyDiamond__factory>;
@@ -165,37 +209,33 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SimplicyWalletDiamond__factory>;
     getContractFactory(
-      name: "WalletFactoryDiamond",
+      name: "IZkWalletDiamondBase",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.WalletFactoryDiamond__factory>;
+    ): Promise<Contracts.IZkWalletDiamondBase__factory>;
     getContractFactory(
-      name: "CountersFacet",
+      name: "ZkWalletBaseMock",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.CountersFacet__factory>;
+    ): Promise<Contracts.ZkWalletBaseMock__factory>;
     getContractFactory(
-      name: "ERC20Facet",
+      name: "ZkWalletDiamondBase",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC20Facet__factory>;
+    ): Promise<Contracts.ZkWalletDiamondBase__factory>;
     getContractFactory(
-      name: "ERC721Facet",
+      name: "IZkWalletFactoryDiamond",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC721Facet__factory>;
+    ): Promise<Contracts.IZkWalletFactoryDiamond__factory>;
     getContractFactory(
-      name: "GuardianFacet",
+      name: "ZkWalletFactoryDiamond",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.GuardianFacet__factory>;
+    ): Promise<Contracts.ZkWalletFactoryDiamond__factory>;
     getContractFactory(
-      name: "RecoveryFacet",
+      name: "ZkWalletDiamond",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.RecoveryFacet__factory>;
+    ): Promise<Contracts.ZkWalletDiamond__factory>;
     getContractFactory(
-      name: "SemaphoreFacet",
+      name: "EtherServiceFacet",
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.SemaphoreFacet__factory>;
-    getContractFactory(
-      name: "SemaphoreGroupsFacet",
-      signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.SemaphoreGroupsFacet__factory>;
+    ): Promise<Contracts.EtherServiceFacet__factory>;
     getContractFactory(
       name: "SemaphoreVotingFacet",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -209,6 +249,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Guardian__factory>;
     getContractFactory(
+      name: "GuardianFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.GuardianFacet__factory>;
+    getContractFactory(
       name: "GuardianInternal",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.GuardianInternal__factory>;
@@ -221,17 +265,57 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IGuardianInternal__factory>;
     getContractFactory(
+      name: "IERC20Facet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20Facet__factory>;
+    getContractFactory(
+      name: "IERC20ServiceFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC20ServiceFacet__factory>;
+    getContractFactory(
+      name: "IERC721ServiceFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC721ServiceFacet__factory>;
+    getContractFactory(
+      name: "IERC721ServiceFacetSelector",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IERC721ServiceFacetSelector__factory>;
+    getContractFactory(
+      name: "IEtherServiceFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IEtherServiceFacet__factory>;
+    getContractFactory(
       name: "IGuardianFacet",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IGuardianFacet__factory>;
+    getContractFactory(
+      name: "IRecoveryFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IRecoveryFacet__factory>;
+    getContractFactory(
+      name: "ISemaphoreFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ISemaphoreFacet__factory>;
+    getContractFactory(
+      name: "ISemaphoreGroupsFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ISemaphoreGroupsFacet__factory>;
     getContractFactory(
       name: "IVerifier",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IVerifier__factory>;
     getContractFactory(
+      name: "IWalletFactoryFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IWalletFactoryFacet__factory>;
+    getContractFactory(
       name: "IzkWallet",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.IzkWallet__factory>;
+    getContractFactory(
+      name: "IZkWalletDiamond",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.IZkWalletDiamond__factory>;
     getContractFactory(
       name: "ERC20Mock",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -252,6 +336,10 @@ declare module "hardhat/types/runtime" {
       name: "Recovery",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Recovery__factory>;
+    getContractFactory(
+      name: "RecoveryFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.RecoveryFacet__factory>;
     getContractFactory(
       name: "RecoveryInternal",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -329,6 +417,14 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Semaphore__factory>;
     getContractFactory(
+      name: "SemaphoreFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SemaphoreFacet__factory>;
+    getContractFactory(
+      name: "SemaphoreGroupsFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.SemaphoreGroupsFacet__factory>;
+    getContractFactory(
       name: "SemaphoreInternal",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.SemaphoreInternal__factory>;
@@ -336,6 +432,10 @@ declare module "hardhat/types/runtime" {
       name: "ERC20Service",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC20Service__factory>;
+    getContractFactory(
+      name: "ERC20ServiceFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC20ServiceFacet__factory>;
     getContractFactory(
       name: "ERC20ServiceInternal",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -357,6 +457,10 @@ declare module "hardhat/types/runtime" {
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC721Service__factory>;
     getContractFactory(
+      name: "ERC721ServiceFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.ERC721ServiceFacet__factory>;
+    getContractFactory(
       name: "ERC721ServiceInternal",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.ERC721ServiceInternal__factory>;
@@ -372,6 +476,10 @@ declare module "hardhat/types/runtime" {
       name: "Counters",
       signerOrOptions?: ethers.Signer | FactoryOptions
     ): Promise<Contracts.Counters__factory>;
+    getContractFactory(
+      name: "CountersFacet",
+      signerOrOptions?: ethers.Signer | FactoryOptions
+    ): Promise<Contracts.CountersFacet__factory>;
     getContractFactory(
       name: "CountersInternal",
       signerOrOptions?: ethers.Signer | FactoryOptions
@@ -562,6 +670,16 @@ declare module "hardhat/types/runtime" {
     ): Promise<Contracts.WalletFactoryInternal__factory>;
 
     getContractAt(
+      name: "AccessControl",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.AccessControl>;
+    getContractAt(
+      name: "IAccessControl",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IAccessControl>;
+    getContractAt(
       name: "ERC20",
       address: string,
       signer?: ethers.Signer
@@ -581,6 +699,26 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ERC721>;
+    getContractAt(
+      name: "ERC721Burnable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721Burnable>;
+    getContractAt(
+      name: "ERC721Enumerable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721Enumerable>;
+    getContractAt(
+      name: "ERC721URIStorage",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721URIStorage>;
+    getContractAt(
+      name: "IERC721Enumerable",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC721Enumerable>;
     getContractAt(
       name: "IERC721Metadata",
       address: string,
@@ -722,6 +860,36 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Proxy>;
     getContractAt(
+      name: "IERC20Base",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20Base>;
+    getContractAt(
+      name: "IERC20Extended",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20Extended>;
+    getContractAt(
+      name: "IERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20>;
+    getContractAt(
+      name: "IERC20Internal",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20Internal>;
+    getContractAt(
+      name: "ISolidStateERC20",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISolidStateERC20>;
+    getContractAt(
+      name: "IERC20Metadata",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20Metadata>;
+    getContractAt(
       name: "IERC721Receiver",
       address: string,
       signer?: ethers.Signer
@@ -737,11 +905,6 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.ISimplicyWalletDiamond>;
     getContractAt(
-      name: "IWalletFactoryDiamond",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.IWalletFactoryDiamond>;
-    getContractAt(
       name: "SimplicyDiamond",
       address: string,
       signer?: ethers.Signer
@@ -752,45 +915,40 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.SimplicyWalletDiamond>;
     getContractAt(
-      name: "WalletFactoryDiamond",
+      name: "IZkWalletDiamondBase",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.WalletFactoryDiamond>;
+    ): Promise<Contracts.IZkWalletDiamondBase>;
     getContractAt(
-      name: "CountersFacet",
+      name: "ZkWalletBaseMock",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.CountersFacet>;
+    ): Promise<Contracts.ZkWalletBaseMock>;
     getContractAt(
-      name: "ERC20Facet",
+      name: "ZkWalletDiamondBase",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.ERC20Facet>;
+    ): Promise<Contracts.ZkWalletDiamondBase>;
     getContractAt(
-      name: "ERC721Facet",
+      name: "IZkWalletFactoryDiamond",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.ERC721Facet>;
+    ): Promise<Contracts.IZkWalletFactoryDiamond>;
     getContractAt(
-      name: "GuardianFacet",
+      name: "ZkWalletFactoryDiamond",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.GuardianFacet>;
+    ): Promise<Contracts.ZkWalletFactoryDiamond>;
     getContractAt(
-      name: "RecoveryFacet",
+      name: "ZkWalletDiamond",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.RecoveryFacet>;
+    ): Promise<Contracts.ZkWalletDiamond>;
     getContractAt(
-      name: "SemaphoreFacet",
+      name: "EtherServiceFacet",
       address: string,
       signer?: ethers.Signer
-    ): Promise<Contracts.SemaphoreFacet>;
-    getContractAt(
-      name: "SemaphoreGroupsFacet",
-      address: string,
-      signer?: ethers.Signer
-    ): Promise<Contracts.SemaphoreGroupsFacet>;
+    ): Promise<Contracts.EtherServiceFacet>;
     getContractAt(
       name: "SemaphoreVotingFacet",
       address: string,
@@ -807,6 +965,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Guardian>;
     getContractAt(
+      name: "GuardianFacet",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.GuardianFacet>;
+    getContractAt(
       name: "GuardianInternal",
       address: string,
       signer?: ethers.Signer
@@ -822,20 +985,70 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.IGuardianInternal>;
     getContractAt(
+      name: "IERC20Facet",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20Facet>;
+    getContractAt(
+      name: "IERC20ServiceFacet",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC20ServiceFacet>;
+    getContractAt(
+      name: "IERC721ServiceFacet",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC721ServiceFacet>;
+    getContractAt(
+      name: "IERC721ServiceFacetSelector",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IERC721ServiceFacetSelector>;
+    getContractAt(
+      name: "IEtherServiceFacet",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IEtherServiceFacet>;
+    getContractAt(
       name: "IGuardianFacet",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IGuardianFacet>;
+    getContractAt(
+      name: "IRecoveryFacet",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IRecoveryFacet>;
+    getContractAt(
+      name: "ISemaphoreFacet",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISemaphoreFacet>;
+    getContractAt(
+      name: "ISemaphoreGroupsFacet",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ISemaphoreGroupsFacet>;
     getContractAt(
       name: "IVerifier",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IVerifier>;
     getContractAt(
+      name: "IWalletFactoryFacet",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IWalletFactoryFacet>;
+    getContractAt(
       name: "IzkWallet",
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.IzkWallet>;
+    getContractAt(
+      name: "IZkWalletDiamond",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.IZkWalletDiamond>;
     getContractAt(
       name: "ERC20Mock",
       address: string,
@@ -861,6 +1074,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.Recovery>;
+    getContractAt(
+      name: "RecoveryFacet",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.RecoveryFacet>;
     getContractAt(
       name: "RecoveryInternal",
       address: string,
@@ -957,6 +1175,16 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.Semaphore>;
     getContractAt(
+      name: "SemaphoreFacet",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SemaphoreFacet>;
+    getContractAt(
+      name: "SemaphoreGroupsFacet",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.SemaphoreGroupsFacet>;
+    getContractAt(
       name: "SemaphoreInternal",
       address: string,
       signer?: ethers.Signer
@@ -966,6 +1194,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.ERC20Service>;
+    getContractAt(
+      name: "ERC20ServiceFacet",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC20ServiceFacet>;
     getContractAt(
       name: "ERC20ServiceInternal",
       address: string,
@@ -992,6 +1225,11 @@ declare module "hardhat/types/runtime" {
       signer?: ethers.Signer
     ): Promise<Contracts.ERC721Service>;
     getContractAt(
+      name: "ERC721ServiceFacet",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.ERC721ServiceFacet>;
+    getContractAt(
       name: "ERC721ServiceInternal",
       address: string,
       signer?: ethers.Signer
@@ -1011,6 +1249,11 @@ declare module "hardhat/types/runtime" {
       address: string,
       signer?: ethers.Signer
     ): Promise<Contracts.Counters>;
+    getContractAt(
+      name: "CountersFacet",
+      address: string,
+      signer?: ethers.Signer
+    ): Promise<Contracts.CountersFacet>;
     getContractAt(
       name: "CountersInternal",
       address: string,

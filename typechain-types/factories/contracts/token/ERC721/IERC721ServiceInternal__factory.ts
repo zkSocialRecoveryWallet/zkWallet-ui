@@ -19,6 +19,25 @@ const _abi = [
         name: "tokenAddress",
         type: "address",
       },
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "tokenId",
+        type: "uint256",
+      },
+    ],
+    name: "ERC721Deposited",
+    type: "event",
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "tokenAddress",
+        type: "address",
+      },
     ],
     name: "ERC721TokenRemoved",
     type: "event",

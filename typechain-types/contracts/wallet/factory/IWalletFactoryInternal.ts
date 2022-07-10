@@ -21,7 +21,7 @@ export interface IWalletFactoryInternalInterface extends utils.Interface {
     "FacetIsRemoved(address)": EventFragment;
     "GuardianAdded(bytes32,bytes32)": EventFragment;
     "GuardianRemoved(bytes32,bytes32)": EventFragment;
-    "NewDiamondWallet(address)": EventFragment;
+    "WalletIsCreated(address)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "DiamondIsSet"): EventFragment;
@@ -40,8 +40,8 @@ export interface IWalletFactoryInternalInterface extends utils.Interface {
   getEvent(
     nameOrSignatureOrTopic: "GuardianRemoved(bytes32,bytes32)"
   ): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "NewDiamondWallet"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "NewDiamondWallet(address)"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "WalletIsCreated"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "WalletIsCreated(address)"): EventFragment;
 }
 
 export interface DiamondIsSetEventObject {
@@ -95,16 +95,15 @@ export type GuardianRemovedEvent = TypedEvent<
 
 export type GuardianRemovedEventFilter = TypedEventFilter<GuardianRemovedEvent>;
 
-export interface NewDiamondWalletEventObject {
+export interface WalletIsCreatedEventObject {
   instance: string;
 }
-export type NewDiamondWalletEvent = TypedEvent<
+export type WalletIsCreatedEvent = TypedEvent<
   [string],
-  NewDiamondWalletEventObject
+  WalletIsCreatedEventObject
 >;
 
-export type NewDiamondWalletEventFilter =
-  TypedEventFilter<NewDiamondWalletEvent>;
+export type WalletIsCreatedEventFilter = TypedEventFilter<WalletIsCreatedEvent>;
 
 export interface IWalletFactoryInternal extends BaseContract {
   connect(signerOrProvider: Signer | Provider | string): this;
@@ -172,8 +171,8 @@ export interface IWalletFactoryInternal extends BaseContract {
       guardian?: null
     ): GuardianRemovedEventFilter;
 
-    "NewDiamondWallet(address)"(instance?: null): NewDiamondWalletEventFilter;
-    NewDiamondWallet(instance?: null): NewDiamondWalletEventFilter;
+    "WalletIsCreated(address)"(instance?: null): WalletIsCreatedEventFilter;
+    WalletIsCreated(instance?: null): WalletIsCreatedEventFilter;
   };
 
   estimateGas: {};

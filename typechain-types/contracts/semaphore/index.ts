@@ -9,4 +9,6 @@ export type { ISemaphore } from "./ISemaphore";
 export type { ISemaphoreGroups } from "./ISemaphoreGroups";
 export type { ISemaphoreInternal } from "./ISemaphoreInternal";
 export type { Semaphore } from "./Semaphore";
+export type { SemaphoreFacet } from "./SemaphoreFacet";
+export type { SemaphoreGroupsFacet } from "./SemaphoreGroupsFacet";
 export type { SemaphoreInternal } from "./SemaphoreInternal";
