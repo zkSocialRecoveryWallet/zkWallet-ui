@@ -72,10 +72,9 @@ const Home: NextPage = () => {
       const fetchInstance = async () => {
         let walletFactory = ''
         if (provider.chainId === '0x635ae020') {
-          //walletFactory = '0x1D7517e85eF2c0b6741D2c61a911c00D88f45a90'
           walletFactory = '0x60e8BE2676fCc5744F2E8bD0Dc0Bb686f413c2FE'
-        } else if (provider.chainId === '0x89') {
-          walletFactory = '0xaC71914E2A22f92d3F75106043aA4E7248Eda9C3'
+        } else {
+          walletFactory = process.env.NEXT_PUBLIC_FACTORY_DIAMOND_ADDRESS as string
         }
         const instance: Contract | IWalletFactoryFacet = await new Contract(
           walletFactory,
@@ -140,19 +139,12 @@ const Home: NextPage = () => {
     let walletFactory = ''
 
     if (provider.chainId === '0x635ae020') {
-      //verifier20Address = '0xE01438D4149F180DC67a0f039C426a4B45E75fE6'
-      //walletFactory = '0x1D7517e85eF2c0b6741D2c61a911c00D88f45a90'
       verifier20Address = '0x53c6fC6E9B7D4A765222F1732b1490462B5d16aB'
       walletFactory = '0x60e8BE2676fCc5744F2E8bD0Dc0Bb686f413c2FE'
-    } else if (provider.chainId === '0x89') {
-      verifier20Address = '0x1A51d1C41be8a8A8F3092C65Ca0c3a0777a65f06'
-      walletFactory = '0xaC71914E2A22f92d3F75106043aA4E7248Eda9C3'
     } else {
-      console.log('provider.chainId', provider.chainId)
-      setConnection(
-        'Please connect to Polygon-, Optimism mainnet or Harmony Devnet!',
-      )
-    }
+      verifier20Address = process.env.NEXT_PUBLIC_VERIFIER20 as string
+      walletFactory = process.env.NEXT_PUBLIC_FACTORY_DIAMOND_ADDRESS as string
+    } 
 
     const instance: Contract | IWalletFactoryFacet = await new Contract(
       walletFactory,
