@@ -38,7 +38,6 @@ import { TrackedERC721Tokens } from '../../../../types'
 const RemoveERC721 = () => {
   const [logs, setLogs] = React.useState('')
   const [connection, setConnection] = useState('')
-  const [provider, setProvider] = useState<any>()
   const [signer, setSigner] = useState<providers.JsonRpcSigner>()
   const [signerAddress, setSignerAddress] = useState<string>('')
   const [walletAddress, setWalletAddress] = useState<string>('')
@@ -49,7 +48,6 @@ const RemoveERC721 = () => {
   useEffect(() => {
     const fetchProvider = async () => {
       const provider = (await detectEthereumProvider()) as any
-      setProvider(provider)
       if (provider.chainId === '0x635ae020') {
         setConnection('You are connected to  Harmony Devnet.')
       } else if (provider.chainId === '0x89') {
@@ -107,7 +105,7 @@ const RemoveERC721 = () => {
         // make sure to catch any error
         .catch(console.error)
     }, 3000)
-  }, [walletAddress, signer, signerAddress, provider])
+  }, [walletAddress, signer, signerAddress])
 
   useEffect(() => {
     const addressString: string = address as string
@@ -235,7 +233,6 @@ const RemoveERC721 = () => {
             <BackToWallet walletAddress={walletAddress} />
           </Container>
         </ThemeProvider>
-        <div hidden>{signerAddress}</div>
       </main>
       <Footer />
     </div>

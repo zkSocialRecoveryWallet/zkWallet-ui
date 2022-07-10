@@ -19,7 +19,6 @@ import styles from '../../../styles/Home.module.css'
 const Ownership = () => {
   const [logs, setLogs] = React.useState('')
   const [connection, setConnection] = useState('')
-  const [provider, setProvider] = useState<any>()
   const [signer, setSigner] = useState<providers.JsonRpcSigner>()
   const [signerAddress, setSignerAddress] = useState<string>('')
   const [walletAddress, setWalletAddress] = useState<string>('')
@@ -29,8 +28,6 @@ const Ownership = () => {
   useEffect(() => {
     const fetchProvider = async () => {
       const provider = (await detectEthereumProvider()) as any
-      setProvider(provider)
-
       if (provider.chainId === '0x635ae020') {
         setConnection('You are connected to  Harmony Devnet.')
       } else if (provider.chainId === '0x89') {
@@ -60,7 +57,7 @@ const Ownership = () => {
     fetchProvider()
       // make sure to catch any error
       .catch(console.error)
-  }, [address, walletAddress, signer, signerAddress, provider])
+  }, [address, walletAddress, signer, signerAddress])
 
   useEffect(() => {
     const addressString: string = address as string
@@ -139,10 +136,6 @@ const Ownership = () => {
             <BackToWallet walletAddress={walletAddress} />
           </Container>
         </ThemeProvider>
-        <div hidden>
-          {provider}
-          {signerAddress}
-        </div>
       </main>
       <Footer />
     </div>

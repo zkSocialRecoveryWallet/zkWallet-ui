@@ -40,22 +40,23 @@ type UserInput = {
 const Wallet = () => {
   const [logs, setLogs] = React.useState('')
   const [connection, setConnection] = useState('')
-  const [provider, setProvider] = useState<any>()
   const [signer, setSigner] = useState<providers.JsonRpcSigner>()
   const [signerAddress, setSignerAddress] = useState<string>('')
   const [walletAddress, setWalletAddress] = useState<string>('')
   const [walletBalance, setWalletBalance] = useState<string>('0.00')
   const [symbol, setSymbol] = useState<string>('')
   const router = useRouter()
-  const { address } = router.query
+  const { address } = router.query  
 
   useEffect(() => {
     const addressString: string = address as string
+    console.log('addressString', addressString)
     setWalletAddress(addressString)
+  }, [address])
 
+  useEffect(() => {
     const fetchProvider = async () => {
       const provider = (await detectEthereumProvider()) as any
-      setProvider(provider)
       if (provider.chainId === '0x635ae020') {
         setConnection('You are connected to  Harmony Devnet.')
         setSymbol('ONE')
@@ -81,25 +82,25 @@ const Wallet = () => {
       const newSignerAddress: string = (await signerData.getAddress()) as string
       setSignerAddress(newSignerAddress)
 
-      const etherServiceFacetInstance: any = await new Contract(
-        walletAddress,
-        IEtherServiceFacetAbi.abi,
-        signer,
-      )
-      const etherBalance = await etherServiceFacetInstance.getEtherBalance()
-      setWalletBalance(parseBalance(etherBalance))
+      if (walletAddress) {
+        const etherServiceFacetInstance: any = await new Contract(
+          walletAddress,
+          IEtherServiceFacetAbi.abi,
+          signer,
+        )
+  
+        try {
+          const etherBalance = await etherServiceFacetInstance.getEtherBalance()
+          console.log('etherBalance', etherBalance)
+          setWalletBalance(parseBalance(etherBalance))
+        } catch(error) {
+          console.log('error', error)
+        }
+      }
     }
-
-
     fetchProvider().catch(console.error)
-  }, [address, walletAddress, signer, signerAddress, provider])
+  }, [address, walletAddress, signer, signerAddress])
 
-  useEffect(() => {
-    const addressString: string = address as string
-    setWalletAddress(addressString)
-  }, [address])
-
-  // form validation rules
   const validationSchema = Yup.object().shape({
     toAddress: Yup.string()
       .length(42, 'Address must be 42 characters long')
@@ -236,10 +237,6 @@ const Wallet = () => {
             </ListItem>
           </List>
         </Box>
-        <div hidden>
-          {provider}
-          {signerAddress}
-        </div>
       </main>
       <Footer />
     </div>

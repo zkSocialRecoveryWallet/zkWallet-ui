@@ -68,7 +68,7 @@ const Home: NextPage = () => {
   }, [latestWalletAddress, setCookies])
 
   useEffect(() => {
-    if (!stateSemaphoreGroup && latestWalletAddress !== '' && provider) {
+    if (!stateSemaphoreGroup || latestWalletAddress !== '' || provider) {
       const fetchInstance = async () => {
         let walletFactory = ''
         if (provider.chainId === '0x635ae020') {
